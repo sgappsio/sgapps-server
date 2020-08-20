@@ -1,6 +1,6 @@
 {
-  "name": "nodejs-mvc",
-  "version": "4.0.13",
+  "name": "sgapps-server",
+  "version": "0.0.1",
   "description": "SGApps Network Server",
   "main": "index.js",
   "scripts": {
