@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>prototypes/logger.js - SGApps Server - Framework</title>
+    
+    <meta name="description" content="SGApps Server for high performance results" />
+    
+        <meta name="keywords" content="javascript, js, application-prototype, prototype" />
+        <meta name="keyword" content="javascript, js, application-prototype, prototype" />
+    
+    
+    
+    <meta property="og:title" content="SGApps Server - Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content="https://labs.sgapps.io/open-source/network-server"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://labs.sgapps.io/open-source/network-server" target="_blank" class="menu-item" id="website_link" >Project Page ( Git Lab )</a></h2><h2><a href="http://gordienco.net/" target="_blank" class="menu-item" id="website_link" >About Me</a></h2><h2><a href="https://github.com/sergiu-gordienco/nodejs-mvc" target="_blank" class="menu-item" id="github_link" >GitHub</a></h2><h3>Classes</h3><ul><li><a href="LoggerBuilder.html">LoggerBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#decorateGlobalLogger">decorateGlobalLogger</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#error">error</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#info">info</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#log">log</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#prompt">prompt</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#warn">warn</a></li></ul></li><li><a href="SGAppsServer.html">SGAppsServer</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServer.html#all">all</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#connect">connect</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#delete">delete</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#finalHandler">finalHandler</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handle">handle</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handleRequest">handleRequest</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#head">head</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#options">options</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#patch">patch</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#post">post</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#put">put</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#server">server</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#trace">trace</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#use">use</a></li></ul></li><li><a href="SGAppsServerDictionary.html">SGAppsServerDictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#push">push</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#run">run</a></li></ul></li><li><a href="SGAppsServerRequest.html">SGAppsServerRequest</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequest.html#getMountUpdatedUrl">getMountUpdatedUrl</a></li></ul></li><li><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#set">set</a></li></ul></li><li></li><li><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestSession.html#destroy">destroy</a></li></ul></li><li><a href="SGAppsServerResponse.html">SGAppsServerResponse</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFile">pipeFile</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFileStatic">pipeFileStatic</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#send">send</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#sendError">sendError</a></li></ul></li><li><a href="SGAppsSessionManager.html">SGAppsSessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsSessionManager.html#removeExpiredSessions">removeExpiredSessions</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#LoggerBuilderPrompt">LoggerBuilderPrompt</a></li><li><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></li><li><a href="global.html#RequestHandler">RequestHandler</a></li><li><a href="global.html#RequestPathStructure">RequestPathStructure</a></li><li><a href="global.html#RequestSessionDecorator">RequestSessionDecorator</a></li><li><a href="global.html#ResourcesExtensions">ResourcesExtensions</a></li><li><a href="global.html#SGAppsServerDecorator">SGAppsServerDecorator</a></li><li><a href="global.html#SGAppsServerDictionaryRunCallBack">SGAppsServerDictionaryRunCallBack</a></li><li><a href="global.html#SGAppsServerOptions">SGAppsServerOptions</a></li><li><a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a></li><li><a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a></li><li><a href="global.html#SGAppsServerRequestSessionCache">SGAppsServerRequestSessionCache</a></li><li><a href="global.html#SGAppsSessionManagerOptions">SGAppsSessionManagerOptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">prototypes/logger.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var promptCallbacks = [];
+
+process.stdin.on('readable', function () {
+	var chunk = process.stdin.read();
+	if (chunk !== null) {
+		if (promptCallbacks.length) {
+			var cbs = promptCallbacks;
+			promptCallbacks = [];
+			cbs.forEach(function (cb) {
+				var er;
+				try {
+					cb(chunk);
+				} catch (er) {
+					console.log(er);
+				}
+			});
+		}
+	}
+});
+
+
+var path = require("path");
+
+
+
+var stackList = function () {
+	var stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i;
+	var stackReg2 = /at\s+()(.*):(\d*):(\d*)/i;
+	var stackIndex = 1;
+	var data = {
+		method: "anonymous",
+		path: "unknown",
+		line: "?",
+		pos: "?",
+		file: "unknown",
+		stack: ""
+	};
+	var errorStack = (new Error()).stack.split('\n').slice(3);
+	var s = errorStack[stackIndex] || errorStack[0],
+		sp = stackReg.exec(s) || stackReg2.exec(s);
+	if (sp &amp;&amp; sp.length === 5) {
+		data.method = data.method || sp[1];
+		data.path = path.relative(process.cwd(), sp[2]);
+		data.line = sp[3];
+		data.pos = sp[4];
+		data.file = (data.path + '').replace(/^[\S\s]*\//, '');
+		data.stack = errorStack.join('\n');
+	}
+	return data;
+};
+
+/**
+ * @example
+ * // =============================
+ * //   Use Logger as 💻 instance
+ * // =============================
+ * 
+ * const { LoggerBuilder } = require('@sgapps.io/server');
+ * 
+ * const logger = new LoggerBuilder();
+ * 
+ * logger.log("Hello world");
+ * 
+ * @example
+ * // replace default console
+ * 
+ * const { LoggerBuilder } = require('@sgapps.io/server');
+ * const logger = new LoggerBuilder();
+ * logger.decorateGlobalLogger();
+ * 
+ * console.log("Console Messages are decorated now");
+ * 
+ * @class
+ * @name LoggerBuilder
+ * @description Pretty CLI Logger, with possibility to replace default nodejs' console logger
+ */
+function LoggerBuilder() {
+	var console = global.console_original || global.console;
+	/**
+	 * @example
+	 * // Insert an message in VT100 format
+	 * logger._format = "\x1b[7m {{timestamp}} [{{TYPE}}] &lt;{{title}}> {{file}}:{{line}} ({{method}}){{stack}}\x1b[7m";
+	 * 
+	 * @memberof LoggerBuilder#
+	 * @description this parameter may be changed if you decide to change decoration schema
+	 * @name _format
+	 * @type {string}
+	 */
+	this._format = "\x1b[7m {{timestamp}} [{{TYPE}}] &lt;{{title}}> {{file}}:{{line}} ({{method}}){{stack}}\x1b[7m";
+	/**
+	 * @memberof LoggerBuilder#
+	 * @name _debug
+	 * @type {boolean}
+	 */
+	this._debug  = true;
+	return this;
+}
+LoggerBuilder.prototype.pushHeader = function (args, type, stack) {
+	const data = stackList();
+	let format = this._format;
+	format = format.replace('{{timestamp}}', new Date().toISOString());
+	format = format.replace('{{TYPE}}', type.toUpperCase());
+	format = format.replace('{{file}}', data.file);
+	format = format.replace('{{line}}', data.line);
+	format = format.replace('{{method}}', data.method);
+	format = format.replace('{{title}}', data.path);
+	format = format.replace('{{stack}}', stack ? "\n" + data.stack + "\n" : "");
+	args.unshift(format);
+};
+
+/**
+ * @memberof LoggerBuilder#
+ * @method log
+ * @param {...any} messages
+ */
+LoggerBuilder.prototype.log	= function () {
+	if (this._debug) {
+		var args = Array.prototype.slice.call(arguments);
+		args.unshift("\x1b[0m");
+		this.pushHeader(args, "log");
+		args.push('\x1b[0m');
+		console.log.apply(console, args);
+	}
+}
+
+/**
+ * @memberof LoggerBuilder#
+ * @method info
+ * @param {...any} messages
+ */
+LoggerBuilder.prototype.info = function () {
+	if (this._debug) {
+		var args = Array.prototype.slice.call(arguments);
+		args.unshift("\x1b[0;36m ");
+		this.pushHeader(args, "info");
+		args.push("\x1b[0m");
+		console.log.apply(console, args);
+	}
+}
+
+/**
+ * @memberof LoggerBuilder#
+ * @method warn
+ * @param {...any} messages
+ */
+LoggerBuilder.prototype.warn = function () {
+	if (this._debug) {
+		var args = Array.prototype.slice.call(arguments);
+		args.unshift("\x1b[0;40;33m ");
+		this.pushHeader(args, "warn");
+		args.push("\x1b[0m");
+		console.log.apply(console, args);
+	}
+};
+
+/**
+ * @memberof LoggerBuilder#
+ * @method error
+ * @param {...any} messages
+ */
+LoggerBuilder.prototype.error	= function () {
+	var getStackTrace = function () {
+		var obj = {};
+		Error.captureStackTrace(obj, getStackTrace);
+		return obj.stack;
+	};
+	var args = Array.prototype.slice.call(arguments);
+	console.log("\x1b[0;40;31m");
+	this.pushHeader(args, "error", true);
+	console.error.apply(console, args);
+	console.log(getStackTrace());
+	console.log("\x1b[0m\n");
+}
+
+/**
+ * @callback LoggerBuilderPrompt
+ * @param {Buffer} message 
+ */
+
+/**
+ * @example
+ * logger.prompt("rerun tests? [y/n]: ", function (err, buffer) {
+ * 	// trim spaces from response
+ * 	var response = buffer.toString().replace(/^\s*(.*?)\s*$/, '$1');
+ * 	if (response === 'y') {
+ * 		// write your code
+ * 	}
+ * });
+ * 
+ * @memberof LoggerBuilder#
+ * @method prompt
+ * @param {LoggerBuilderPrompt} callback
+ * @param {string|Buffer} message
+ */
+LoggerBuilder.prototype.prompt = function (callback, message) {
+	if (typeof (message) !== "undefined")
+		process.stdout.write(message);
+	promptCallbacks.push(callback);
+}
+		
+/**
+ * @memberof LoggerBuilder#
+ * @method decorateGlobalLogger
+ */
+LoggerBuilder.prototype.decorateGlobalLogger = function () {
+	//@ts-ignore
+	if (!global.console_original) {
+		//@ts-ignore
+		global.console_original = {
+			log: console.log,
+			info: console.info,
+			warn: console.warn,
+			error: console.error,
+			dir: console.dir,
+			time: console.time,
+			timeEnd: console.timeEnd,
+			trace: console.trace,
+			assert: console.assert,
+			Console: console.Console
+		};
+		global.console.log = this.log;
+		global.console.info = this.info;
+		global.console.warn = this.warn;
+		global.console.error = this.error;
+		//@ts-ignore
+		global.console.prompt = this.prompt;
+	}
+}
+
+module.exports = LoggerBuilder;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <script src="https://sgapps.io/components/sgapps-labs-examples/toolbar/loader.js"></script>
+    
+</body>
+</html>

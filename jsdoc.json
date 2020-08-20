@@ -1,0 +1,89 @@
+{
+	"tags": {
+		"allowUnknownTags": false
+	},
+	"source": {
+		"include": "./",
+		"includePattern": "\\.js$",
+		"excludePattern": "(node_modules/|docs|resources/thirdparty|old)"
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"opts": {
+		"template": "node_modules/docdash",
+		"encoding": "utf8",
+		"readme": "README.md",
+		"mainpagetitle": "SGApps Server - by Sergiu Gordienco ( https://sgapps.io )",
+		"destination": "documentation/",
+		"recurse": true,
+		"verbose": true
+	},
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": true,
+		"default": {
+			"includeDate": false
+		}
+	},
+	"docdash": {
+		"static": true,
+		"sort": true,
+		"search": true,
+		"collapse": true,
+		"sectionOrder": [
+			"Modules",
+			"Classes",
+			"Externals",
+			"Events",
+			"Namespaces",
+			"Mixins",
+			"Tutorials",
+			"Interfaces"
+		],
+		"disqus": "",
+		"openGraph": {
+			"title": "SGApps Server - Framework",
+			"type": "website",
+			"image": "",
+			"site_name": "",
+			"url": "https://labs.sgapps.io/open-source/sgapps-server"
+		},
+		"meta": {
+			"title": "SGApps Server - Framework",
+			"description": "SGApps Server for high performance results",
+			"keyword": "javascript, js, application-prototype, prototype"
+		},
+		"wrap": true,
+		"typedefs": true,
+		"navLevel": 1,
+		"private": false,
+		"removeQuotes": "none",
+		"scripts": [
+			"https://sgapps.io/components/sgapps-labs-examples/toolbar/loader.js"
+		],
+		"menu": {
+			"Project Page ( Git Lab )": {
+				"href":"https://labs.sgapps.io/open-source/sgapps-server",
+				"target":"_blank",
+				"class":"menu-item",
+				"id":"website_link"
+			},
+			"About Me": {
+				"href":"http://gordienco.net/",
+				"target":"_blank",
+				"class":"menu-item",
+				"id":"website_link"
+			},
+			"GitHub": {
+				"href":"https://labs.sgapps.io/open-source/sgapps-server",
+				"target":"_blank",
+				"class":"menu-item",
+				"id":"github_link"
+			}
+		},
+		"scopeInOutputPath": true,
+		"nameInOutputPath": true,
+		"versionInOutputPath": true
+	}
+}

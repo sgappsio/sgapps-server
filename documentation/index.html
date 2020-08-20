@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - SGApps Server - Framework</title>
+    
+    <meta name="description" content="SGApps Server for high performance results" />
+    
+        <meta name="keywords" content="javascript, js, application-prototype, prototype" />
+        <meta name="keyword" content="javascript, js, application-prototype, prototype" />
+    
+    
+    
+    <meta property="og:title" content="SGApps Server - Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content="https://labs.sgapps.io/open-source/network-server"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://labs.sgapps.io/open-source/network-server" target="_blank" class="menu-item" id="website_link" >Project Page ( Git Lab )</a></h2><h2><a href="http://gordienco.net/" target="_blank" class="menu-item" id="website_link" >About Me</a></h2><h2><a href="https://github.com/sergiu-gordienco/nodejs-mvc" target="_blank" class="menu-item" id="github_link" >GitHub</a></h2><h3>Classes</h3><ul><li><a href="LoggerBuilder.html">LoggerBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#decorateGlobalLogger">decorateGlobalLogger</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#error">error</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#info">info</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#log">log</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#prompt">prompt</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#warn">warn</a></li></ul></li><li><a href="SGAppsServer.html">SGAppsServer</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServer.html#all">all</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#connect">connect</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#delete">delete</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#finalHandler">finalHandler</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handle">handle</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handleRequest">handleRequest</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#head">head</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#options">options</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#patch">patch</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#post">post</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#put">put</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#server">server</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#trace">trace</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#use">use</a></li></ul></li><li><a href="SGAppsServerDictionary.html">SGAppsServerDictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#push">push</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#run">run</a></li></ul></li><li><a href="SGAppsServerRequest.html">SGAppsServerRequest</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequest.html#getMountUpdatedUrl">getMountUpdatedUrl</a></li></ul></li><li><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#set">set</a></li></ul></li><li></li><li><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestSession.html#destroy">destroy</a></li></ul></li><li><a href="SGAppsServerResponse.html">SGAppsServerResponse</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFile">pipeFile</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFileStatic">pipeFileStatic</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#send">send</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#sendError">sendError</a></li></ul></li><li><a href="SGAppsSessionManager.html">SGAppsSessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsSessionManager.html#removeExpiredSessions">removeExpiredSessions</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#LoggerBuilderPrompt">LoggerBuilderPrompt</a></li><li><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></li><li><a href="global.html#RequestHandler">RequestHandler</a></li><li><a href="global.html#RequestPathStructure">RequestPathStructure</a></li><li><a href="global.html#RequestSessionDecorator">RequestSessionDecorator</a></li><li><a href="global.html#ResourcesExtensions">ResourcesExtensions</a></li><li><a href="global.html#SGAppsServerDecorator">SGAppsServerDecorator</a></li><li><a href="global.html#SGAppsServerDictionaryRunCallBack">SGAppsServerDictionaryRunCallBack</a></li><li><a href="global.html#SGAppsServerOptions">SGAppsServerOptions</a></li><li><a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a></li><li><a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a></li><li><a href="global.html#SGAppsServerRequestSessionCache">SGAppsServerRequestSessionCache</a></li><li><a href="global.html#SGAppsSessionManagerOptions">SGAppsSessionManagerOptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme usertext">
+        <article><h1>SGApps Server</h1>
+<p>A network solution for web applications.</p>
+<blockquote>
+<blockquote>
+<blockquote></blockquote>
+</blockquote>
+</blockquote>
+<p>Since this application is fully compatible with nodejs-mvc, I decided to replace nodejs-mvc with this new approach.</p>
+<p>SGApps Server is completely new solution, that will be improved continuously thats why I will work on this project instead of nodejs-mvc</p>
+<blockquote>
+<blockquote>
+<blockquote></blockquote>
+</blockquote>
+</blockquote>
+<p>by <em>Sergiu Gordienco &lt; sergiu.gordienco@sgapps.io &gt;</em></p>
+<h3>Application adding controllers and actions</h3>
+<blockquote>
+<p>A demo application you will see in ./demo/mvc-sample/app.js</p>
+</blockquote>
+<p>Defining the folder were a stored controllers: `app.setModulePath(&quot;app/modules&quot;);</p>
+<p>File structure of an controller and actions:</p>
+<pre class="prettyprint source"><code>    app
+    ⊢  modules
+        ⊢ index            # folder for controller &quot;index&quot;
+           ⊢ controller
+              ⊢ index.js   # default action
+              ⊢ create.js  # default other action named &quot;create&quot;
+</code></pre>
+<h4>Actions's file &quot;app/modules/index.js&quot;</h4>
+<pre class="prettyprint source lang-javascript"><code>	module.exports	= {
+		&quot;public&quot;	: true,	// define action as public default:false
+		&quot;postData&quot;	: false,	// if `true` the service will wait while POST data
+								// will be loaded in request object
+								// POST data will be returned by request.postVars()
+								// FILES will be returned by request.fileVars()
+		&quot;maxPostSize&quot;	: 1024*1024, // default 1Mb
+								// may be set true if action is sync without callbacks
+		capture	: function( request, response, app, controller, action ) {
+			// redner the view index
+			controller.render( response, 'index', { username: &quot;sergiu gordienco&quot; });
+		}
+	};
+</code></pre>
+<h4>Controllers's Methods</h4>
+<pre class="prettyprint source lang-javascript"><code>	module.exports	= {
+		&quot;public&quot;	: false,	// define action as public default:false
+		capture	: function (request, response, app, controller, action) {
+			// list controller methods
+			app.debug(true);
+			app.console.log(controller);
+			response.end();
+		}
+	};
+</code></pre>
+<ul>
+<li><code>controller.getViewer()</code>	- returns viewer Object</li>
+<li><code>controller.getName()</code>	- returns controller name</li>
+<li><code>controller.getView( str_viewName )</code>	- returns view <code>Object</code> or <code>false</code> if it don't exists</li>
+<li><code>controller.viewExists( str_viewName ) - returns Boolean </code>true<code>if view exists else returns</code>false`</li>
+<li><code>controller.render( response, viewName, parameters )</code>	- if viewExists render view else doesn't do any thing</li>
+<li><code>controller.removeView( viewName )</code>	- removes view if it exists under an action on success return <code>true</code> else returns <code>false</code></li>
+<li><code>controller.getAction( actionName )</code>	- return a action <code>Object</code> or <code>false</code></li>
+<li><code>controller.actionExists( actionName )</code>	- return <code>true</code> if action exists</li>
+<li><code>controller.addAction( actionName, configActionObject )</code>	- add action to controller if action already exists returns <code>false</code></li>
+<li><code>controller.removeAction( actionName )</code>	- removes action from controller on success returns <code>true</code> else <code>false</code></li>
+<li><code>controller.getVars()</code>	- return controllers vars object that can be used by all functions, and it is common for all user sessions</li>
+</ul>
+<h4>Action's Methods</h4>
+<pre class="prettyprint source lang-javascript"><code>	action = controller.getAction(&quot;library&quot;);
+</code></pre>
+<ul>
+<li><code>action.getController()</code>	- returns controller object</li>
+<li><code>action.getName()</code>	- return action name</li>
+<li><code>action.isPublic()</code>	- returns <code>true</code> if <code>public</code> is <code>true</code> else <code>false</code></li>
+<li><code>action.usePostData()</code>	- returns <code>true</code> if <code>postData</code> is <code>true</code> else <code>false</code></li>
+<li><code>action.maxPostSize(numberBytes)</code> - if <code>numberBytes</code> is a number it updates <code>maxPostSize</code> parameter, even function returns current maxPostSize</li>
+<li><code>action.run( request, response )</code> - run a action and returns <code>true</code> on success else returns <code>Error</code> object</li>
+</ul>
+<h3>Session vs SessionDyn</h3>
+<p>Using a session in a action:</p>
+<pre class="prettyprint source lang-javascript"><code>module.exports	= {
+	public	: 1,
+	capture	: function (request, response, app, controller, action) {
+		var sess = request.session
+		if (sess.views) {
+			sess.views++
+			response.setHeader('Content-Type', 'text/html')
+			response.write('&lt;p>views: ' + sess.views + '&lt;/p>&lt;p>expires in: ' + (sess.cookie.maxAge / 1000) + 's&lt;/p>', function (err) {
+				if (err) console.error(err);
+				response.end();
+			});
+		} else {
+		sess.views = 1
+			response.end('welcome to the session demo. refresh!')
+		}
+	}
+}
+</code></pre>
+<h3>SessionDyn <code>request.sessionDyn</code></h3>
+<p><strong>sessionDyn</strong> is much faster then other sessions, but it is stores object references in memory,
+it is very optimized, and practically, doesn't store additional metadata.</p>
+<ul>
+<li><code>request.sessionDyn.ip()</code> - returns current user ip</li>
+<li><code>request.sessionDyn.host()</code> - returns <code>request.headers.host</code></li>
+<li><code>request.sessionDyn.origin()</code> - returns <code>request.headers.origin</code>;</li>
+<li><code>request.sessionDyn.hashSession( sessionId )</code> - returns hashed <code>sessionId</code></li>
+<li><code>request.sessionDyn.genSessionId()</code> - returns a new valid sessionId</li>
+<li><code>request.sessionDyn.sessionId()</code> - returns current sessionId</li>
+<li><code>request.sessionDyn.setExpire( secconds, sessionId )</code> - set session expire timeout, if <code>sessionId</code> is undefined it will update current session</li>
+<li><code>request.sessionDyn.getExpire( sessionId )</code> - get session expire timestamp, if <code>sessionId</code> is undefined it will work with current session</li>
+<li><code>request.sessionDyn.getCreated( sessionId )</code> - get creation <code>timestamp</code> for <code>sessionDyn</code> with id equal to <code>sessionId</code></li>
+<li><code>request.sessionDyn.sessionExists( sessionId )</code>		: function( sessionId ) - retruns true if exists a <code>sessionDyn</code> with iq equal with <code>sessionId</code></li>
+<li><code>request.sessionDyn.getVars( sessionId )</code> - will return variables from a <code>sessionDyn</code> if it exists, if <code>sessionId</code> is <code>undefined</code> will return variables from current <code>sessionDyn</code> if sessionExists else retruns <code>false</code></li>
+</ul>
+<h3>Request methods</h3>
+<ul>
+<li><code>request.headers</code>   - object that contains headers <code>{ &quot;header name&quot; : &quot;header value&quot;, .... }</code></li>
+<li><code>request.urlObject</code> - object that resulted on parsing current url</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>    var url = &quot;https://www.example.com/path/to-an-url?get=references#hash-link&quot;;
+    console.log(url.parseURL(true));
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>    {
+        &quot;original&quot;  : &quot;https://www.example.com/path/to-an-url?get=references#hash-link&quot;,
+        &quot;origin&quot;    : &quot;https://www.example.com&quot;,&quot;domain&quot;:&quot;www.example.com&quot;,
+        &quot;domain_short&quot;  : &quot;example.com&quot;,
+        &quot;pathname&quot;  : &quot;/path/to-an-url&quot;,
+        &quot;reqQuery&quot;  : &quot;get=references&quot;,
+        &quot;protocol&quot;  : &quot;https&quot;,
+        &quot;protocoll&quot; : &quot;https://&quot;,
+        &quot;url&quot;       : &quot;www.example.com/path/to-an-url?get=references#hash-link&quot;,
+        &quot;url_p&quot;     : &quot;https://www.example.com/path/to-an-url?get=references#hash-link&quot;,
+        &quot;isIp&quot;      : &quot;www.example.com&quot;,
+        &quot;get_vars&quot;  : {
+            &quot;get&quot;   : &quot;references&quot;
+        }
+    }
+</code></pre>
+<ul>
+<li><code>request.controller</code>         - current controller name</li>
+<li><code>request.controllerAction</code>   - current action name</li>
+<li><code>request.params</code>             - current parameters array</li>
+<li><code>request.postData</code>           - <code>Buffer Object</code> where was stored original POST data</li>
+<li><code>request.postVars()</code>         - returns <code>POST</code> vars stored in a object ( available as <code>request.body</code> )</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>	// for PUT method or other
+	app.put(function (request, response, next) {
+		request.postDataColect(next);
+	});
+
+	app.put('/chat',function (request, response) {
+		response.send(request.body);
+	});
+</code></pre>
+<ul>
+<li><code>request.fileVars()</code>         - returns <code>FILE</code> vars stored in a object</li>
+<li><code>request.sessionDyn</code>         - returns <code>sessionDyn Object</code></li>
+<li><code>request.session</code>            - returns <code>session Object</code></li>
+<li><code>request.redirect( url, status )</code> - redirects to a specified url with a specified status ( default <code>status = 302</code> )</li>
+<li><code>request.postDataState</code>      - if <code>POST</code> data length is less that <code>action.maxPostSize</code> then it is <code>true</code> else <code>false</code></li>
+</ul>
+<h3>Response Methods</h3>
+<ul>
+<li><code>response.req</code>                        - request related tu current request</li>
+<li><code>response.get(headerName)</code>            - return a header value</li>
+<li><code>response.append(headerName, val)</code>    - add value to a header, if header is already set, append second same header</li>
+<li><code>response.location(url)</code>              - add headers for redirect by url</li>
+<li>`response.clearCookie(name, options)  - removing a coockie</li>
+<li>`response.cookie(name, val, options)  - addinf a cookie
+<ul>
+<li><code>options.signed</code>             - if true, hash the cookie</li>
+<li><code>options.expires</code>            - absolute expiration date for the cookie (Date object)</li>
+<li><code>options.path</code>               - cookie path</li>
+<li><code>options.maxAge</code>             - relative max age of the cookie from when the client receives it (seconds)</li>
+<li><code>options.domain</code>             - domain for the cookie</li>
+<li><code>options.secure</code>             - true or false</li>
+<li><code>options.httpOnly</code>           - true or false</li>
+</ul>
+</li>
+<li><code>response.pipe(filePath, callback, request)</code>
+<em>piping a file from</em> <code>filePath</code> <em>to</em> <code>response</code>
+<code>response</code> <em>is not closed/ended</em>
+<code>callback</code> <em>captures <code>err</code> in case of in-success</em> <code>function (err) { /*...*/ }</code>
+<code>request</code> <em>is optional ( used for <code>Content-Range</code> header)</em></li>
+<li><code>response.download(filePath, fileName, callback, request)</code>
+<em>piping a file from</em> <code>filePath</code> <em>to</em> <code>response</code>
+<code>fileName</code> <em>filename for downloaded file</em>
+<code>response</code> <em>is not closed/ended</em>
+<code>callback</code> <em>captures <code>err</code> in case of in-success</em> <code>function (err) { /*...*/ }</code>
+<code>request</code> <em>is optional ( used for <code>Content-Range</code> header)</em></li>
+<li><code>response.staticResource(filePath, fileName, callback, request)</code>
+<em>piping a file from</em> <code>filePath</code> <em>to</em> <code>response</code>
+<code>fileName</code> <em>filename for returned file</em>
+<code>response</code> <em>is not closed/ended</em>
+<code>callback</code> <em>captures <code>err</code> in case of in-success</em> <code>function (err) { /*...*/ }</code>
+<code>request</code> <em>is optional ( used for <code>Content-Range</code> header)</em></li>
+</ul>
+<h2>Templates Env references</h2>
+<pre class="prettyprint source lang-js"><code>var app = require(&quot;nodejs-mvc&quot;)();
+
+app.templateEnv({
+	author: &quot;sergiu-gordienco&quot;
+});
+
+// in templates will be available a reference env with data { author: &quot;sergiu-gordienco&quot; }
+</code></pre>
+<h2>application viewer - Viewer Object</h2>
+<p>Small overview</p>
+<pre class="prettyprint source lang-js"><code>	debugMode	: function (status) {
+		// updates or just return current debug status
+	},
+	getEnvVars	: function() {
+		// return envVars;
+	},
+	updateEnvVars	: function( data ) {
+		// updates env vars
+	},
+	renderCode	: function (code, vars, virtualFilePath, cb) {
+		// code - the code to e rendered
+		// vars - this reference will be available in template as &quot;vars&quot;
+		// virtualFilePath - reference path that will be used for searching included files
+		// cb - callback for getting results
+			// arguments:
+				// error - ( Array of errors ) or ( undefined )
+				// html - String code
+	}
+</code></pre>
+<h2>Email Object</h2>
+<h2>Examples</h2>
+<pre class="prettyprint source lang-js"><code>	var app = require(&quot;nodejs-mvc&quot;);
+	var Email = app.Email
+	var myMsg = new Email(
+	{ from: &quot;me@example.com&quot;
+		, to:   &quot;you@example.com&quot;
+		, subject: &quot;Knock knock...&quot;
+		, body: &quot;Who's there?&quot;
+	});
+
+	// if callback is provided, errors will be passed into it
+	// else errors will be thrown
+	myMsg.send(function(err){ ... })
+</code></pre>
+<p>Note that no callback was passed into <code>send()</code>, therefore errors will throw.</p>
+<h2>Options</h2>
+<pre class="prettyprint source lang-js"><code>	new Email(config)
+</code></pre>
+<p>config options:</p>
+<ul>
+<li>to {array|string}
+<ul>
+<li>Email address(es) to which this msg will be sent</li>
+</ul>
+</li>
+<li>from {string}
+<ul>
+<li>Email address from which this msg is sent. If not set
+defaults to the <code>exports.from</code> global setting.</li>
+</ul>
+</li>
+<li>replyTo {string}
+<ul>
+<li>Email address to which replies will be sent. If not set
+defaults to <code>from</code></li>
+</ul>
+</li>
+<li>cc {array|string}
+<ul>
+<li>Email address(es) who receive a copy</li>
+</ul>
+</li>
+<li>bcc {array|string}
+<ul>
+<li>Email address(es) who receive a blind copy</li>
+</ul>
+</li>
+<li>subject {string}
+<ul>
+<li>The subject of the email</li>
+</ul>
+</li>
+<li>body {string}
+<ul>
+<li>The message of the email</li>
+</ul>
+</li>
+<li>bodyType {string}
+<ul>
+<li>Content type of body. Only valid option is 'html' (for now).
+Defaults to text/plain.</li>
+</ul>
+</li>
+<li>altText {string}
+<ul>
+<li>If <code>bodyType</code> is set to 'html', this will be sent as the text
+alternative.</li>
+</ul>
+</li>
+<li>timeout {number}
+<ul>
+<li>Duration in milliseconds to wait before killing the process.
+If not set, defaults to <code>exports.timeout</code> global setting.</li>
+</ul>
+</li>
+<li>path {string}
+<ul>
+<li>Optional path to the sendmail executable</li>
+</ul>
+</li>
+<li>debug {boolean}
+<ul>
+<li>Print debug info</li>
+</ul>
+</li>
+</ul>
+<h2>TODO documentation for following objects</h2>
+<p>app.debug
+app.console
+app.templateManager
+app.getVars
+app.maxPostSize
+app.onMaxPostSize
+app.sessionManager
+app._events // .onError
+app.httpStatuses</p>
+<p>appInstance._functions.isValidIdentifier
+appInstance.structure
+appInstance.sessionExpire
+appInstance.templateEnv
+appInstance.sessionAutoUpdate
+appInstance.getPublicPath
+appInstance.getRootPath
+appInstance.getLibPath
+appInstance.getVendorPath
+appInstance.viewer</p>
+<h2>Templates FaceboxTPL</h2>
+<h3>To view parameters that are send have following structure</h3>
+<p>On template Rendering we have following variables</p>
+<pre class="prettyprint source lang-javascript"><code>
+	// variables that a sent from controllers
+	var vars	= {};
+
+	var env		= {
+		error	: [],
+		vars	: envVars,
+		path	: &quot;&quot;, // file path of current rendered template
+		dirname	: &quot;&quot;, // dirname of current rendered template
+		render	: function( text, vars, env ) {}, // render function
+		renderFile	: function( file, vars, callback ) {}, // render file function
+			// callback( error {{ [] or false }}, htm)
+	};
+
+	// env vars sent from app
+	env.vars = {
+		response : [object] // http response object
+	}
+</code></pre>
+<h3>An example how to render a view:</h3>
+<pre class="prettyprint source lang-javascript"><code>
+	// file app/modules/index/controller/pageviews.js
+
+	// file represents action page-views from controller index
+	var _vars	= {
+		pageviews	: 0
+	};
+	module.exports	= {
+		public	: true,
+		capture	: function( request, response, app, controller, action ) {
+			// increasing page-views
+			// sending page-views to view
+			controller.render( response, 'index', { pageviews: (++_vars.pageviews) });
+		}
+	};
+</code></pre>
+<h3>Operation in templates</h3>
+<h4>Include another template</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;!DOCTYPE html>
+	&lt;html lang=&quot;en&quot;>
+	&lt;head>
+		&lt;meta charset=&quot;UTF-8&quot;>
+		&lt;title>Document&lt;/title>
+	&lt;/head>
+	&lt;body>
+		&lt;!-- Include rendered teplate -->
+		{{render: env.vars.paths.layouts+&quot;header.tpl&quot; }}
+		&lt;div class=&quot;my-content&quot;>
+			&lt;!-- Include teplate and render with all content -->
+			{{include: env.vars.paths.layouts+&quot;header.tpl&quot; }}
+			Lorem ipsum Excepteur dolore labore nisi non.
+		&lt;/div>
+		&lt;!-- Include rendered teplate -->
+		{{render: env.vars.paths.layouts+&quot;footer.tpl&quot; }}
+	&lt;/body>
+	&lt;/html>
+</code></pre>
+<h4>Executing operations in template code</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;!DOCTYPE html>
+	&lt;html lang=&quot;en&quot;>
+	&lt;head>
+		&lt;meta charset=&quot;UTF-8&quot;>
+		&lt;title>Document&lt;/title>
+	&lt;/head>
+	&lt;body>
+		{eval}
+			vars.item_index	= 0;
+		{/eval}
+		&lt;script type=&quot;text/facebox-template&quot;>
+			vars.item_index	= 1;
+		&lt;/script>
+		&lt;ul>
+			&lt;li>item {{ ++vars.item_index }}&lt;/li>
+			&lt;li>item {{ ++vars.item_index }}&lt;/li>
+			&lt;li>item {{ ++vars.item_index }}&lt;/li>
+			&lt;li>item {{ ++vars.item_index }}&lt;/li>
+			&lt;li>item {{ ++vars.item_index }}&lt;/li>
+		&lt;/ul>
+		{js-return}
+			var message	= 'Were inserted '+vars.item_index+' items';
+			// returning response that will be inserted
+			return message;
+		{/js-return}
+		&lt;script type=&quot;text/facebox-template&quot;>
+			var message	= 'Were inserted '+vars.item_index+' items';
+			// returning response that will be inserted
+			return message;
+		&lt;/script>
+	&lt;/body>
+	&lt;/html>
+</code></pre>
+<h4>Isolate a section of code from parsing / no-format</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;!DOCTYPE html>
+	&lt;html lang=&quot;en&quot;>
+	&lt;head>
+		&lt;meta charset=&quot;UTF-8&quot;>
+		&lt;title>Document&lt;/title>
+	&lt;/head>
+	&lt;body>
+		{code}
+			not parsed code ... even this &quot;{{read:license.txt}}&quot;
+		{code}
+	&lt;/body>
+	&lt;/html>
+</code></pre>
+<h4>Adding a script and a css style</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;!DOCTYPE html>
+	&lt;html lang=&quot;en&quot;>
+	&lt;head>
+		&lt;meta charset=&quot;UTF-8&quot;>
+		&lt;title>Document&lt;/title>
+	&lt;/head>
+	&lt;body>
+		{js-script}
+			// javascript code
+			alert(&quot;Hello&quot;);
+		{js-script}
+		{css-style}
+			html, body {
+				background	: white;
+				color	: black;
+			}
+		{css-style}
+	&lt;/body>
+	&lt;/html>
+</code></pre>
+<h4>Include content from a file without parsing it</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;h1>License&lt;/h1>
+	&lt;pre>&lt;code>
+		{{read:license.txt}}
+	&lt;/code>&lt;/pre>
+</code></pre>
+<h4>Include content from a file encoded in HEX</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;script type=&quot;text/javascript&quot;>
+		var fileHexContent	= &quot;{{read-hex:file.hex}}&quot;
+	&lt;/script>
+</code></pre>
+<h4>Include content from a file encoded in base64</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;img src=&quot;data:image/jpeg; base64,{{read-base64:image.png}}&quot; />
+</code></pre>
+<h2>Using Extended prototype</h2>
+<blockquote>
+<p>Extended template operations regarding prototype</p>
+</blockquote>
+<h3>Escaping HTML chars</h3>
+<h4>For strings references</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;a href=&quot;{{ vars.url.toHtml() }}&quot;>{{ vars.user.name.toHtml() }}&lt;/a>
+</code></pre>
+<h4>For other type of references</h4>
+<pre class="prettyprint source lang-html"><code>	&lt;a href=&quot;{{ ((vars.url || &quot;&quot;) + &quot;&quot;).toHtml() }}&quot;>{{ ((vars.user.name || &quot;&quot;) + &quot;&quot;).toHtml() }}&lt;/a>
+</code></pre>
+<h2>Global Functions</h2>
+<h3>Extend/Merge Objects</h3>
+<pre class="prettyprint source lang-javascript"><code>	objMerge	= function(obj1, obj2, obj3, ..) { /*...*/ }
+</code></pre>
+<blockquote>
+<p>extend object
+<code>objEncodeURL({ name: &quot;foo&quot;, val : &quot;23&quot;}, { val: 24, val2: &quot;abc&quot;} )</code>
+result <code>{ name: &quot;foo&quot;, val: 24, val2: &quot;abc&quot; }</code></p>
+</blockquote>
+<blockquote>
+<p>remove poperty from object
+<code>objEncodeURL({ name: &quot;foo&quot;, val : &quot;23&quot;}, { val: null, val2: &quot;abc&quot;} )</code>
+result <code>{ name: &quot;foo&quot;, val2: &quot;abc&quot; }</code></p>
+</blockquote>
+<h3>Encode URL variables</h3>
+<pre class="prettyprint source lang-javascript"><code>	objEncodeURL	= function(data, prefix) { /*...*/ }
+</code></pre>
+<blockquote>
+<p><code>objEncodeURL({ foo: 5, bar: [1,5,9], cid: &quot;id-3453&quot; })</code>
+result <code>foo=5&amp;bar[0]=1&amp;bar[1]=5&amp;bar[2]=9&amp;cid=id-3453</code></p>
+</blockquote>
+<blockquote>
+<p><code>objEncodeURL([{ foo: 5, bar: [1,5,9], cid: &quot;id-3453&quot; }, &quot;test&quot;, { value: &quot;123&quot; }], &quot;data&quot;)</code>
+result <code>data[foo]=5&amp;bar[0]=1&amp;bar[1]=5&amp;bar[2]=9&amp;cid=id-3453</code></p>
+</blockquote>
+<h3>Check references' types</h3>
+<p>Check if reference is an Array. Returns <code>boolean</code></p>
+<pre class="prettyprint source lang-javascript"><code>	isArray = function() { /*...*/ };
+</code></pre>
+<p>Check if reference is a String. Returns <code>boolean</code></p>
+<pre class="prettyprint source lang-javascript"><code>	isString	= function(val) {};
+</code></pre>
+<h3>Global Object m_store</h3>
+<h4>Method <strong>m_store.empty</strong>:</h4>
+<p>Returns <code>true</code> if v is empty <em>( undefined, null, 0, &quot;0&quot;, false, [], &quot;&quot; )</em> else returns <code>false</code>;
+if <code>objectCheck = true</code> then m_store.empty also will turn true for empty objects.</p>
+<pre class="prettyprint source lang-javascript"><code>	m_store.empty	: function(v, objectCheck) { /*...*/ };
+</code></pre>
+<h4>Method <strong>m_store.is_numeric</strong>:</h4>
+<pre class="prettyprint source lang-javascript"><code>	m_store.is_numeric	: function(v) { /*...*/ },
+</code></pre>
+<p>Return <code>true</code> if reference <code>v</code> is a number or a numeric string</p>
+<h4>Method <strong>m_store.type</strong>:</h4>
+<pre class="prettyprint source lang-javascript"><code>	m_store.type	: function(val) { /*...*/ }
+</code></pre>
+<p>Detects following type of reference types,</p>
+<ul>
+<li>return <code>'null'</code> for <code>null</code> reference</li>
+<li>return <code>'string'</code> for <em>String</em> reference or instanceof <em>String</em></li>
+<li>return <code>'boolean'</code> for <code>boolean</code> reference</li>
+<li>return <code>'undefined'</code> for undefined references</li>
+<li>return <code>'function'</code> for functions</li>
+<li>return <code>'number'</code> for number</li>
+<li>return <code>'array'</code> for array objects</li>
+<li>return <code>'regexp'</code> for Regular Expressions</li>
+<li>return <code>'object'</code> for Objects</li>
+</ul>
+<h4>Method <strong>m_store.json</strong>:</h4>
+<p>Following function encodes a reference into JSON object.
+The function will encode different references, even:
+<strong>functions</strong>, <strong>Infinity</strong>, <strong>-Infinity</strong>, <strong>NaN</strong>, <strong>undefined</strong></p>
+<p><code>maxEncodeDepth</code> if is not defined, default is <code>5</code></p>
+<pre class="prettyprint source lang-javascript"><code>	m_store.json	: function(val, maxEncodeDepth ) {}
+</code></pre>
+<h4>Method <strong>m_store.getv</strong>:</h4>
+<p>Return parsed JSON value. When <code>safeMode</code> is not specified or is <em>false</em>,
+the method m_store.getv uses <code>eval</code> <strong>(not safe)</strong></p>
+<p>With <code>safeMode = true</code> will be used function JSON.parse
+<em>( JSON parse will not be able to decode <strong>functions</strong>, <strong>Infinity</strong>, <strong>-Infinity</strong> or <strong>NaN</strong> references )</em></p>
+<pre class="prettyprint source lang-javascript"><code>	m_store.getv	: function(val, safeMode) { /*...*/ }
+</code></pre>
+<h3>String Prototype</h3>
+<h4>Subs Method:</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.subs	= function(string, offset, length) {}
+</code></pre>
+<blockquote>
+<p><code>&quot;abcdefghi&quot;.subs(2)</code> is equal to <code>&quot;ab&quot;</code>
+<code>&quot;abcdefghi&quot;.subs(2,3)</code> is equal to <code>&quot;cde&quot;</code>
+<code>&quot;abcdefghi&quot;.subs(-2)</code> is equal to <code>&quot;hi&quot;</code>
+<code>&quot;abcdefghi&quot;.subs(1,-2)</code> is equal to <code>&quot;bcdefg&quot;</code>
+<code>&quot;abcdefghi&quot;.subs(-4,3)</code> is equal to <code>&quot;fgh&quot;</code></p>
+</blockquote>
+<h4>Subs Method:</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.toHex = function(utf8String) { /*...*/ return hex_str; }
+	String.prototype.fromHex = function(){ /*...*/ retrun utf8_str; },
+</code></pre>
+<blockquote>
+<p><code>&quot;TEST&quot;.toHex()</code> is equal to <code>&quot;54455354&quot;</code>
+<code>&quot;54455354&quot;.fromHex()</code> is equal to <code>&quot;TEST&quot;</code>
+<code>&quot;54455354&quot;.fromHex()</code> is equal to <code>&quot;TEST&quot;</code></p>
+</blockquote>
+<blockquote>
+<p><strong>UTF-8</strong> vs Unicode
+Function <code>.toHex()</code> and <code>.fromHex</code> is working with <strong>UTF-8</strong> Strings
+but javascript is working with <strong>Unicode</strong>
+<code>&quot;€&quot;.toHex()</code> <em>(Unicode)</em> 1 char in HEX is 2 chars <code>&quot;20ac&quot;</code>
+<code>&quot;20ac&quot;.fromHex()</code> is &quot; ¬&quot;</p>
+</blockquote>
+<blockquote>
+<p>So correctly to encode UnicodeText to Hex is
+&quot;€&quot;.utf8encode().toHex() and the result is <code>&quot;e282ac&quot;</code>
+and <code>&quot;e282ac&quot;.fromHex().utf8decode()</code> is <code>&quot;€&quot;</code></p>
+</blockquote>
+<h4>Escape HTML</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.toHtmlSimple	= function() { /*...*/ retrun str; },
+	String.prototype.toHtml = function(){ /*...*/ return str;},
+	String.prototype.cleanTags	= function() { /*...*/ return str; }
+</code></pre>
+<h4>Check if word exists in a list of words separated by <code>&quot; &quot;</code></h4>
+<pre class="prettyprint source lang-javascript"><code>	// add class
+	String.prototype.add_Class = function(x){},
+	// remove class
+	String.prototype.del_Class = function(x){},
+	// check is calss exists
+	String.prototype.fnd_Class = function(x){},
+</code></pre>
+<h4>String letterCase change</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.swp_case = function(){ return str; }
+	String.prototype.ucfirst = function(k){ return str; }
+	String.prototype.lcfirst = function(k){ return str; }
+</code></pre>
+<h4>Encoding Conversions</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.utf8need = function() { return bool_utf8 }
+	String.prototype.utf8encode = function() { return utf8_str; }
+	String.prototype.utf8decode = function(strUtf) { return unicode_str; }
+	String.prototype.utf8	= String.prototype.utf8encode;
+	String.prototype.unicode = String.prototype.utf8decode;
+
+	String.prototype.escapeHex	= function() { /* ... */ return str; },
+	// on execution: &quot;#$%#$%^&quot;.escapeHex()
+	// return &quot;\x23\x24\x25\x23\x24\x25\x5E&quot;
+
+	String.prototype.escape		= function() { return escape(this); },
+	String.prototype.encodeURI	= function() { return encodeURIComponent(this); },
+	String.prototype.unescape	= function() { return unescape(this); },
+	String.prototype.decodeURI	= function() { return decodeURIComponent(this); },
+
+	String.prototype.toRegexp = function(flags){ return reg_exp_object; }
+	// on execution: &quot;.*&quot;.toRegexp(&quot;g&quot;)
+	// returns: /.*/g
+</code></pre>
+<h4>Parse URL links</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.parseUrlVars	= function(json,params) { retrun data_object; },
+	String.prototype.parseMultipartFormData	= function(json,params,postToUtf8, hexData) { return data_object; },
+	String.prototype.parseUrl	= function(url) { return object; }
+</code></pre>
+<p><strong>Examples</strong></p>
+<h5>Parse URL</h5>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com/test?nr=1&module=mvc#link-1&quot;.parseUrl()
+```javascript
+**Returns**
+```javascript
+	{
+		original	: &quot;http://www.example.com/test?nr=1&module=mvc#link-1&quot;,
+		origin	: &quot;http://www.example.com&quot;,
+		domain	: &quot;www.example.com&quot;,
+		domain_short	: &quot;example.com&quot;,
+		pathname: &quot;/test&quot;,
+		reqQuery	: &quot;nr=1&module=mvc&quot;,
+		protocol: &quot;http&quot;,
+		protocoll: &quot;http://&quot;
+	};
+</code></pre>
+<h5>Parse URL with GET vars</h5>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com/test?nr=1&module=mvc&val[x]=5#link-1&quot;.parseUrl(true)
+```javascript
+**Returns**
+```javascript
+	{
+		get_vars	: {
+			nr	: 1,
+			module	: mvc,
+			val : {
+				x	: 5
+			}
+		},
+		original	: &quot;http://www.example.com/test?nr=1&module=mvc#link-1&quot;,
+		origin	: &quot;http://www.example.com&quot;,
+		domain	: &quot;www.example.com&quot;,
+		domain_short	: &quot;example.com&quot;,
+		pathname: &quot;/test&quot;,
+		reqQuery	: &quot;nr=1&module=mvc&quot;,
+		protocol: &quot;http&quot;,
+		protocoll: &quot;http://&quot;
+	};
+</code></pre>
+<h5>Parse URL retrieve only GET vars</h5>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com/test?nr=1&module=mvc&val[x]=5#link-1&quot;.parseUrl(&quot;get_vars&quot;)
+```javascript
+**Returns**
+```javascript
+	{
+		nr	: 1,
+		module	: mvc,
+		val : {
+			x	: 5
+		}
+	}
+</code></pre>
+<h5>Parse URL and retrieve only a property from parsed Object</h5>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com/test?nr=1&module=mvc&val[x]=5#link-1&quot;.parseUrl(&quot;origin&quot;)
+</code></pre>
+<p><strong>Returns</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com&quot;
+</code></pre>
+<hr>
+<pre class="prettyprint source lang-javascript"><code>	&quot;http://www.example.com/test?nr=1&module=mvc&val[x]=5#link-1&quot;.parseUrl(&quot;reqQuery&quot;)
+</code></pre>
+<p><strong>Returns</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;nr=1&module=mvc&quot;
+</code></pre>
+<h4>Match a string using a reg expression described in a string</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.match_str	= function(regexp_str,regexp_flags) { /* ... */ }
+</code></pre>
+<h4>Make a SHA1 Hash</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.sha1 : function(utf8){return Sha1.hash(this,( utf8 || typeof(utf8) == &quot;undefined&quot; ) ? true : false)},
+
+	// &quot;utf8&quot; indicates that code firstly should be encoded to UTF-8 from UNICODE
+	// default &quot;utf8&quot; argument is true
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;password&quot;.sha1();
+	// returns
+	&quot;5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8&quot;
+</code></pre>
+<h4>Make a SHA2 Hash</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.sha256 : function(utf8){return Sha256.hash(this,( utf8 || typeof(utf8) == &quot;undefined&quot; ) ? true : false)},
+
+	// &quot;utf8&quot; indicates that code firstly should be encoded to UTF-8 from UNICODE
+	// default &quot;utf8&quot; argument is true
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;password&quot;.sha256();
+	// returns
+	&quot;5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8&quot;
+</code></pre>
+<h4>Make a MD5 Hash</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.md5	: function() { /* ... */},
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;password&quot;.md5();
+	// returns
+	&quot;5f4dcc3b5aa765d61d8327deb882cf99&quot;
+</code></pre>
+<h4>For encoding JavaScript UNICODE code into Base64</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.base64encode	: function() { return btoa(this.utf8need()); },
+</code></pre>
+<h4>For decoding JavaScript UNICODE code into Base64</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.base64decode	: function() { return atob(this).unicode(); },
+</code></pre>
+<h4>For encoding JavaScript UTF8 and ASCII code into Base64</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.base64encodeClean	: function() { return btoa(this); },
+</code></pre>
+<h4>For decoding JavaScript UTF8 and ASCII code into Base64</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.base64decodeClean	: function() { return atob(this); },
+</code></pre>
+<h4>Encrypt a String using a passKey and TEA algorithm</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.encryptTea	: function(p) { /* ... */ },
+</code></pre>
+<h4>Decrypt a String using a passKey and TEA algorithm</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.decryptTea	: function(p) { /* ... */ },
+</code></pre>
+<h4>Encrypt a String using a passKey and passlength ( 128, 192, 256 ) in AES algorithm</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.encryptAes	: function(passKey, passlength) { /* ... */ },
+</code></pre>
+<h4>Decrypt a String using a passKey and passlength ( 128, 192, 256 ) in AES algorithm</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.decryptAes	: function(passKey, passlength) { /* ... */ },
+</code></pre>
+<h4>String Method buildQuery</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.buildQuery	: function() {
+		var r	= /^\s*([a-z]+)\:\s*(\S[^\:]*?|)\s*(\s[a-z]+\:.*|)$/i
+		var s = this, o = { &quot;_keys&quot; : [] }, m, k, f = s.split(/([a-z]+)\:/i);
+		if( m = f[0].match(/^\s*(\S[\s\S]*?)\s*$/) ) {
+			o[&quot;_keys&quot;].push(&quot;_&quot;);
+			o['_']	= m[1];
+		};
+		f = s.substring(f[0].length,s.length);
+		while( m = f.match(r) ) {
+			o[k = m[1].toLowerCase()]	= m[2];
+			o[&quot;_keys&quot;].push(k);
+			f = f.split(m[0]).join(m[3]);
+		};
+		return o;
+	},
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;test:234 val:foo bar&quot;.buildQuery()
+	// returns
+	{
+		&quot;_keys&quot; : [&quot;test&quot;, &quot;val&quot;],
+		&quot;test&quot;	: &quot;234&quot;,
+		&quot;val&quot;	: &quot;foo bar&quot;
+	}
+</code></pre>
+<h4>String Method buildSearchArray</h4>
+<pre class="prettyprint source lang-javascript"><code>	String.prototype.buildSearchArray	: function() { /*...*/ return arr; }
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>	&quot;test 'foo bar'&quot;.buildSearchArray()
+	// returns
+	[&quot;test&quot;, &quot;foo bar&quot;]
+</code></pre>
+<h3>Array prototype</h3>
+<h4>Array method (inArray) - search an element in a array with a defined comparator</h4>
+<pre class="prettyprint source lang-javascript"><code>	/*
+		comparator posible values:
+		1. '==='	- check if is strict equal
+		2. '=='		- check if is equal
+		3. a _function_ :
+		function(searched_item,array_item) {
+			return searched_item === array_item
+		}
+	*/
+	Array.prototype.inArray	= function(a,comparator) { /*...*/ },
+</code></pre>
+<h4>Split an Array by an a value of one octet</h4>
+<pre class="prettyprint source lang-javascript"><code>	Array.prototype.split	= function (elem, num, cmp) { /*...*/ },
+</code></pre>
+<h4>Split an Array by an a section value of one or more bytes</h4>
+<pre class="prettyprint source lang-javascript"><code>	Array.prototype.splitSect	= function(elem, num) {
+		return this.split(elem, (num || 0), &quot;indexOfSect&quot;);
+	},
+</code></pre>
+<h4>Convert a Array to an parameter object</h4>
+<pre class="prettyprint source lang-javascript"><code>	Array.prototype.toParamObj	= function() { /*...*/ },
+</code></pre>
+<h4>Remove from Array undefined values</h4>
+<pre class="prettyprint source lang-javascript"><code>	Array.prototype.resetArray	= function() {return this.filter(function(v) { return ( typeof(v) != &quot;undefined&quot; ); })},
+</code></pre>
+<h4>Find IndexOf position of a set of elements in a Array</h4>
+<pre class="prettyprint source lang-javascript"><code>	Array.prototype.indexOfSect	= function (searchElement, fromIndex) { /*...*/ }
+</code></pre>
+<pre><code>Number.prototype.round	= function(k) {	if(k) return parseFloat(this.toFixed(k)); return Math.round(this);	},
+
+Number.prototype.ceil	= function() {	return Math.ceil(this);	},
+
+Number.prototype.floor	= function() {	return Math.floor(this);	}
+</code></pre>
+<h3>Buffer prototype</h3>
+<h4>Split a Buffer by an a value of one octet</h4>
+<pre class="prettyprint source lang-javascript"><code>	Buffer.prototype.split	= function (elem, num, cmp) {
+		/* ... */
+		return lines;
+	}
+</code></pre>
+<h4>Split a Buffer by an a section value of one or more bytes</h4>
+<pre class="prettyprint source lang-javascript"><code>	Buffer.prototype.splitSect	= function(elem, num) {
+		return this.split(elem, (num || 0), &quot;indexOfSect&quot;);
+	}
+</code></pre>
+<h4>Converts a Buffer in a params object</h4>
+<pre class="prettyprint source lang-javascript"><code>	Buffer.prototype.toParamObj	= function() { /*...*/ },
+</code></pre>
+<h4>Find IndexOf a byte in a Buffer</h4>
+<pre class="prettyprint source lang-javascript"><code>	Buffer.prototype.indexOf	= function(searchSequence, fromIndex) { /*...*/ },
+</code></pre>
+<h4>Find IndexOf a section of bytes in a Buffer</h4>
+<pre class="prettyprint source lang-javascript"><code>	Buffer.prototype.indexOfSect	= function(searchSequence, fromIndex) { /*...*/ },
+</code></pre>
+<h2>Authors</h2>
+<ul>
+<li>Gordienco Sergiu &lt; sergiu.gordienco@sgapps.io &gt;</li>
+</ul>
+<h2>License</h2>
+<p>the license is <a href="./LICENSE">Apache-2.0</a></p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <script src="https://sgapps.io/components/sgapps-labs-examples/toolbar/loader.js"></script>
+    
+</body>
+</html>

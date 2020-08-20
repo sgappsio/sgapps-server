@@ -1,0 +1,60 @@
+{
+  "name": "nodejs-mvc",
+  "version": "4.0.13",
+  "description": "SGApps Network Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "rm -rf ./documentation/* ; jsdoc -c jsdoc.json ; ",
+    "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; rm types.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ;",
+    "docs-dictionary-dev": "npm run docs-dictionary; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary; done",
+    "docs-dev": "npm run docs; while true; do find . -not -path './documentation' | entr -pd npm run docs; done",
+    "docs-preview": "live-server --wait=2500 --no-browser documentation"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://labs.sgapps.io/open-source/sgapps-server.git"
+  },
+  "keywords": [
+    "http server",
+    "web server",
+    "web application",
+    "sgapps server",
+    "http application",
+    "node-mvc",
+    "nodejs-mvc",
+    "web framework",
+    "application prototype",
+    "sgapps",
+    "map",
+    "sgapps.io"
+  ],
+  "jshintConfig": {
+    "bitwise": false,
+    "freeze": false,
+    "loopfunc": true,
+    "laxbreak": true,
+    "multistr": true,
+    "-W002": true,
+    "-W014": true,
+    "-W069": true,
+    "-W032": true
+  },
+  "author": "Sergiu Gordienco <sergiu.gordienco@gmail.com> ( https://sgapps.io/about-us )",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://labs.sgapps.io/open-source/sgapps-server/issues"
+  },
+  "homepage": "https://labs.sgapps.io/open-source/sgapps-server",
+  "dependencies": {
+    "application-prototype": "^1.25.12",
+    "busboy": "0.3.1",
+    "module-require": ">=1.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "docdash": "^1.2.0",
+    "jsdoc": "^3.6.3",
+    "tsd-jsdoc": "^2.4.0"
+  }
+}

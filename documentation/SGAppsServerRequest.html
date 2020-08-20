@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>SGAppsServerRequest - SGApps Server - Framework</title>
+    
+    <meta name="description" content="SGApps Server for high performance results" />
+    
+        <meta name="keywords" content="javascript, js, application-prototype, prototype" />
+        <meta name="keyword" content="javascript, js, application-prototype, prototype" />
+    
+    
+    
+    <meta property="og:title" content="SGApps Server - Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content="https://labs.sgapps.io/open-source/network-server"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://labs.sgapps.io/open-source/network-server" target="_blank" class="menu-item" id="website_link" >Project Page ( Git Lab )</a></h2><h2><a href="http://gordienco.net/" target="_blank" class="menu-item" id="website_link" >About Me</a></h2><h2><a href="https://github.com/sergiu-gordienco/nodejs-mvc" target="_blank" class="menu-item" id="github_link" >GitHub</a></h2><h3>Classes</h3><ul><li><a href="LoggerBuilder.html">LoggerBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#decorateGlobalLogger">decorateGlobalLogger</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#error">error</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#info">info</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#log">log</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#prompt">prompt</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#warn">warn</a></li></ul></li><li><a href="SGAppsServer.html">SGAppsServer</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServer.html#all">all</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#connect">connect</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#delete">delete</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#finalHandler">finalHandler</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handle">handle</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handleRequest">handleRequest</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#head">head</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#options">options</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#patch">patch</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#post">post</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#put">put</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#server">server</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#trace">trace</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#use">use</a></li></ul></li><li><a href="SGAppsServerDictionary.html">SGAppsServerDictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#push">push</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#run">run</a></li></ul></li><li><a href="SGAppsServerRequest.html">SGAppsServerRequest</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequest.html#getMountUpdatedUrl">getMountUpdatedUrl</a></li></ul></li><li><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#set">set</a></li></ul></li><li></li><li><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestSession.html#destroy">destroy</a></li></ul></li><li><a href="SGAppsServerResponse.html">SGAppsServerResponse</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFile">pipeFile</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFileStatic">pipeFileStatic</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#send">send</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#sendError">sendError</a></li></ul></li><li><a href="SGAppsSessionManager.html">SGAppsSessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsSessionManager.html#removeExpiredSessions">removeExpiredSessions</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#LoggerBuilderPrompt">LoggerBuilderPrompt</a></li><li><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></li><li><a href="global.html#RequestHandler">RequestHandler</a></li><li><a href="global.html#RequestPathStructure">RequestPathStructure</a></li><li><a href="global.html#RequestSessionDecorator">RequestSessionDecorator</a></li><li><a href="global.html#ResourcesExtensions">ResourcesExtensions</a></li><li><a href="global.html#SGAppsServerDecorator">SGAppsServerDecorator</a></li><li><a href="global.html#SGAppsServerDictionaryRunCallBack">SGAppsServerDictionaryRunCallBack</a></li><li><a href="global.html#SGAppsServerOptions">SGAppsServerOptions</a></li><li><a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a></li><li><a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a></li><li><a href="global.html#SGAppsServerRequestSessionCache">SGAppsServerRequestSessionCache</a></li><li><a href="global.html#SGAppsSessionManagerOptions">SGAppsSessionManagerOptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">SGAppsServerRequest</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        SGAppsServerRequest
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+
+    <h4 class="name" id="SGAppsServerRequest"><span class="type-signature"></span>new SGAppsServerRequest<span class="signature">(request, server)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">IncomingMessage</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>server</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServer.html">SGAppsServer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="_postDataBuffer"><span class="type-signature"></span>_postDataBuffer<span class="type-signature"> :Buffer</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>post data buffer cache</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Buffer</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="body"><span class="type-signature"></span>body<span class="type-signature"> :object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="bodyItems"><span class="type-signature"></span>bodyItems<span class="type-signature"> :Array.&lt;<a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="cookies"><span class="type-signature"></span>cookies<span class="type-signature"> :<a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-cookie.js.html">prototypes/server/extend/request-cookie.js</a>, <a href="prototypes_server_extend_request-cookie.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="files"><span class="type-signature"></span>files<span class="type-signature"> :Object.&lt;string, Array.&lt;<a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a>>></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line79">line 79</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object.&lt;string, Array.&lt;<a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a>>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="MAX_POST_SIZE"><span class="type-signature"></span>MAX_POST_SIZE<span class="type-signature"> :number</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// changing max post size to 4Mb
+request.MAX_POST_SIZE = 4 * 1024 * 1024;</code></pre>
+
+    <pre class="prettyprint"><code>// reset max post size to global value
+request.MAX_POST_SIZE = -1;</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="mountPath"><span class="type-signature"></span>mountPath<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="postData"><span class="type-signature"></span>postData<span class="type-signature"> :Promise.&lt;Buffer></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line92">line 92</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>request's post received data</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Promise.&lt;Buffer></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="query"><span class="type-signature"></span>query<span class="type-signature"> :object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="request"><span class="type-signature"></span>request<span class="type-signature"> :IncomingMessage</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">IncomingMessage</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="session"><span class="type-signature"></span>session<span class="type-signature"> :<a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-session.js.html">prototypes/server/extend/request-session.js</a>, <a href="prototypes_server_extend_request-session.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="getMountUpdatedUrl"><span class="type-signature"></span>getMountUpdatedUrl<span class="signature">(url)</span><span class="type-signature"> &rarr; {<a href="global.html#MountUpdatedURL">MountUpdatedURL</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_request-url.js.html">prototypes/server/extend/request-url.js</a>, <a href="prototypes_server_extend_request-url.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <script src="https://sgapps.io/components/sgapps-labs-examples/toolbar/loader.js"></script>
+    
+</body>
+</html>

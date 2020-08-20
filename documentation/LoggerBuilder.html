@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>LoggerBuilder - SGApps Server - Framework</title>
+    
+    <meta name="description" content="SGApps Server for high performance results" />
+    
+        <meta name="keywords" content="javascript, js, application-prototype, prototype" />
+        <meta name="keyword" content="javascript, js, application-prototype, prototype" />
+    
+    
+    
+    <meta property="og:title" content="SGApps Server - Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content="https://labs.sgapps.io/open-source/network-server"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://labs.sgapps.io/open-source/network-server" target="_blank" class="menu-item" id="website_link" >Project Page ( Git Lab )</a></h2><h2><a href="http://gordienco.net/" target="_blank" class="menu-item" id="website_link" >About Me</a></h2><h2><a href="https://github.com/sergiu-gordienco/nodejs-mvc" target="_blank" class="menu-item" id="github_link" >GitHub</a></h2><h3>Classes</h3><ul><li><a href="LoggerBuilder.html">LoggerBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#decorateGlobalLogger">decorateGlobalLogger</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#error">error</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#info">info</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#log">log</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#prompt">prompt</a></li><li data-type='method' style='display: none;'><a href="LoggerBuilder.html#warn">warn</a></li></ul></li><li><a href="SGAppsServer.html">SGAppsServer</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServer.html#all">all</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#connect">connect</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#delete">delete</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#finalHandler">finalHandler</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handle">handle</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#handleRequest">handleRequest</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#head">head</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#options">options</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#patch">patch</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#post">post</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#put">put</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#server">server</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#trace">trace</a></li><li data-type='method' style='display: none;'><a href="SGAppsServer.html#use">use</a></li></ul></li><li><a href="SGAppsServerDictionary.html">SGAppsServerDictionary</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#push">push</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerDictionary.html#run">run</a></li></ul></li><li><a href="SGAppsServerRequest.html">SGAppsServerRequest</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequest.html#getMountUpdatedUrl">getMountUpdatedUrl</a></li></ul></li><li><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#get">get</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerRequestCookie.html#set">set</a></li></ul></li><li></li><li><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerRequestSession.html#destroy">destroy</a></li></ul></li><li><a href="SGAppsServerResponse.html">SGAppsServerResponse</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFile">pipeFile</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#pipeFileStatic">pipeFileStatic</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#send">send</a></li><li data-type='method' style='display: none;'><a href="SGAppsServerResponse.html#sendError">sendError</a></li></ul></li><li><a href="SGAppsSessionManager.html">SGAppsSessionManager</a><ul class='methods'><li data-type='method' style='display: none;'><a href="SGAppsSessionManager.html#removeExpiredSessions">removeExpiredSessions</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#LoggerBuilderPrompt">LoggerBuilderPrompt</a></li><li><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></li><li><a href="global.html#RequestHandler">RequestHandler</a></li><li><a href="global.html#RequestPathStructure">RequestPathStructure</a></li><li><a href="global.html#RequestSessionDecorator">RequestSessionDecorator</a></li><li><a href="global.html#ResourcesExtensions">ResourcesExtensions</a></li><li><a href="global.html#SGAppsServerDecorator">SGAppsServerDecorator</a></li><li><a href="global.html#SGAppsServerDictionaryRunCallBack">SGAppsServerDictionaryRunCallBack</a></li><li><a href="global.html#SGAppsServerOptions">SGAppsServerOptions</a></li><li><a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a></li><li><a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a></li><li><a href="global.html#SGAppsServerRequestSessionCache">SGAppsServerRequestSessionCache</a></li><li><a href="global.html#SGAppsSessionManagerOptions">SGAppsSessionManagerOptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">LoggerBuilder</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        LoggerBuilder
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+
+    <h4 class="name" id="LoggerBuilder"><span class="type-signature"></span>new LoggerBuilder<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Pretty CLI Logger, with possibility to replace default nodejs' console logger</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// =============================
+//   Use Logger as 💻 instance
+// =============================
+
+const { LoggerBuilder } = require('@sgapps.io/server');
+
+const logger = new LoggerBuilder();
+
+logger.log("Hello world");</code></pre>
+
+    <pre class="prettyprint"><code>// replace default console
+
+const { LoggerBuilder } = require('@sgapps.io/server');
+const logger = new LoggerBuilder();
+logger.decorateGlobalLogger();
+
+console.log("Console Messages are decorated now");</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="_debug"><span class="type-signature"></span>_debug<span class="type-signature"> :boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="_format"><span class="type-signature"></span>_format<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line79">line 79</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>this parameter may be changed if you decide to change decoration schema</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Insert an message in VT100 format
+logger._format = "\x1b[7m {{timestamp}} [{{TYPE}}] &lt;{{title}}> {{file}}:{{line}} ({{method}}){{stack}}\x1b[7m";</code></pre>
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="decorateGlobalLogger"><span class="type-signature"></span>decorateGlobalLogger<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line201">line 201</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="error"><span class="type-signature"></span>error<span class="signature">(&hellip;messages)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>messages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">(&hellip;messages)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>messages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(&hellip;messages)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>messages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="prompt"><span class="type-signature"></span>prompt<span class="signature">(callback, message)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line180">line 180</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>logger.prompt("rerun tests? [y/n]: ", function (err, buffer) {
+	// trim spaces from response
+	var response = buffer.toString().replace(/^\s*(.*?)\s*$/, '$1');
+	if (response === 'y') {
+		// write your code
+	}
+});</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#LoggerBuilderPrompt">LoggerBuilderPrompt</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Buffer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(&hellip;messages)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_logger.js.html">prototypes/logger.js</a>, <a href="prototypes_logger.js.html#line141">line 141</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>messages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <script src="https://sgapps.io/components/sgapps-labs-examples/toolbar/loader.js"></script>
+    
+</body>
+</html>
