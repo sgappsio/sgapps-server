@@ -12,6 +12,32 @@ const SGAppsServerRequest = require('./server/request');
 const SGAppsServerResponse = require('./server/response');
 const SGAppsServerDictionary = require('./dictionary');
 
+
+
+/**
+ * @callback SGAppsServerErrorCallBack
+ * @param {Error} err
+ * @param {SGAppsServerRequest} request 
+ * @param {SGAppsServerResponse} response 
+ * @param {SGAppsServer} server 
+ */
+
+
+/**
+ * @callback SGAppsServerErrorOnlyCallback
+ * @param {Error} err
+ */
+
+/**
+ * @class
+ * @name FSLibrary
+ */
+
+/**
+ * @class
+ * @name SGAppsServerShared
+ */;
+
 /**
  * @callback SGAppsServerDecorator
  * @param {SGAppsServerRequest} request
@@ -130,11 +156,17 @@ function SGAppsServer(options) {
 		{ strictRouting: true }, (options || {})
 	);
 
+	/**
+	 * @memberof SGAppsServer#
+	 * @name STATUS_CODES
+	 * @type {Object<number,string>}
+	 */
+	this.STATUS_CODES = require('http').STATUS_CODES;
 
 	/**
 	 * @memberof SGAppsServer#
 	 * @name shared
-	 * @type {object}
+	 * @type {SGAppsServerShared}
 	 */
 	this.shared = {};
 
@@ -168,9 +200,16 @@ function SGAppsServer(options) {
 	/**
 	 * @memberof SGAppsServer#
 	 * @name _fs
-	 * @type {FSLibrary}
-	 */
-	this._fs = FSLibrary;
+	 * @type {object}
+	 */;
+	this._fs = require('fs');
+
+	/**
+	 * @memberof SGAppsServer#
+	 * @name _path
+	 * @type {object}
+	 */;
+	this._path = require('path');
 
 	/**
 	 * @memberof SGAppsServer#
@@ -318,6 +357,59 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
 		);
 	} else {
 		response.sendError(Error(`[Request.method] is unknown; ${method}`));
+	}
+}
+
+
+/**
+ * @memberof SGAppsServer
+ * @param {SGAppsServerRequest} request
+ * @param {SGAppsServerResponse} response
+ * @param {string} path
+ * @param {SGAppsServerErrorCallBack} callback
+ */
+SGAppsServer.prototype.handleStaticRequest = function (request, response, path, callback) {
+	if (response.response) {
+		response.pipeFile(
+			this._path.resolve(
+				path,
+				request.mountPath,
+				this._path.resolve(
+					'/',
+					request.urlInfo.pathname
+				)
+			),
+			(err) => {
+				if (callback) {
+					callback(
+						null,
+						request,
+						response,
+						//@ts-ignore
+						this
+					);
+				} else {
+					if (err) {
+						response.sendError(
+							Error(`404 ${this.STATUS_CODES[404]}; ${err.message}`),
+							{
+								statusCode: 404
+							}
+						);
+					}
+				}
+			}
+		);
+	} else {
+		if (callback) {
+			callback(
+				Error('[Response] is already finished'),
+				request,
+				response,
+				//@ts-ignore
+				this
+			);
+		}
 	}
 }
 

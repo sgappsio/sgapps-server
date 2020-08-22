@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>prototypes/server/extend/response-send.js - SGApps Server - Framework</title>
+    <title>FSLibrary - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,91 +46,137 @@
 
 <div id="main">
     
-    <h1 class="page-title">prototypes/server/extend/response-send.js</h1>
+    <h1 class="page-title">FSLibrary</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @private
- * @param {SGAppsServerRequest} request 
- * @param {SGAppsServerResponse} response 
- * @param {SGAppsServer} server 
- * @param {function} callback
- */
-function ResponseSendDecorator(request, response, server, callback) {
-	if (request === null || response === null) {
-		callback();
-		return;
-	}
+        <h2>
+        FSLibrary
+        </h2>
+        
+    
+</header>
 
-	/**
-	* @method send
-	* @memberof SGAppsServerResponse#
-	* @param {string|Buffer|object|any[]} data 
-	*/
-	response.send = function (data) {
-		if (typeof(data) === "string") {
-			if (data[0] === '&lt;') {
-				if (!response.response.headersSent) {
-					response.response.setHeader('Content-Type', 'text/html');
-				}
-			} else {
-				if (!response.response.headersSent) {
-					response.response.setHeader('Content-Type', 'text/plain');
-				}
-			}
-			
-			response.response.write(data, function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else if (data instanceof Buffer) {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
-			response.response.write(data, function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else if (Array.isArray(data) || typeof(data) === "object") {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/json');
-			}
-			
-			response.response.write(JSON.stringify(data), function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
-			response.response.write((data.toString ? data.toString() : (data + '')), function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		}
-	};
-	
-	response.response.on('end', function () {
-		// @ts-ignore
-		delete response.send;
-	});
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-	callback();
-};
+    
 
-module.exports = ResponseSendDecorator;</code></pre>
-        </article>
-    </section>
+    <h4 class="name" id="FSLibrary"><span class="type-signature"></span>new FSLibrary<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server.js.html">prototypes/server.js</a>, <a href="prototypes_server.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

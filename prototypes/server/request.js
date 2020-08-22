@@ -17,7 +17,21 @@ function SGAppsServerRequest(request, server) {
 	this.request = request;
 
 	//@ts-ignore
-	const _urlInfo = request.url.parseVars(true);
+	const _urlInfo = `${request.protocol || 'http'}://${request.headers.host || 'localhost'}/${request.url}`.parseUrl(true);
+	/**
+	 * @memberof SGAppsServerRequest#
+	 * @var {object} urlInfo
+	 * @property {string} original
+	 * @property {string} origin 
+	 * @property {string} domain full domain of url
+	 * @property {string} domain_short	domain without "www."
+	 * @property {string} pathname url's pathname
+	 * @property {string} reqQuery url's query from '?'
+	 * @property {string} protocol url.split('://')[0]
+	 * @property {string} url
+	 * @property {string} url_p
+	 * @property {string} isIp	domain or Ip
+	 */;
 	Object.defineProperty(this, 'urlInfo', {
 		get: () => _urlInfo,
 		set: () => {

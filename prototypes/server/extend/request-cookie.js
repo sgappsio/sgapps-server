@@ -13,7 +13,7 @@ const Cookies = require('./../../../resources/thirdparty/cookies');
  * @param {object} [options]
  * @param {boolean} [options.secure=false]
  * @returns {string}
- */;
+ */
 
 
 /**
@@ -24,7 +24,8 @@ const Cookies = require('./../../../resources/thirdparty/cookies');
  * @param {object} [options]
  * @param {boolean} [options.secure=false]
  * @returns {string}
- */;
+ */
+;
 
 /**
  * @private
@@ -57,7 +58,7 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 	 * @memberof SGAppsServerRequest#
 	 * @name cookies
 	 * @type {SGAppsServerRequestCookie}
-	 */
+	 */;
 	//@ts-ignore
 	request.cookies = new Cookies(request.request, response.response, {
 		keys: [server.CookiesManager.COOKIES_KEY]

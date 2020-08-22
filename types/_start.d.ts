@@ -1,3 +1,10 @@
+
+declare module "sgapps-server" {
+
+import * as FSLibrary from 'fs';
+
+export = FSLibrary;
+
 interface ReadableStream extends EventEmitter {
     readable: boolean;
     read(size?: number): string | Buffer;

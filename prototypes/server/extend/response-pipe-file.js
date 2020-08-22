@@ -15,7 +15,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 	 * @memberof SGAppsServerResponse#
 	 * @method pipeFile
 	 * @param {string} filePath 
-	 * @param {function} callback represents a `Function(Error)`
+	 * @param {SGAppsServerErrorOnlyCallback} callback represents a `Function(Error)`
 	 */
 	response.pipeFile = function ResponsePipe(filePath, callback) {
 		var returned = false;
@@ -23,6 +23,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 
 		if (response.response.writableEnded) {
 			_callback(Error('Response is already ended'));
+			return;
 		}
 		
 		server._fs.stat(filePath, function (err, stat) {
@@ -94,7 +95,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 			});
 
 			readStream.on('end', function() {
-				_callback(undefined);
+				_callback(null);
 			});
 		});
 	};

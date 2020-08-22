@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>prototypes/server/extend/response-send.js - SGApps Server - Framework</title>
+    <title>TemplateManagerViewer - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,91 +46,832 @@
 
 <div id="main">
     
-    <h1 class="page-title">prototypes/server/extend/response-send.js</h1>
+    <h1 class="page-title">TemplateManagerViewer</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @private
- * @param {SGAppsServerRequest} request 
- * @param {SGAppsServerResponse} response 
- * @param {SGAppsServer} server 
- * @param {function} callback
- */
-function ResponseSendDecorator(request, response, server, callback) {
-	if (request === null || response === null) {
-		callback();
-		return;
-	}
+        <h2>
+        TemplateManagerViewer
+        </h2>
+        
+    
+</header>
 
-	/**
-	* @method send
-	* @memberof SGAppsServerResponse#
-	* @param {string|Buffer|object|any[]} data 
-	*/
-	response.send = function (data) {
-		if (typeof(data) === "string") {
-			if (data[0] === '&lt;') {
-				if (!response.response.headersSent) {
-					response.response.setHeader('Content-Type', 'text/html');
-				}
-			} else {
-				if (!response.response.headersSent) {
-					response.response.setHeader('Content-Type', 'text/plain');
-				}
-			}
-			
-			response.response.write(data, function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else if (data instanceof Buffer) {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
-			response.response.write(data, function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else if (Array.isArray(data) || typeof(data) === "object") {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/json');
-			}
-			
-			response.response.write(JSON.stringify(data), function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else {
-			if (!response.response.headersSent) {
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
-			response.response.write((data.toString ? data.toString() : (data + '')), function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		}
-	};
-	
-	response.response.on('end', function () {
-		// @ts-ignore
-		delete response.send;
-	});
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-	callback();
-};
+    
 
-module.exports = ResponseSendDecorator;</code></pre>
-        </article>
-    </section>
+    <h4 class="name" id="TemplateManagerViewer"><span class="type-signature"></span>new TemplateManagerViewer<span class="signature">(options)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>_fs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FSLibrary.html">FSLibrary</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="_debug"><span class="type-signature"></span>_debug<span class="type-signature"> :boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="_env"><span class="type-signature"></span>_env<span class="type-signature"> :Object.&lt;string, any></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object.&lt;string, any></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="_facebox"><span class="type-signature"></span>_facebox<span class="type-signature"> :<a href="FaceboxTemplate.html">FaceboxTemplate</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="FaceboxTemplate.html">FaceboxTemplate</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="renderCode"><span class="type-signature"></span>renderCode<span class="signature">(response, view, vars)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li><a href="TemplateManagerViewer.html">TemplateManagerViewer</a></li></ul>
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServerResponse.html">SGAppsServerResponse</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>view</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#TemplateManagerTemplate">TemplateManagerTemplate</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vars</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="renderCode"><span class="type-signature"></span>renderCode<span class="signature">(code, vars, virtualFilePath, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_template-manager_viewer.js.html">prototypes/server/extend/template-manager/viewer.js</a>, <a href="prototypes_server_extend_template-manager_viewer.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vars</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>virtualFilePath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

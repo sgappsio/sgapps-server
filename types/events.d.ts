@@ -13,7 +13,7 @@ interface DOMEventTarget {
     addEventListener(event: string, listener: (...args: any[]) => void, opts?: { once: boolean }): any;
 }
 
-class EventEmitter {
+declare class EventEmitter {
     constructor(options?: EventEmitterOptions);
     /** @deprecated since v4.0.0 */
     static listenerCount(emitter: EventEmitter, event: string | symbol): number;

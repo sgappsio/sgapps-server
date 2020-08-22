@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>SGAppsServerRequest - SGApps Server - Framework</title>
+    <title>TemplateManager - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,7 +46,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">SGAppsServerRequest</h1>
+    <h1 class="page-title">TemplateManager</h1>
     
 
     
@@ -59,7 +59,7 @@
 <header>
     
         <h2>
-        SGAppsServerRequest
+        TemplateManager
         </h2>
         
     
@@ -73,7 +73,7 @@
 
     
 
-    <h4 class="name" id="SGAppsServerRequest"><span class="type-signature"></span>new SGAppsServerRequest<span class="signature">(request, server)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TemplateManager"><span class="type-signature"></span>new TemplateManager<span class="signature">(options)</span><span class="type-signature"></span></h4>
 
     
 
@@ -85,7 +85,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line5">line 5</a>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -159,13 +159,55 @@
 
         <tr>
             
-                <td class="name"><code>request</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">IncomingMessage</span>
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>_fs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FSLibrary.html">FSLibrary</a></span>
 
 
             
@@ -179,26 +221,10 @@
         </tr>
 
     
+    </tbody>
+</table>
 
-        <tr>
-            
-                <td class="name"><code>server</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="SGAppsServer.html">SGAppsServer</a></span>
-
-
-            
             </td>
-
-            
-
-            
-
-            <td class="description last"></td>
         </tr>
 
     
@@ -244,7 +270,7 @@
 
         
             
-<h4 class="name" id="_postDataBuffer"><span class="type-signature"></span>_postDataBuffer<span class="type-signature"> :Buffer</span></h4>
+<h4 class="name" id="_env"><span class="type-signature"></span>_env<span class="type-signature"> :Object.&lt;string, any></span></h4>
 
 
 
@@ -255,80 +281,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line20">line 20</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>post data buffer cache</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Buffer</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="body"><span class="type-signature"></span>body<span class="type-signature"> :object</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line55">line 55</a>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -373,7 +326,7 @@
     <ul>
         <li>
             
-<span class="param-type">object</span>
+<span class="param-type">Object.&lt;string, any></span>
 
 
         </li>
@@ -386,7 +339,7 @@
 
         
             
-<h4 class="name" id="bodyItems"><span class="type-signature"></span>bodyItems<span class="type-signature"> :Array.&lt;<a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a>></span></h4>
+<h4 class="name" id="_options"><span class="type-signature"></span>_options<span class="type-signature"> :object</span></h4>
 
 
 
@@ -397,641 +350,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line67">line 67</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="global.html#SGAppsServerRequestPostDataItem">SGAppsServerRequestPostDataItem</a>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="cookies"><span class="type-signature"></span>cookies<span class="type-signature"> :<a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-cookie.js.html">prototypes/server/extend/request-cookie.js</a>, <a href="prototypes_server_extend_request-cookie.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="SGAppsServerRequestCookie.html">SGAppsServerRequestCookie</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="files"><span class="type-signature"></span>files<span class="type-signature"> :Object.&lt;string, Array.&lt;<a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a>>></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line79">line 79</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object.&lt;string, Array.&lt;<a href="global.html#SGAppsServerRequestFile">SGAppsServerRequestFile</a>>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="MAX_POST_SIZE"><span class="type-signature"></span>MAX_POST_SIZE<span class="type-signature"> :number</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line70">line 70</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>// changing max post size to 4Mb
-request.MAX_POST_SIZE = 4 * 1024 * 1024;</code></pre>
-
-    <pre class="prettyprint"><code>// reset max post size to global value
-request.MAX_POST_SIZE = -1;</code></pre>
-
-
-
-        
-            
-<h4 class="name" id="mountPath"><span class="type-signature"></span>mountPath<span class="type-signature"> :string</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line54">line 54</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="postData"><span class="type-signature"></span>postData<span class="type-signature"> :Promise.&lt;Buffer></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-postdata.js.html">prototypes/server/extend/request-postdata.js</a>, <a href="prototypes_server_extend_request-postdata.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>request's post received data</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Promise.&lt;Buffer></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="query"><span class="type-signature"></span>query<span class="type-signature"> :object</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="request"><span class="type-signature"></span>request<span class="type-signature"> :IncomingMessage</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">IncomingMessage</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="session"><span class="type-signature"></span>session<span class="type-signature"> :<a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-session.js.html">prototypes/server/extend/request-session.js</a>, <a href="prototypes_server_extend_request-session.js.html#line209">line 209</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="SGAppsServerRequestSession.html">SGAppsServerRequestSession</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="urlInfo"><span class="type-signature"></span>urlInfo<span class="type-signature"> :object</span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_request.js.html">prototypes/server/request.js</a>, <a href="prototypes_server_request.js.html#line21">line 21</a>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -1094,13 +413,13 @@ request.MAX_POST_SIZE = -1;</code></pre>
 
         <tr>
             
-                <td class="name"><code>original</code></td>
+                <td class="name"><code>_fs</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="FSLibrary.html">FSLibrary</a></span>
 
 
             
@@ -1111,213 +430,6 @@ request.MAX_POST_SIZE = -1;</code></pre>
             
 
             <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>origin</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>domain</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>full domain of url</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>domain_short</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>domain without &quot;www.&quot;</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pathname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>url's pathname</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>reqQuery</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>url's query from '?'</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>protocol</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>url.split('://')[0]</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>url_p</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isIp</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>domain or Ip</p></td>
         </tr>
 
     
@@ -1347,6 +459,75 @@ request.MAX_POST_SIZE = -1;</code></pre>
 
 
         
+            
+<h4 class="name" id="_viewer"><span class="type-signature"></span>_viewer<span class="type-signature"> :<a href="TemplateManagerViewer.html">TemplateManagerViewer</a></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="TemplateManagerViewer.html">TemplateManagerViewer</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
     
 
     
@@ -1357,7 +538,7 @@ request.MAX_POST_SIZE = -1;</code></pre>
 
     
 
-    <h4 class="name" id="getMountUpdatedUrl"><span class="type-signature"></span>getMountUpdatedUrl<span class="signature">(url)</span><span class="type-signature"> &rarr; {<a href="global.html#MountUpdatedURL">MountUpdatedURL</a>}</span></h4>
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(templateName, filePath)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1369,7 +550,7 @@ request.MAX_POST_SIZE = -1;</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_request-url.js.html">prototypes/server/extend/request-url.js</a>, <a href="prototypes_server_extend_request-url.js.html#line20">line 20</a>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -1443,7 +624,294 @@ request.MAX_POST_SIZE = -1;</code></pre>
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>templateName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>filePath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addList"><span class="type-signature"></span>addList<span class="signature">(templates)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line92">line 92</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>templates</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(templateName)</span><span class="type-signature"> &rarr; {<a href="global.html#TemplateManagerTemplate">TemplateManagerTemplate</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>templateName</code></td>
             
 
             <td class="type">
@@ -1492,7 +960,467 @@ request.MAX_POST_SIZE = -1;</code></pre>
     </dt>
     <dd>
         
-<span class="param-type"><a href="global.html#MountUpdatedURL">MountUpdatedURL</a></span>
+<span class="param-type"><a href="global.html#TemplateManagerTemplate">TemplateManagerTemplate</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">(templateName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>templateName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(response, templateName, vars)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServerResponse.html">SGAppsServerResponse</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>templateName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vars</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="templateExists"><span class="type-signature"></span>templateExists<span class="signature">(templateName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>templateName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
 
 
     </dd>
