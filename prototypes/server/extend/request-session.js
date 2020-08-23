@@ -229,6 +229,7 @@ function RequestSessionDecorator(request, response, server, callback) {
 
 	response.response.on('end', function () {
 		request.session.destroy();
+		delete request.session;
 	});
 	
 	callback();

@@ -15,17 +15,27 @@ function ResponseSendDecorator(request, response, server, callback) {
 	* @method send
 	* @memberof SGAppsServerResponse#
 	* @param {string|Buffer|object|any[]} data 
+	* @param {object} [options] 
+	* @param {number} [options.statusCode=200] 
 	*/
-	response.send = function (data) {
+	response.send = function (data, options) {
+		if (!response.response || !response.response.writableEnded)
+			return;
+		options = Object.assign(
+			{
+				statusCode: 200
+			},
+			options
+		);
+
 		if (typeof(data) === "string") {
-			if (data[0] === '<') {
-				if (!response.response.headersSent) {
+			if (!response.response.headersSent) {
+				if (data[0] === '<') {
 					response.response.setHeader('Content-Type', 'text/html');
-				}
-			} else {
-				if (!response.response.headersSent) {
+				} else {
 					response.response.setHeader('Content-Type', 'text/plain');
 				}
+				response.response.statusCode = options.statusCode;
 			}
 			
 			response.response.write(data, function (err) {
@@ -34,6 +44,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 			});
 		} else if (data instanceof Buffer) {
 			if (!response.response.headersSent) {
+				response.response.statusCode = options.statusCode;
 				response.response.setHeader('Content-Type', 'application/octet-stream');
 			}
 			
@@ -43,6 +54,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 			});
 		} else if (Array.isArray(data) || typeof(data) === "object") {
 			if (!response.response.headersSent) {
+				response.response.statusCode = options.statusCode;
 				response.response.setHeader('Content-Type', 'application/json');
 			}
 			
@@ -52,6 +64,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 			});
 		} else {
 			if (!response.response.headersSent) {
+				response.response.statusCode = options.statusCode;
 				response.response.setHeader('Content-Type', 'application/octet-stream');
 			}
 			
@@ -61,6 +74,20 @@ function ResponseSendDecorator(request, response, server, callback) {
 			});
 		}
 	};
+
+	/**
+	* @method sendStatusCode
+	* @memberof SGAppsServerResponse#
+	* @param {number} statusCode 
+	*/
+	response.sendStatusCode = function (statusCode) {
+		response.send(
+			server.STATUS_CODES[statusCode] || 'Unknown status code',
+			{
+				statusCode
+			}
+		);
+	}
 	
 	response.response.on('end', function () {
 		// @ts-ignore

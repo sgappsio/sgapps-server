@@ -33,7 +33,7 @@ declare class SGAppsServerDictionary {
     constructor(options?: {
         reverse?: boolean;
     });
-    push(path: RequestPathStructure, handler: RequestHandler): void;
+    push(path: RequestPathStructure, handlers: RequestHandler[]): void;
     run(request: SGAppsServerRequest, response: SGAppsServerResponse, server: SGAppsServer, callback: SGAppsServerDictionaryRunCallBack): void;
 }
 
@@ -197,7 +197,7 @@ declare class TemplateManager {
         [key: string]: string;
     }): void;
     get(templateName: string): TemplateManagerTemplate;
-    render(response: SGAppsServerResponse, templateName: string, vars: {
+    render(response: SGAppsServerResponse, templateName: string, vars?: {
         [key: string]: any;
     }): void;
 }
@@ -313,7 +313,10 @@ declare class SGAppsServerResponse {
      * @param callback - <p>represents a <code>Function(Error)</code></p>
      */
     pipeFile(filePath: string, callback: SGAppsServerErrorOnlyCallback): void;
-    send(data: string | Buffer | any | any[]): void;
+    send(data: string | Buffer | any | any[], options?: {
+        statusCode?: number;
+    }): void;
+    sendStatusCode(statusCode: number): void;
     response: ServerResponse;
 }
 
@@ -414,52 +417,61 @@ declare class SGAppsServer {
     handleStaticRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, path: string, callback: SGAppsServerErrorCallBack): void;
     handle(request: IncomingMessage, response: ServerResponse, callback: SGAppsServerDictionaryRunCallBack): void;
     server(): Server;
-    use(handler: RequestHandler): SGAppsServer;
+    use(path: string | RequestHandler, ...handlers?: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>POST</code> method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.</p>
      */
-    post(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    post(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>GET</code> method requests a representation of the specified resource. Requests using GET should only retrieve data.</p>
      */
-    get(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    get(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>HEAD</code> method asks for a response identical to that of a GET request, but without the response body.</p>
      */
-    head(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    head(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>PUT</code> method replaces all current representations of the target resource with the request payload.</p>
      */
-    put(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    put(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>TRACE</code> method performs a message loop-back test along the path to the target resource.</p>
      */
-    trace(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    trace(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>DELETE</code> method deletes the specified resource.</p>
      */
-    delete(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    delete(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>OPTIONS</code> method is used to describe the communication options for the target resource.</p>
      */
-    options(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    options(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>CONNECT</code> method establishes a tunnel to the server identified by the target resource.</p>
      */
-    connect(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    connect(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>PATCH</code> method is used to apply partial modifications to a resource.</p>
      */
-    patch(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    patch(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>add handler to all methods</p>
      */
-    all(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    all(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>add final handler to all methods, last added is first</p>
      */
-    finalHandler(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    finalHandler(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
+    handlePostData(options?: {
+        MAX_POST_SIZE?: number;
+        error?: {
+            statusCode: number;
+            message?: string;
+        };
+    }): SGAppsServerHandlerPostData;
 }
+
+declare type SGAppsServerHandlerPostData = (request: SGAppsServerRequest, response: SGAppsServerResponse, next: (...params: any[]) => any) => void;
 
 declare type ResourcesExtensions = {
     mime: (...params: any[]) => any;
@@ -1547,7 +1559,7 @@ declare class SGAppsServerDictionary {
     constructor(options?: {
         reverse?: boolean;
     });
-    push(path: RequestPathStructure, handler: RequestHandler): void;
+    push(path: RequestPathStructure, handlers: RequestHandler[]): void;
     run(request: SGAppsServerRequest, response: SGAppsServerResponse, server: SGAppsServer, callback: SGAppsServerDictionaryRunCallBack): void;
 }
 
@@ -1711,7 +1723,7 @@ declare class TemplateManager {
         [key: string]: string;
     }): void;
     get(templateName: string): TemplateManagerTemplate;
-    render(response: SGAppsServerResponse, templateName: string, vars: {
+    render(response: SGAppsServerResponse, templateName: string, vars?: {
         [key: string]: any;
     }): void;
 }
@@ -1827,7 +1839,10 @@ declare class SGAppsServerResponse {
      * @param callback - <p>represents a <code>Function(Error)</code></p>
      */
     pipeFile(filePath: string, callback: SGAppsServerErrorOnlyCallback): void;
-    send(data: string | Buffer | any | any[]): void;
+    send(data: string | Buffer | any | any[], options?: {
+        statusCode?: number;
+    }): void;
+    sendStatusCode(statusCode: number): void;
     response: ServerResponse;
 }
 
@@ -1928,52 +1943,61 @@ declare class SGAppsServer {
     handleStaticRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, path: string, callback: SGAppsServerErrorCallBack): void;
     handle(request: IncomingMessage, response: ServerResponse, callback: SGAppsServerDictionaryRunCallBack): void;
     server(): Server;
-    use(handler: RequestHandler): SGAppsServer;
+    use(path: string | RequestHandler, ...handlers?: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>POST</code> method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.</p>
      */
-    post(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    post(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>GET</code> method requests a representation of the specified resource. Requests using GET should only retrieve data.</p>
      */
-    get(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    get(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>HEAD</code> method asks for a response identical to that of a GET request, but without the response body.</p>
      */
-    head(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    head(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>PUT</code> method replaces all current representations of the target resource with the request payload.</p>
      */
-    put(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    put(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>TRACE</code> method performs a message loop-back test along the path to the target resource.</p>
      */
-    trace(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    trace(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>DELETE</code> method deletes the specified resource.</p>
      */
-    delete(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    delete(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>OPTIONS</code> method is used to describe the communication options for the target resource.</p>
      */
-    options(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    options(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>CONNECT</code> method establishes a tunnel to the server identified by the target resource.</p>
      */
-    connect(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    connect(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>The <code>PATCH</code> method is used to apply partial modifications to a resource.</p>
      */
-    patch(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    patch(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>add handler to all methods</p>
      */
-    all(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    all(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
     /**
      * <p>add final handler to all methods, last added is first</p>
      */
-    finalHandler(path: RequestPathStructure, handler: RequestHandler): SGAppsServer;
+    finalHandler(path: RequestPathStructure, ...handlers: RequestHandler[]): SGAppsServer;
+    handlePostData(options?: {
+        MAX_POST_SIZE?: number;
+        error?: {
+            statusCode: number;
+            message?: string;
+        };
+    }): SGAppsServerHandlerPostData;
 }
+
+declare type SGAppsServerHandlerPostData = (request: SGAppsServerRequest, response: SGAppsServerResponse, next: (...params: any[]) => any) => void;
 
 declare type ResourcesExtensions = {
     mime: (...params: any[]) => any;

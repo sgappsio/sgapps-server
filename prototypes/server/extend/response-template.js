@@ -122,7 +122,7 @@ TemplateManager.prototype.get = function (templateName) {
  * @method render
  * @param {SGAppsServerResponse} response
  * @param {string} templateName
- * @param {Object<string,any>} vars
+ * @param {Object<string,any>} [vars]
  */
 TemplateManager.prototype.render = function (
 	response, templateName, vars
@@ -131,7 +131,7 @@ TemplateManager.prototype.render = function (
 		this._viewer.render(
 			response,
 			this._templates[templateName],
-			vars
+			vars || {}
 		);
 	} else {
 		response.sendError(

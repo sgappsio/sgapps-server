@@ -99,18 +99,22 @@ function SGAppsServerDictionary(options) {
  * @memberof SGAppsServerDictionary#
  * @method push
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {RequestHandler[]} handlers
  */
-SGAppsServerDictionary.prototype.push = function (path, handler) {
+SGAppsServerDictionary.prototype.push = function (path, handlers) {
 	if (!(path in this._dictionary)) {
 		this._dictionary[path] = [];
 	}
 	if (this._options.reverse) {
 		this._paths.unshift(path);
-		this._dictionary[path].unshift(handler);
+		handlers.map(v => v).reverse().forEach(handler => {
+			this._dictionary[path].unshift(handler);
+		})
 	} else {
 		this._paths.push(path);
-		this._dictionary[path].push(handler);
+		handlers.forEach(handler => {
+			this._dictionary[path].push(handler);
+		})
 	}
 };
 

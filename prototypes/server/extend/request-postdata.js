@@ -49,8 +49,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 * @property {string} data.mimeType file's mimeType
 	 */
 
-	const _body = {};
-	const _bodyItems = [];
+	let _body = {};
+	let _bodyItems = [];
 
 	/**
 	 * @memberof SGAppsServerRequest#
@@ -81,7 +81,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 * @name files
 	 * @type {Object<string,SGAppsServerRequestFile[]>}
 	 */
-	const _files = {};
+	let _files = {};
 	Object.defineProperty(request, 'files', {
 		get: () => _files,
 		set: () => server.logger.warn("[Request.files] is not configurable"),
@@ -95,172 +95,195 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 * @name postData
 	 * @type {Promise<Buffer>}
 	 */
-	request.postData = new Promise(function (resolve, reject) {
-		let _postDataSize = 0;
-		let _canceled = false;
-		request.request.on("data", function (chunk) {
-			if (_canceled) return;
-			if (request.request.aborted) return;
-
-			var dataLimit = request.MAX_POST_SIZE;
-
-			if (dataLimit < _postDataSize) {
-				_canceled = true;
-				const err = Error('[Request.MAX_POST_SIZE] exceeded');
-				server.logger.error(err);
-				reject(err);
-				return;
-			}
-
-			request._postDataBuffer = Buffer.concat([request._postDataBuffer, chunk]);
-
-			_postDataSize += chunk.length;
-		});
-
-		request.request.once("error", function (err) {
-			if (_canceled) return;
-			server.logger.error(err);
-			_canceled = true;
-			reject(err);
-		});
-
-		request.request.once("abort", function () {
-			if (_canceled) return;
-			const err = Error('[Request] aborted');
-			server.logger.error(err);
-			_canceled = true;
-			reject(err);
-		});
-
-		request.request.once('end', function () {
-			if (_canceled) return;
-			if (
-				(
-					request.request.headers['content-type'] || ''
-				).indexOf('multipart/form-data') === 0
-			) {
-
-				let Readable = require('stream').Readable;
-				let readable = new Readable()
-				readable._read = () => {} // _read is required but you can noop it
-				readable.push(request._postDataBuffer);
-				readable.push(null);
-	
-				var detectedBoundary = (
-					request._postDataBuffer
-						.slice(0, 1024).toString()
-						.match(/^\-\-(\-{4,}[A-Za-z0-9]{4,}\-*)(\r|)\n/) || []
-				)[1] || null;
-	
-					if (detectedBoundary) {
-						var calculatedHeader = 'multipart/form-data; boundary=' + detectedBoundary;
-						if (
-							calculatedHeader !== request.request.headers['content-type']
-						) {
-							console.warn(
-								"Multipart Form Data: boundary replaced from ",
-								request.request.headers['content-type'],
-								calculatedHeader
-							);
+	let _postData = null;
+	Object.defineProperty(
+		request,
+		'postData',
+		{
+			get: () => {
+				if (_postData) return _postData;
+				_postData = new Promise(function (resolve, reject) {
+					let _postDataSize = 0;
+					let _canceled = false;
+					request.request.on("data", function (chunk) {
+						if (_canceled) return;
+						if (request.request.aborted) return;
+			
+						var dataLimit = request.MAX_POST_SIZE;
+			
+						if (dataLimit < _postDataSize) {
+							_canceled = true;
+							const err = Error('[Request.MAX_POST_SIZE] exceeded');
+							server.logger.error(err);
+							reject(err);
+							return;
 						}
-						request.request.headers['content-type'] = calculatedHeader;
-					}
-	
-					/**
-					 * @private
-					 * @type {Readable}
-					 */
-					//@ts-ignore
-					const busboy = new Busboy({
-						headers: request.request.headers,
-						limits: {
-							fieldNameSize: 255,
-							fieldSize: request.MAX_POST_SIZE,
-							fileSize: request.MAX_POST_SIZE
-						}
+			
+						request._postDataBuffer = Buffer.concat([request._postDataBuffer, chunk]);
+			
+						_postDataSize += chunk.length;
 					});
-
-					busboy.on(
-						'file',
-						/**
-						 * @inner
-						 * @param {string} fieldName 
-						 * @param {Readable} fileStream 
-						 * @param {string} fileName 
-						 * @param {string} encoding 
-						 * @param {string} mimeType 
-						 */
-						function (
-							fieldName,
-							fileStream,
-							fileName,
-							encoding,
-							mimeType
-						) {
-							const file = {
-								fieldName: fieldName,
-								data: {
-									fileName: fileName,
-									encoding: encoding,
-									fileStream: () => fileStream,
-									fileData: null,
-									fileSize: 0,
-									contentType: mimeType,
-									loaded: false
-								}
-							};
-							if (!(fieldName in _files)) _files[fieldName] = [];
-
-							//@ts-ignore
-							_files[fieldName].push(file);
-
-							fileStream.on('data', function (data) {
-								file.data.fileData.push(data);
-								file.data.fileSize += data.length;
-							});
-							fileStream.on('error', function (err) {
-								file.data.error = err;
-								server.logger.error(err);
-							});
-							fileStream.on('end', function () {
-								file.data.fileData = Buffer.concat(file.data.fileData);
-								if (!file.data.error)
-									file.data.loaded = true;
-							});
-						}
-					);
-
-					busboy.on('field', function (fieldName, value, fieldNameTruncated, valTruncated, encoding, mimeType) {
-						// console.warn("BusBoy Field", arguments);
-						_bodyItems.push({
-							fieldName: fieldName,
-							data: {
-								value: value,
-								fieldNameTruncated: fieldNameTruncated,
-								valTruncated: valTruncated,
-								encoding: encoding,
-								mimeType: mimeType
-							}
-						});
-						_body[fieldName] = value;
-					});
-	
-					busboy.on('error', function (err) {
+			
+					request.request.once("error", function (err) {
+						if (_canceled) return;
 						server.logger.error(err);
+						_canceled = true;
 						reject(err);
 					});
-	
-					busboy.on('finish', function () {
-						resolve(request._postDataBuffer);
+			
+					request.request.once("abort", function () {
+						if (_canceled) return;
+						const err = Error('[Request] aborted');
+						server.logger.error(err);
+						_canceled = true;
+						reject(err);
 					});
-	
-					//@ts-ignore
-					readable.pipe(busboy) // consume the stream
-			} else {
-				resolve(request._postDataBuffer);
+			
+					request.request.once('end', function () {
+						if (_canceled) return;
+						if (
+							(
+								request.request.headers['content-type'] || ''
+							).indexOf('multipart/form-data') === 0
+						) {
+			
+							let Readable = require('stream').Readable;
+							let readable = new Readable()
+							readable._read = () => {} // _read is required but you can noop it
+							readable.push(request._postDataBuffer);
+							readable.push(null);
+				
+							var detectedBoundary = (
+								request._postDataBuffer
+									.slice(0, 1024).toString()
+									.match(/^\-\-(\-{4,}[A-Za-z0-9]{4,}\-*)(\r|)\n/) || []
+							)[1] || null;
+				
+								if (detectedBoundary) {
+									var calculatedHeader = 'multipart/form-data; boundary=' + detectedBoundary;
+									if (
+										calculatedHeader !== request.request.headers['content-type']
+									) {
+										console.warn(
+											"Multipart Form Data: boundary replaced from ",
+											request.request.headers['content-type'],
+											calculatedHeader
+										);
+									}
+									request.request.headers['content-type'] = calculatedHeader;
+								}
+				
+								/**
+								 * @private
+								 * @type {Readable}
+								 */
+								//@ts-ignore
+								const busboy = new Busboy({
+									headers: request.request.headers,
+									limits: {
+										fieldNameSize: 255,
+										fieldSize: request.MAX_POST_SIZE,
+										fileSize: request.MAX_POST_SIZE
+									}
+								});
+			
+								busboy.on(
+									'file',
+									/**
+									 * @inner
+									 * @param {string} fieldName 
+									 * @param {Readable} fileStream 
+									 * @param {string} fileName 
+									 * @param {string} encoding 
+									 * @param {string} mimeType 
+									 */
+									function (
+										fieldName,
+										fileStream,
+										fileName,
+										encoding,
+										mimeType
+									) {
+										const file = {
+											fieldName: fieldName,
+											data: {
+												fileName: fileName,
+												encoding: encoding,
+												fileStream: () => fileStream,
+												fileData: null,
+												fileSize: 0,
+												contentType: mimeType,
+												loaded: false
+											}
+										};
+										if (!(fieldName in _files)) _files[fieldName] = [];
+			
+										//@ts-ignore
+										_files[fieldName].push(file);
+			
+										fileStream.on('data', function (data) {
+											file.data.fileData.push(data);
+											file.data.fileSize += data.length;
+										});
+										fileStream.on('error', function (err) {
+											file.data.error = err;
+											server.logger.error(err);
+										});
+										fileStream.on('end', function () {
+											file.data.fileData = Buffer.concat(file.data.fileData);
+											if (!file.data.error)
+												file.data.loaded = true;
+										});
+									}
+								);
+			
+								busboy.on('field', function (fieldName, value, fieldNameTruncated, valTruncated, encoding, mimeType) {
+									// console.warn("BusBoy Field", arguments);
+									_bodyItems.push({
+										fieldName: fieldName,
+										data: {
+											value: value,
+											fieldNameTruncated: fieldNameTruncated,
+											valTruncated: valTruncated,
+											encoding: encoding,
+											mimeType: mimeType
+										}
+									});
+									_body[fieldName] = value;
+								});
+				
+								busboy.on('error', function (err) {
+									server.logger.error(err);
+									reject(err);
+								});
+				
+								busboy.on('finish', function () {
+									resolve(request._postDataBuffer);
+								});
+				
+								//@ts-ignore
+								readable.pipe(busboy) // consume the stream
+						} else {
+							resolve(request._postDataBuffer);
+						}
+					});
+				});
+				return _postData;
+			},
+			set: (v) => {
+				server.logger.warn('[Request.postData] is not writeable')
 			}
-		});
-	});
+		}
+	)
+
+	response.response.on('end', function () {
+		_postData = null;
+		_body = null;
+		_bodyItems = null;
+		_files = null;
+		delete request._postDataBuffer;
+		delete request.postData;
+	})
 
 	callback();
 }

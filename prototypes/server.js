@@ -486,13 +486,15 @@ SGAppsServer.prototype.server = function () {
 
 /**
  * @memberof SGAppsServer
- * @param {RequestHandler} handler
+ * @param {string|RequestHandler} path
+ * @param {...RequestHandler} [handlers]
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.use = function (handler) {
+SGAppsServer.prototype.use = function (path, ...handlers) {
 	this._requestListeners.use.push(
-		'',
-		handler
+		(typeof(path) === "string" || (path instanceof RegExp)) ? path : '',
+		//@ts-ignore
+		typeof(path) === "function" ? [path, ...handlers] : handlers
 	);
 	return this;
 }
@@ -502,13 +504,13 @@ SGAppsServer.prototype.use = function (handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.post = function (path, handler) {
+SGAppsServer.prototype.post = function (path, ...handlers) {
 	this._requestListeners.post.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -518,13 +520,13 @@ SGAppsServer.prototype.post = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.get = function (path, handler) {
+SGAppsServer.prototype.get = function (path, ...handlers) {
 	this._requestListeners.get.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -534,13 +536,13 @@ SGAppsServer.prototype.get = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.head = function (path, handler) {
+SGAppsServer.prototype.head = function (path, ...handlers) {
 	this._requestListeners.head.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -550,13 +552,13 @@ SGAppsServer.prototype.head = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.put = function (path, handler) {
+SGAppsServer.prototype.put = function (path, ...handlers) {
 	this._requestListeners.put.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -566,13 +568,13 @@ SGAppsServer.prototype.put = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.trace = function (path, handler) {
+SGAppsServer.prototype.trace = function (path, ...handlers) {
 	this._requestListeners.trace.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -582,13 +584,13 @@ SGAppsServer.prototype.trace = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.delete = function (path, handler) {
+SGAppsServer.prototype.delete = function (path, ...handlers) {
 	this._requestListeners.delete.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -598,13 +600,13 @@ SGAppsServer.prototype.delete = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.options = function (path, handler) {
+SGAppsServer.prototype.options = function (path, ...handlers) {
 	this._requestListeners.options.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -614,13 +616,13 @@ SGAppsServer.prototype.options = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.connect = function (path, handler) {
+SGAppsServer.prototype.connect = function (path, ...handlers) {
 	this._requestListeners.connect.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -630,13 +632,13 @@ SGAppsServer.prototype.connect = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.patch = function (path, handler) {
+SGAppsServer.prototype.patch = function (path, ...handlers) {
 	this._requestListeners.patch.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
 }
@@ -646,17 +648,17 @@ SGAppsServer.prototype.patch = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.all = function (path, handler) {
+SGAppsServer.prototype.all = function (path, ...handlers) {
 	Object.keys(
 		this._requestListeners
 	).forEach(function (method) {
 		if (method !== "use" && method[0] !== '_') {
 			this._requestListeners[method].push(
 				path,
-				handler
+				handlers
 			);
 		}
 	});
@@ -668,15 +670,64 @@ SGAppsServer.prototype.all = function (path, handler) {
  * 
  * @memberof SGAppsServer
  * @param {RequestPathStructure} path
- * @param {RequestHandler} handler
+ * @param {...RequestHandler} handlers
  * @returns {SGAppsServer}
  */
-SGAppsServer.prototype.finalHandler = function (path, handler) {
+SGAppsServer.prototype.finalHandler = function (path, ...handlers) {
 	this._requestListeners._finalHandler.push(
 		path,
-		handler
+		handlers
 	);
 	return this;
+}
+
+/**
+ * @callback SGAppsServerHandlerPostData
+ * @param {SGAppsServerRequest} request
+ * @param {SGAppsServerResponse} response
+ * @param {function} next
+ */
+
+/**
+ * @memberof SGAppsServer
+ * @param {object} [options]
+ * @param {number} [options.MAX_POST_SIZE]
+ * @param {object} [options.error]
+ * @param {number} options.error.statusCode
+ * @param {string} [options.error.message]
+ * @returns {SGAppsServerHandlerPostData}
+ */
+SGAppsServer.prototype.handlePostData = function (options) {
+	return (request, response, next) => {
+		options = Object.assign(
+			{
+				error: {
+					statusCode: 500
+				}
+			}, options
+		);
+		if ("MAX_POST_SIZE" in options) {
+			request.MAX_POST_SIZE = options.MAX_POST_SIZE;
+		}
+		request.postData.then(
+			() => {
+				next()
+			},
+			(err) => {
+				response.sendError(
+					Error(
+						options.error.message
+						|| this.STATUS_CODES[options.error.statusCode]
+						|| err.message
+						|| 'Unexpected Error'
+					),
+					{
+						statusCode: options.error.statusCode
+					}
+				)
+			}
+		);
+	}
 }
 
 module.exports = SGAppsServer;
