@@ -12,62 +12,58 @@ function ResponseSendDecorator(request, response, server, callback) {
 	}
 
 	/**
-	* @method send
-	* @memberof SGAppsServerResponse#
-	* @param {string|Buffer|object|any[]} data 
-	* @param {object} [options] 
-	* @param {number} [options.statusCode=200] 
-	*/
+	 * @method send
+	 * @memberof SGAppsServerResponse#
+	 * @param {string|Buffer|object|any[]} data 
+	 * @param {object} [options] 
+	 * @param {number} [options.statusCode=200] 
+	 * @param {Object<string,(string|string[])>} [options.headers]
+	 */
 	response.send = function (data, options) {
-		if (!response.response || !response.response.writableEnded)
+		if (!(response.response && !response.response.writableEnded))
 			return;
 		options = Object.assign(
 			{
-				statusCode: 200
+				statusCode: 200,
+				headers: {}
 			},
 			options
 		);
 
-		if (typeof(data) === "string") {
-			if (!response.response.headersSent) {
-				if (data[0] === '<') {
-					response.response.setHeader('Content-Type', 'text/html');
-				} else {
-					response.response.setHeader('Content-Type', 'text/plain');
-				}
-				response.response.statusCode = options.statusCode;
+		if (!response.response.headersSent) {
+			if (typeof(data) === "string") {
+				options.headers["Content-Type"] = (
+					data[0] === '<' ? "text/html" : "text/plain"
+				)
+			} else if (data instanceof Buffer) {
+				options.headers["Content-type"] = 'application/octet-stream';
+			} else if (Array.isArray(data) || typeof(data) === "object") {
+				options.headers['Content-Type'] = 'application/json';
+			} else {
+				options.headers["Content-type"] = 'application/octet-stream';
 			}
-			
+
+			response.response.statusCode = options.statusCode;
+			let header;
+			for (header in options.headers) {
+				response.response.setHeader(header, options.headers[header]);
+			}
+		}
+
+		if (
+			typeof(data) === "string"
+			|| data instanceof Buffer
+		) {
 			response.response.write(data, function (err) {
 				if (err) server.logger.error(err);
 				response.response.end();
 			});
-		} else if (data instanceof Buffer) {
-			if (!response.response.headersSent) {
-				response.response.statusCode = options.statusCode;
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
-			response.response.write(data, function (err) {
-				if (err) server.logger.error(err);
-				response.response.end();
-			});
-		} else if (Array.isArray(data) || typeof(data) === "object") {
-			if (!response.response.headersSent) {
-				response.response.statusCode = options.statusCode;
-				response.response.setHeader('Content-Type', 'application/json');
-			}
-			
+		} else if (Array.isArray(data) || (typeof(data) === "object" && data)) {
 			response.response.write(JSON.stringify(data), function (err) {
 				if (err) server.logger.error(err);
 				response.response.end();
 			});
 		} else {
-			if (!response.response.headersSent) {
-				response.response.statusCode = options.statusCode;
-				response.response.setHeader('Content-Type', 'application/octet-stream');
-			}
-			
 			response.response.write((data.toString ? data.toString() : (data + '')), function (err) {
 				if (err) server.logger.error(err);
 				response.response.end();
@@ -89,7 +85,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 		);
 	}
 	
-	response.response.on('end', function () {
+	response._destroy.push(function () {
 		// @ts-ignore
 		delete response.send;
 	});

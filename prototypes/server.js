@@ -7,11 +7,16 @@ const {
 } = require('http');
 const { Duplex } = require('stream');
 const LoggerBuilder = require('./logger');
+const _EmailBuilder = require('./email');
 
 const SGAppsServerRequest = require('./server/request');
 const SGAppsServerResponse = require('./server/response');
 const SGAppsServerDictionary = require('./dictionary');
 
+/**
+ * @class
+ * @name SGAppsServerDecoratorsLibrary
+ */
 
 
 /**
@@ -31,6 +36,7 @@ const SGAppsServerDictionary = require('./dictionary');
 /**
  * @class
  * @name FSLibrary
+ * @mixes FSLibraryModule
  */
 
 /**
@@ -47,9 +53,11 @@ const SGAppsServerDictionary = require('./dictionary');
  */;
 const _decorators = [
 	require('./server/extend/request-url'),
-	require('./server/extend/response-error'),
 	require('./server/extend/response-send'),
+	require('./server/extend/response-error'),
+	require('./server/extend/response-redirect'),
 	require('./server/extend/response-pipe-file'),
+	require('./server/extend/response-template'),
 	require('./server/extend/request-postdata'),
 	require('./server/extend/request-cookie'),
 	require('./server/extend/request-session'),
@@ -120,6 +128,15 @@ const _decorators = [
  * @param {SGAppsServerDecorator[]} [options.decorators]
  */
 function SGAppsServer(options) {
+
+	options = Object.assign(
+		{
+			server: null,
+			strictRouting: true,
+			decorators: []
+		}, options || {}
+	);
+
 	/**
 	 * @memberof SGAppsServer#
 	 * @name _server
@@ -177,6 +194,15 @@ function SGAppsServer(options) {
 	 */
 	this.logger = new LoggerBuilder();
 
+	/**
+	 * @memberof SGAppsServer#
+	 * @method Email
+	 * @param {SGAppsServerEmail.Config} config
+	 * @returns {SGAppsServerEmail}
+	 */
+	//@ts-ignore
+	this.Email  = _EmailBuilder;
+
 
 	/**
 	 * @memberof SGAppsServer#
@@ -225,17 +251,18 @@ function SGAppsServer(options) {
 	 * @type {Object<string,SGAppsServerDictionary>}
 	 */
 	this._requestListeners = {
-		"use"	: new SGAppsServerDictionary(),
-		"post"	: new SGAppsServerDictionary(),
-		"get"	: new SGAppsServerDictionary(),
-		"head"	: new SGAppsServerDictionary(),
-		"put"	: new SGAppsServerDictionary(),
-		"trace"	: new SGAppsServerDictionary(),
-		"delete"	: new SGAppsServerDictionary(),
-		"options"	: new SGAppsServerDictionary(),
-		"connect"	: new SGAppsServerDictionary(),
-		"patch"		: new SGAppsServerDictionary(),
+		"use"	: new SGAppsServerDictionary({ name: "use" }),
+		"post"	: new SGAppsServerDictionary({ name: "post" }),
+		"get"	: new SGAppsServerDictionary({ name: "get" }),
+		"head"	: new SGAppsServerDictionary({ name: "head" }),
+		"put"	: new SGAppsServerDictionary({ name: "put" }),
+		"trace"	: new SGAppsServerDictionary({ name: "trace" }),
+		"delete"	: new SGAppsServerDictionary({ name: "delete" }),
+		"options"	: new SGAppsServerDictionary({ name: "options" }),
+		"connect"	: new SGAppsServerDictionary({ name: "connect" }),
+		"patch"		: new SGAppsServerDictionary({ name: "patch" }),
 		"_finalHandler"	: new SGAppsServerDictionary({
+			name: "_finalHandler",
 			reverse: true
 		})
 	};
@@ -251,22 +278,7 @@ function SGAppsServer(options) {
 			function (request, response) {
 				this.handle(
 					request,
-					response,
-					function (_request, _response, server) {
-						server._requestListeners._finalHandler.run(
-							_request,
-							_response,
-							server,
-							function () {
-								_response.sendError(
-									Error(`Unable to handle path ${request.url}`),
-									{
-										statusCode: 404
-									}
-								);
-							}
-						);
-					}
+					response
 				)
 			}
 		).bind(this)
@@ -306,26 +318,47 @@ function SGAppsServer(options) {
 	});
 
 
+	/**
+	 * @memberof SGAppsServer#
+	 * @name whenReady
+	 * @type {Promise<SGAppsServer>}
+	 */
 	this.whenReady = new Promise((resolve, reject) => {
 		let index = 0;
 		// @ts-ignore
 		const _decorators = this._decorators;
 		const loadDecorator = () => {
 			if (_decorators[index]) {
+				if (this.logger._debug) {
+					process.stderr.write(
+						`\n\t» \x1b[36m[Server.Decorator] ${
+							_decorators[index].name || _decorators[index].toString()
+						}\x1b[0m`
+					);
+				}
 				_decorators[index](
 					null,
 					null,
 					this,
 					(err) => {
 						if (err) {
+							process.stderr.write(
+								' \x1b[32;1mError\x1b[0m\n' + err.message + '\n'
+							);
 							reject(err);
 						} else {
 							index++;
+							if (this.logger._debug) {
+								process.stderr.write(' \x1b[32;1mDone\x1b[0m')
+							}
 							loadDecorator();
 						}
 					}
 				);
 			} else {
+				if (this.logger._debug) {
+					process.stderr.write('\n\n\t\t\x1b[32;1mDecorators Loaded\x1b[0m\n')
+				}
 				resolve(this);
 			}
 		};
@@ -353,7 +386,28 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
 			response,
 			//@ts-ignore
 			this,
-			callback
+			function (request, response, server) {
+				server._requestListeners._finalHandler.run(
+					request,
+					response,
+					server,
+					function () {
+						if (callback) {
+							callback(request, response, server);
+						} else if (
+							response.response
+							&& !response.response.writableEnded
+						) {
+							response.sendError(
+								Error(`Unable to handle path ${request.request ? request.request.url : ''}`),
+								{
+									statusCode: 404
+								}
+							);
+						}
+					}
+				);
+			}
 		);
 	} else {
 		response.sendError(Error(`[Request.method] is unknown; ${method}`));
@@ -370,19 +424,25 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
  */
 SGAppsServer.prototype.handleStaticRequest = function (request, response, path, callback) {
 	if (response.response) {
-		response.pipeFile(
-			this._path.resolve(
-				path,
-				request.mountPath,
+		response.pipeFileStatic(
+			this._path.join(
+				this._path.resolve(path),
 				this._path.resolve(
-					'/',
-					request.urlInfo.pathname
+					request.mountPath || './',
+					this._path.resolve(
+						'/',
+						request.urlInfo.pathname
+					)
 				)
 			),
+			(request.urlInfo.pathname || '').replace(
+				/^.*\//,
+				''
+			) || 'index.html',
 			(err) => {
 				if (callback) {
 					callback(
-						null,
+						err || null,
 						request,
 						response,
 						//@ts-ignore
@@ -417,7 +477,7 @@ SGAppsServer.prototype.handleStaticRequest = function (request, response, path, 
  * @memberof SGAppsServer
  * @param {IncomingMessage} request
  * @param {ServerResponse} response
- * @param {SGAppsServerDictionaryRunCallBack} callback
+ * @param {SGAppsServerDictionaryRunCallBack} [callback]
  */
 SGAppsServer.prototype.handle = function (request, response, callback) {
 	/**
@@ -434,20 +494,14 @@ SGAppsServer.prototype.handle = function (request, response, callback) {
 	//@ts-ignore
 	const _response = new SGAppsServerResponse(response, this);
 
-	// Improve garbage collector
-	_response.response.on('end', function () {
-		delete _request.request;
-		delete _response.response;
-	});
-
 	let index = 0;
 	const loadDecorator = () => {
 		//@ts-ignore
 		const _decorators = this._decorators;
 		if (_decorators[index]) {
 			_decorators[index](
-				null,
-				null,
+				_request,
+				_response,
 				// @ts-ignore
 				this,
 				(err) => {
@@ -468,12 +522,27 @@ SGAppsServer.prototype.handle = function (request, response, callback) {
 				_request,
 				_response,
 				function () {
-					callback(_request, _response, this)
+					if (callback) {
+						callback(_request, _response, this)
+					} else {
+						_response.sendError(
+							Error(`Unable to handle path ${request.url}`),
+							{
+								statusCode: 404
+							}
+						);
+					}
 				}
 			);
 		}
 	};
 	loadDecorator();
+
+	// Improve garbage collector
+	_response._destroy.push(function () {
+		delete _request.request;
+		delete _response.response;
+	});
 };
 
 /**
@@ -654,8 +723,8 @@ SGAppsServer.prototype.patch = function (path, ...handlers) {
 SGAppsServer.prototype.all = function (path, ...handlers) {
 	Object.keys(
 		this._requestListeners
-	).forEach(function (method) {
-		if (method !== "use" && method[0] !== '_') {
+	).forEach((method) => {
+		if (method !== "use" && method[0] !== '_' && method[0] !== 'finalHandler') {
 			this._requestListeners[method].push(
 				path,
 				handlers

@@ -9,9 +9,9 @@ process.stdin.on('readable', function () {
 			cbs.forEach(function (cb) {
 				var er;
 				try {
-					cb(chunk);
+					cb(null, chunk);
 				} catch (er) {
-					console.log(er);
+					console.error(er);
 				}
 			});
 		}
@@ -75,7 +75,13 @@ var stackList = function () {
  * @description Pretty CLI Logger, with possibility to replace default nodejs' console logger
  */
 function LoggerBuilder() {
-	var console = global.console_original || global.console;
+	//@ts-ignore
+	if (this === global) {
+		throw Error("LoggerBuilder should be initialized with `new`");
+	}
+
+	//@ts-ignore
+	this._console = global.console_original || global.console;
 	/**
 	 * @example
 	 * // Insert an message in VT100 format
@@ -202,7 +208,7 @@ LoggerBuilder.prototype.log	= function () {
 		args.unshift("\x1b[0m");
 		this.pushHeader(args, "log");
 		args.push('\x1b[0m');
-		console.log.apply(console, args);
+		this._console.log.apply(this._console, args);
 	}
 }
 
@@ -217,7 +223,7 @@ LoggerBuilder.prototype.info = function () {
 		args.unshift("\x1b[0;36m ");
 		this.pushHeader(args, "info");
 		args.push("\x1b[0m");
-		console.log.apply(console, args);
+		this._console.log.apply(this._console, args);
 	}
 }
 
@@ -232,7 +238,7 @@ LoggerBuilder.prototype.warn = function () {
 		args.unshift("\x1b[0;40;33m ");
 		this.pushHeader(args, "warn");
 		args.push("\x1b[0m");
-		console.log.apply(console, args);
+		this._console.log.apply(this._console, args);
 	}
 };
 
@@ -248,11 +254,11 @@ LoggerBuilder.prototype.error	= function () {
 		return obj.stack;
 	};
 	var args = Array.prototype.slice.call(arguments);
-	console.log("\x1b[0;40;31m");
+	this._console.log("\x1b[0;40;31m");
 	this.pushHeader(args, "error", true);
-	console.error.apply(console, args);
-	console.log(getStackTrace());
-	console.log("\x1b[0m\n");
+	this._console.error.apply(this._console, args);
+	this._console.log(getStackTrace());
+	this._console.log("\x1b[0m\n");
 }
 
 /**
@@ -290,16 +296,16 @@ LoggerBuilder.prototype.decorateGlobalLogger = function () {
 	if (!global.console_original) {
 		//@ts-ignore
 		global.console_original = {
-			log: console.log,
-			info: console.info,
-			warn: console.warn,
-			error: console.error,
-			dir: console.dir,
-			time: console.time,
-			timeEnd: console.timeEnd,
-			trace: console.trace,
-			assert: console.assert,
-			Console: console.Console
+			log: this._console.log,
+			info: this._console.info,
+			warn: this._console.warn,
+			error: this._console.error,
+			dir: this._console.dir,
+			time: this._console.time,
+			timeEnd: this._console.timeEnd,
+			trace: this._console.trace,
+			assert: this._console.assert,
+			Console: this._console.Console
 		};
 		global.console.log = this.log;
 		global.console.info = this.info;

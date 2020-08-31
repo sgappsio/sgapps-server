@@ -95,6 +95,21 @@ function SGAppsServerRequest(request, server) {
 		configurable: true
 	});
 
+	/**
+	 * Array of functions to be called on response end
+	 * @memberof SGAppsServerRequest#
+	 * @name _destroy
+	 * @type {Array<function>}
+	 */
+	this._destroy = [];
+
+	request.on('end', () => {
+		this._destroy.forEach((unbindCall) => {
+			unbindCall();
+		});
+		request.removeAllListeners();
+	});
+
 	return this;
 };
 

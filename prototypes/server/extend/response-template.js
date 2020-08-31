@@ -165,7 +165,11 @@ function ResponseTemplateDecorator(request, response, server, callback) {
 		server.TemplateManager = new TemplateManager({
 			_fs: server._fs
 		});
+		callback();
+		return;
 	}
+
+	callback();
 	
 }
 

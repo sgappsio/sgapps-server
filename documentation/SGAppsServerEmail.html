@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>SGAppsServerResponse - SGApps Server - Framework</title>
+    <title>SGAppsServerEmail - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,7 +46,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">SGAppsServerResponse</h1>
+    <h1 class="page-title">SGAppsServerEmail</h1>
     
 
     
@@ -59,7 +59,7 @@
 <header>
     
         <h2>
-        SGAppsServerResponse
+        SGAppsServerEmail
         </h2>
         
     
@@ -73,7 +73,7 @@
 
     
 
-    <h4 class="name" id="SGAppsServerResponse"><span class="type-signature"></span>new SGAppsServerResponse<span class="signature">(response, server)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SGAppsServerEmail"><span class="type-signature"></span>new SGAppsServerEmail<span class="signature">(config)</span><span class="type-signature"></span></h4>
 
     
 
@@ -85,7 +85,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_response.js.html">prototypes/server/response.js</a>, <a href="prototypes_server_response.js.html#line4">line 4</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -132,6 +132,21 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>Example:
+   var Email = require('path/to/email').Email
+   var myMsg = new Email(
+   { from: 'me@example.com'
+   , to:   'you@example.com'
+   , subject: 'Knock knock...'
+   , body: "Who's there?"
+   })
+   myMsg.send(function(err){
+     ...
+   })</code></pre>
+
+
 
 
     <h5>Parameters:</h5>
@@ -159,13 +174,13 @@
 
         <tr>
             
-                <td class="name"><code>response</code></td>
+                <td class="name"><code>config</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">ServerResponse</span>
+<span class="param-type"><a href="SGAppsServerEmail.html#.Config">SGAppsServerEmail.Config</a></span>
 
 
             
@@ -175,30 +190,7 @@
 
             
 
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>server</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="SGAppsServer.html">SGAppsServer</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
+            <td class="description last"><p>optional configuration object</p></td>
         </tr>
 
     
@@ -244,7 +236,7 @@
 
         
             
-<h4 class="name" id="response"><span class="type-signature"></span>response<span class="type-signature"> :ServerResponse</span></h4>
+<h4 class="name" id="encodedBody"><span class="type-signature">(readonly) </span>encodedBody<span class="type-signature"> :string</span></h4>
 
 
 
@@ -255,419 +247,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_response.js.html">prototypes/server/response.js</a>, <a href="prototypes_server_response.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">ServerResponse</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="pipeFile"><span class="type-signature"></span>pipeFile<span class="signature">(filePath, callback)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-pipe-file.js.html">prototypes/server/extend/response-pipe-file.js</a>, <a href="prototypes_server_extend_response-pipe-file.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>filePath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#SGAppsServerErrorOnlyCallback">SGAppsServerErrorOnlyCallback</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>represents a <code>Function(Error)</code></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="pipeFileStatic"><span class="type-signature"></span>pipeFileStatic<span class="signature">(filePath, fileName, callback)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-pipe-file-static.js.html">prototypes/server/extend/response-pipe-file-static.js</a>, <a href="prototypes_server_extend_response-pipe-file-static.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>filePath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fileName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">SGAppsServerResponse.pipeFileStaticCallback</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="redirect"><span class="type-signature"></span>redirect<span class="signature">(url, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-redirect.js.html">prototypes/server/extend/response-redirect.js</a>, <a href="prototypes_server_extend_response-redirect.js.html#line18">line 18</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -707,7 +287,289 @@
 
 
 <div class="description usertext">
-    <p>if it returns <code>false</code> than the action was not possible</p>
+    <p>getter generate encoded body</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="msg"><span class="type-signature">(readonly) </span>msg<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>getter generate all email structure</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="options"><span class="type-signature">(readonly) </span>options<span class="type-signature"> :object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>get message options</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".from"><span class="type-signature">(static) </span>from<span class="signature">(email)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Email address from which messages are sent. Used
+when <code>from</code> was not set on a message.</p>
 </div>
 
 
@@ -733,8 +595,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -747,7 +607,7 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -760,120 +620,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>statusCode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>302</code>
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -895,6 +645,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -903,7 +671,7 @@
 
     
 
-    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">(data, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".isValidAddress"><span class="type-signature">(static) </span>isValidAddress<span class="signature">(email)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
@@ -915,7 +683,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-send.js.html">prototypes/server/extend/response-send.js</a>, <a href="prototypes_server_extend_response-send.js.html#line14">line 14</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -977,8 +745,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -991,169 +757,20 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
-|
-
-<span class="param-type">Buffer</span>
-|
-
-<span class="param-type">object</span>
-|
-
-<span class="param-type">Array.&lt;any></span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>statusCode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>200</code>
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, (string|Array.&lt;string>)></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
             
 
             <td class="description last"></td>
@@ -1163,28 +780,39 @@
     </tbody>
 </table>
 
-            </td>
-        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
 
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1193,7 +821,7 @@
 
     
 
-    <h4 class="name" id="sendError"><span class="type-signature"></span>sendError<span class="signature">(error, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".timeout"><span class="type-signature">(static) </span>timeout<span class="signature">(milliseconds)</span><span class="type-signature"> &rarr; {number}</span></h4>
 
     
 
@@ -1205,7 +833,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-error.js.html">prototypes/server/extend/response-error.js</a>, <a href="prototypes_server_extend_response-error.js.html#line18">line 18</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1244,6 +872,12 @@
 
 
 
+<div class="description usertext">
+    <p>Duration in milliseconds to wait before
+killing the process. Defaults to 3000. Used when <code>timeout</code> is not set
+on a message.</p>
+</div>
+
 
 
 
@@ -1267,8 +901,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -1281,94 +913,7 @@
 
         <tr>
             
-                <td class="name"><code>error</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Error</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>statusCode</code></td>
+                <td class="name"><code>milliseconds</code></td>
             
 
             <td class="type">
@@ -1381,23 +926,7 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>500</code>
-                
-                </td>
             
 
             <td class="description last"></td>
@@ -1407,28 +936,39 @@
     </tbody>
 </table>
 
-            </td>
-        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
 
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1437,7 +977,7 @@
 
     
 
-    <h4 class="name" id="sendStatusCode"><span class="type-signature"></span>sendStatusCode<span class="signature">(statusCode)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">(callback)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1449,7 +989,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-send.js.html">prototypes/server/extend/response-send.js</a>, <a href="prototypes_server_extend_response-send.js.html#line74">line 74</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -1488,6 +1028,10 @@
 
 
 
+<div class="description usertext">
+    <p>Send email</p>
+</div>
+
 
 
 
@@ -1523,13 +1067,149 @@
 
         <tr>
             
-                <td class="name"><code>statusCode</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="SGAppsServerEmail.html#.Callback">SGAppsServerEmail.Callback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="valid"><span class="type-signature"></span>valid<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>check if email is valid</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServerEmail.html#.Callback">SGAppsServerEmail.Callback</a></span>
 
 
             
@@ -1575,7 +1255,7 @@
 
     
 
-    <h4 class="name" id="pipeFileStaticCallback"><span class="type-signature"></span>pipeFileStaticCallback<span class="signature">(error)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".Callback"><span class="type-signature"></span>Callback<span class="signature">(err)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1587,7 +1267,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-pipe-file-static.js.html">prototypes/server/extend/response-pipe-file-static.js</a>, <a href="prototypes_server_extend_response-pipe-file-static.js.html#line16">line 16</a>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -1661,7 +1341,7 @@
 
         <tr>
             
-                <td class="name"><code>error</code></td>
+                <td class="name"><code>err</code></td>
             
 
             <td class="type">
@@ -1696,6 +1376,542 @@
 
 
 
+
+
+
+
+
+
+            
+                
+<h4 class="name" id=".Config">Config</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="prototypes_email.js.html">prototypes/email.js</a>, <a href="prototypes_email.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>to</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Email address(es) to which this msg will be sent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>debug</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>from</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Email address from which this msg is sent. If not set defaults to the <code>exports.from</code> global setting.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replyTo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Email address to which replies will be sent. If not
+set defaults to <code>from</code></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Email address(es) who receive a copy</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bcc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Email address(es) who receive a blind copy</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>subject</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The subject of the email</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The message of the email</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bodyType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Content type of body. Only valid option is
+'html' (for now). Defaults to text/plain.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>altText</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>If <code>bodyType</code> is set to 'html', this will be sent
+as the alternative text.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Duration in milliseconds to wait before killing the
+process. If not set, defaults to <code>exports.timeout</code> global setting.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional path to the sendmail executable.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>Email : Sends email using the sendmail command.</p>
+<p>Note: sendmail must be installed: see http://www.sendmail.org/</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
 
 
 

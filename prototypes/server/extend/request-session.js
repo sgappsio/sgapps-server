@@ -175,6 +175,20 @@ SGAppsSessionManager.prototype.removeExpiredSessions = function () {
 }
 
 /**
+ * @memberof SGAppsSessionManager#
+ * @method handleRequest
+ * @param {SGAppsServerRequest} request
+ */
+SGAppsSessionManager.prototype.handleRequest = function (request) {
+	request.session = new SGAppsServerRequestSessionBuilder(
+		request,
+		this._options
+	);
+}
+
+
+
+/**
  * @param {SGAppsServerRequest} request 
  * @param {SGAppsServerResponse} response 
  * @param {SGAppsServer} server 
@@ -227,7 +241,7 @@ function RequestSessionDecorator(request, response, server, callback) {
 		request.session.data = server.SessionManager._sessions[request.session._id].data;
 	}
 
-	response.response.on('end', function () {
+	response._destroy.push(function () {
 		request.session.destroy();
 		delete request.session;
 	});

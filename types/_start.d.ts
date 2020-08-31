@@ -1,9 +1,9 @@
 
 declare module "sgapps-server" {
 
-import * as FSLibrary from 'fs';
+// import * as FSLibraryModule from 'fs';
 
-export = FSLibrary;
+// export = FSLibraryModule;
 
 interface ReadableStream extends EventEmitter {
     readable: boolean;

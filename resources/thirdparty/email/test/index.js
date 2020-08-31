@@ -1,4 +1,4 @@
-
+//@ts-nocheck
 var assert = require('assert')
   , lib = require('../')
   , gleak = require('gleak')()

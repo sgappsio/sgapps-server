@@ -1,3 +1,4 @@
+//@ts-nocheck
 /*!
  * cookies
  * Copyright(c) 2014 Jed Schmidt, http://jed.is/

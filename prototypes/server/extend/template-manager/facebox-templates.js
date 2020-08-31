@@ -69,6 +69,7 @@ function FaceboxTemplate(options) {
 		if (addr in this._cachedFiles) {
 			return this._cachedFiles[addr];
 		} else {
+			//@ts-ignore
 			const content	= options._fs.readFileSync( addr, { encoding: "utf-8" } );
 			if (!this._debug) {
 				this._cachedFiles[addr]	= content;

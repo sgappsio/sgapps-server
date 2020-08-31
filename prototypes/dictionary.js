@@ -2,42 +2,40 @@ const parseParams = require('application-prototype/constructors/request/params-p
 
 function routeMatch(route, url, strictRouting, _cache) {
 	if (
-		route[0] !== url[0]
-	) return false;
-
-	if (
-		route === ''
+		route === '*'
 		||
 		(
 			!strictRouting
 			&& (
-				url === '' || url === '/'
+				route === '/'
 			)
 		)
 	) return true;
 
+	
 	if (typeof (route) === "string") {
+		// if (
+		// 	route[1] !== url[1]
+		// ) return false;
+
 		if (
 			url === route
 		) {
 			return true;
 		} else if (
+			url.indexOf(route) === 0 && !strictRouting
+		) {
+			return true;
+		} else if (
 			strictRouting
+			&& url.indexOf(route) === 0
 			&& (
-				url.length === route.length - 1
-				||
 				(
-					(
-						url[route.length - 1] === '?'
-						|| (
-							url[route.length - 1] === '/'
-							&& (
-								url.length === route.length
-								||
-								url[route.length] === '?'
-							)
-						)
-					) && route[route.length - 1] === '/'
+					// /path/route/ --- /path/route/
+					url.length === route.length
+				) || (
+					// /path/route? --- /path/route
+					url[route.length - 1] === '?'
 				)
 			)
 		) {
@@ -79,15 +77,22 @@ function routeMatch(route, url, strictRouting, _cache) {
  * @name SGAppsServerDictionary
  * @description a dictionary for storing 
  * @param {object} [options]
+ * @param {string} [options.name=""]
  * @param {boolean} [options.reverse=false]
  */
 function SGAppsServerDictionary(options) {
 	this._paths = [];
+	/**
+	 * @memberof SGAppsServerDictionary#
+	 * @name _dictionary
+	 * @type {Object<RequestPathStructure,Array<RequestHandler>>}
+	 */
 	this._dictionary = {};
 	this._cache = {};
 	this._options = Object.assign(
 		{
-			reverse: false
+			reverse: false,
+			name: ""
 		},
 		options || {}
 	);
@@ -102,6 +107,8 @@ function SGAppsServerDictionary(options) {
  * @param {RequestHandler[]} handlers
  */
 SGAppsServerDictionary.prototype.push = function (path, handlers) {
+	if (path === '') path = '*';
+
 	if (!(path in this._dictionary)) {
 		this._dictionary[path] = [];
 	}
@@ -109,7 +116,7 @@ SGAppsServerDictionary.prototype.push = function (path, handlers) {
 		this._paths.unshift(path);
 		handlers.map(v => v).reverse().forEach(handler => {
 			this._dictionary[path].unshift(handler);
-		})
+		});
 	} else {
 		this._paths.push(path);
 		handlers.forEach(handler => {
@@ -151,20 +158,47 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 				_cache
 			)
 		) {
-			index++;
-			this._paths[index].apply(
-				server,
-				[
-					request,
-					response,
-					next
-				]
-			);
+			let itemIndex = 0;
+			let itemNext = () => {
+				if (itemIndex >= this._dictionary[this._paths[index]].length) {
+					index++;
+					next();
+				} else {
+					if (this._paths[index]) {
+						server.logger.log(
+							this._paths[index].toString(),
+							this._options.name,
+							request.request.url,
+							this._dictionary[this._paths[index]][itemIndex].name
+						);
+					}
+					let err;
+					try {
+						this._dictionary[this._paths[index]][itemIndex]
+							.apply(
+								server,
+								[
+									request,
+									response,
+									function () {
+										itemIndex++;
+										itemNext();
+									}
+								]
+							);
+					} catch (err) {
+						server.logger.error(err);
+						next();
+					}
+				}
+			};
+			itemNext();
 		} else {
 			index++;
 			next();
 		}
 	}
+	next();
 };
 
 module.exports = SGAppsServerDictionary;

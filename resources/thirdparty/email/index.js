@@ -1,4 +1,4 @@
-
+//@ts-nocheck
 // - node-email Copyright Aaron Heckmann <aaron.heckmann+github@gmail.com> (MIT Licensed)
 
 /**
@@ -91,46 +91,55 @@ Email.prototype = {
         cb(err);
       };
     })();
-    if (!this.valid(callback)) return;
-		var args = ['-i', '-t'];
-		if (this.debug)
-			args.push('-v');
-    var sendmail = spawn(this.path, args, this.options);
-    sendmail.on('error', function(err) {
+    this.valid((err) => {
+      if (err) {
+        return callback(err);
+      }
+      var args = ['-i', '-t'];
       if (this.debug) {
-        console.error('Sendmail Error: ', err);
+        args.push('-v');
       }
-      callback(err);
-    });
-    sendmail.on('exit', function(code) {
-      var err = null;
-      if (code !== 0) {
-        err = new Error("Sendmail exited with code: " + code);
-      }
-
-      if (callback) {
+      var sendmail = spawn(this.path, args, this.options);
+      sendmail.on('error', function(err) {
+        if (this.debug) {
+          console.error('Sendmail Error: ', err);
+        }
         callback(err);
-      }
-    });
-		if (this.debug) {
-			if (sendmail.stdout) {
-				sendmail.stdout.on('data', function (chunk) {
-					process.stdout.write('\033[0mmail:: >> \033[36m' + chunk.toString() + '\033[0m');
-				});
-			}
-			if (sendmail.stdin) {
-				sendmail.stdin.on('data', function (chunk) {
-					process.stdout.write('\033[0mmail:: << \033[36m' + chunk.toString() + '\033[0m');
-				});
-			}
-			if (sendmail.stderr) {
-				sendmail.stderr.on('data', function (chunk) {
-					process.stdout.write('\033[0mmail:: ?> \033[36m' + chunk.toString() + '\033[0m');
-				});
-			}
-		}
+      });
+      sendmail.on('exit', function(code) {
+        var err = null;
+        if (code !== 0) {
+          err = new Error("Sendmail exited with code: " + code);
+        }
 
-    sendmail.stdin.end(this.msg);
+        if (callback) {
+          callback(err);
+        }
+      });
+      if (this.debug) {
+        if (sendmail.stdout) {
+          sendmail.stdout.on('data', function (chunk) {
+            process.stdout.write('\033[0mmail:: >> \033[36m' + chunk.toString() + '\033[0m');
+          });
+        }
+        if (sendmail.stdin) {
+          sendmail.stdin.on('data', function (chunk) {
+            process.stdout.write('\033[0mmail:: << \033[36m' + chunk.toString() + '\033[0m');
+          });
+        }
+        if (sendmail.stderr) {
+          sendmail.stderr.on('data', function (chunk) {
+            process.stdout.write('\033[0mmail:: ?> \033[36m' + chunk.toString() + '\033[0m');
+          });
+        }
+      }
+
+      sendmail.stdin.end(this.msg);
+
+      sendmail.on('close', function () {
+        callback();
+      })
+    });
   }
 
 , get options () {
@@ -217,12 +226,12 @@ Email.prototype = {
         addLen = addresses.length;
         while (addLen--) {
           if (!isValidAddress(addresses[addLen])) {
-            return error("invalid email address : " + addresses[addLen], callback);
+            error("invalid email address : " + addresses[addLen], callback);
           }
         }
       }
     }
-
+    callback();
     return true;
   }
 }

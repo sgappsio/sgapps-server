@@ -42,7 +42,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		return url;
 	}
 
-	response.response.on('end', () => {
+	response._destroy.push(() => {
 		delete request.getMountUpdatedUrl;
 	});
 

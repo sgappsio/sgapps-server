@@ -51,7 +51,7 @@ function ResponseSendErrorDecorator(request, response, server, callback) {
 		}
 	};
 
-	response.response.on('end', function () {
+	response._destroy.push(() => {
 		delete response.sendError;
 	});
 

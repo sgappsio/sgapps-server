@@ -43,8 +43,10 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 		 * @property {string} COOKIES_KEY
 		 * @property {boolean} [_enabled=true] if is changed to false server will not decorate requests with cookie manager
 		 */
-		server.CookiesManager.COOKIES_KEY = 'your secret key';
-		server.CookiesManager._enabled = true;
+		server.CookiesManager = {
+			COOKIES_KEY: 'your secret key',
+			_enabled: true
+		};
 		callback();
 		return;
 	}
@@ -64,7 +66,7 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 		keys: [server.CookiesManager.COOKIES_KEY]
 	})
 
-	response.response.on('end', () => {
+	response._destroy.push(() => {
 		delete request.cookies;
 	});
 

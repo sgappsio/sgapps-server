@@ -164,7 +164,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 									if (
 										calculatedHeader !== request.request.headers['content-type']
 									) {
-										console.warn(
+										server.logger.warn(
 											"Multipart Form Data: boundary replaced from ",
 											request.request.headers['content-type'],
 											calculatedHeader
@@ -276,7 +276,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		}
 	)
 
-	response.response.on('end', function () {
+	response._destroy.push(function () {
 		_postData = null;
 		_body = null;
 		_bodyItems = null;

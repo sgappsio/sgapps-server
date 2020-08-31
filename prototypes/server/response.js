@@ -15,6 +15,22 @@ function SGAppsServerResponse(response, server) {
 	 * @type {ServerResponse}
 	 */
 	this.response = response;
+
+	/**
+	 * Array of functions to be called on response end
+	 * @memberof SGAppsServerResponse#
+	 * @name _destroy
+	 * @type {Array<function>}
+	 */
+	this._destroy = [];
+
+	response.on('end', () => {
+		this._destroy.forEach((unbindCall) => {
+			unbindCall();
+		});
+		response.removeAllListeners();
+	});
+
 	return this;
 };
 

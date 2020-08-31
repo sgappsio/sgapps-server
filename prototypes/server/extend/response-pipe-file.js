@@ -21,7 +21,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 		var returned = false;
 		var _callback = function (err) { if (!returned && callback) callback(err); };
 
-		if (response.response.writableEnded) {
+		if (!(response.response && !response.response.writableEnded)) {
 			_callback(Error('Response is already ended'));
 			return;
 		}
@@ -32,9 +32,9 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 				return;
 			}
 
-			var readStream, start, end, total = stat.size, chunkSize;
+			let readStream, start, end, total = stat.size, chunkSize;
 
-			if (request) {
+			if (request.request) {
 				var range = request.request.headers.range || "";
 				if (range && total) {
 					var parts = range.replace(/bytes=/, "").split("-");
@@ -81,7 +81,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 			// // This will wait until we know the readable stream is actually valid before piping
 			readStream.on('open', function () {
 				// This just pipes the read stream to the response object (which goes to the client)
-				readStream.pipe(response);
+				readStream.pipe(response.response);
 			});
 
 			response.response.on('close', function() {
@@ -100,7 +100,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 		});
 	};
 
-	response.response.on('end', function ResponsePipeEnd() {
+	response._destroy.push(function ResponsePipeEnd() {
 		delete response.pipeFile;
 	});
 

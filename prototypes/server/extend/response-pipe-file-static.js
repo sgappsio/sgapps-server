@@ -1,4 +1,5 @@
 const _zlib = require('zlib');
+const { Stats } = require('fs');
 /**
  * @private
  * @method ResponsePipeFileStaticDecorator
@@ -34,9 +35,23 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 				callback(err);
 			}
 		};
-		server._fs.stat(filePath, function (err, stat) {
+		server._fs.stat(filePath, function (
+			err,
+			stat
+		) {
 			if (err) {
-				response.sendError(err);
+				if (callback) {
+					_callback(err);
+				} else {
+					response.sendError(err);
+				}
+			} else if (!stat.isFile()) {
+				const err = Error('IS_NOT_FILE File not allowed to be accesed');
+				if (callback) {
+					_callback(err);
+				} else {
+					response.sendError(err);
+				}
 			} else {
 				var eTag = `${stat.size}-${Date.parse(stat.mtime)}`;
 				response.response.setHeader(
@@ -46,6 +61,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 				if (request && request.request.headers['if-none-match'] === eTag) {
 					response.response.statusCode = 304;
 					response.response.end();
+					_callback();
 				} else {
 					var acceptEncoding = request.request.headers['accept-encoding'];
 					if (Array.isArray(acceptEncoding)) acceptEncoding = acceptEncoding[0];
@@ -65,7 +81,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 						eTag
 					);
 					response.response.statusCode = 200;
-					var resError;
+					let resError;
 					if (acceptEncoding.match(/\bdeflate\b/)) {
 						response.response.setHeader(
 							'content-encoding',
@@ -85,7 +101,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 							});
 						raw().pipe(
 							_zlib.createDeflate()
-						).pipe(response);
+						).pipe(response.response);
 					} else if (acceptEncoding.match(/\bgzip\b/)) {
 						response.response.setHeader(
 							'content-encoding',
@@ -93,7 +109,9 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 						);
 						response.response.on(
 							'end',
-							_callback
+							function () {
+								_callback(resError);
+							}
 						);
 						response.response.on(
 							'error',
@@ -125,7 +143,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 		});
 	};
 
-	response.response.on('end', function () {
+	response._destroy.push(function () {
 		delete response.pipeFileStatic;
 	});
 
