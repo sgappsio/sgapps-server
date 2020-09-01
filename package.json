@@ -1,6 +1,6 @@
 {
   "name": "sgapps-server",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "SGApps Network Server",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,9 @@
     "docs-dictionary-dev": "npm run docs-dictionary; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary; done",
     "docs-dictionary-build-dev": "npm run docs-dictionary-build; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary-build; done",
     "docs-dev": "npm run docs; while true; do find . -not -path './documentation' | entr -pd npm run docs; done",
-    "docs-preview": "live-server --wait=2500 --no-browser documentation"
+    "docs-preview": "live-server --wait=2500 --no-browser documentation",
+    "version": "node ./resources/version.js --version ",
+    "prepare": "npm run docs-dictionary-build ; npm run docs ; npm run version "
   },
   "repository": {
     "type": "git",
