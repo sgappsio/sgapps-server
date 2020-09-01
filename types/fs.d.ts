@@ -669,37 +669,37 @@ declare interface FSLibrary {
      * Asynchronous stat(2) - Get file status.
      * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
      */
-    stat(path: PathLike, callback: (err: NodeJS.ErrnoException | null, stats: Stats) => void): void;
+    stat(path: PathLike, callback: (err: NodeJS.ErrnoException | null, stats: FSLibrary.Stats) => void): void;
 
     /**
      * Synchronous stat(2) - Get file status.
      * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
      */
-    statSync(path: PathLike): Stats;
+    statSync(path: PathLike): FSLibrary.Stats;
 
     /**
      * Asynchronous fstat(2) - Get file status.
      * @param fd A file descriptor.
      */
-    fstat(fd: number, callback: (err: NodeJS.ErrnoException | null, stats: Stats) => void): void;
+    fstat(fd: number, callback: (err: NodeJS.ErrnoException | null, stats: FSLibrary.Stats) => void): void;
 
     /**
      * Synchronous fstat(2) - Get file status.
      * @param fd A file descriptor.
      */
-    fstatSync(fd: number): Stats;
+    fstatSync(fd: number): FSLibrary.Stats;
 
     /**
      * Asynchronous lstat(2) - Get file status. Does not dereference symbolic links.
      * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
      */
-    lstat(path: PathLike, callback: (err: NodeJS.ErrnoException | null, stats: Stats) => void): void;
+    lstat(path: PathLike, callback: (err: NodeJS.ErrnoException | null, stats: FSLibrary.Stats) => void): void;
 
     /**
      * Synchronous lstat(2) - Get file status. Does not dereference symbolic links.
      * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
      */
-    lstatSync(path: PathLike): Stats;
+    lstatSync(path: PathLike): FSLibrary.Stats;
 
     /**
      * Asynchronous link(2) - Create a new link (also known as a hard link) to an existing file.
@@ -1396,21 +1396,21 @@ declare interface FSLibrary {
     /**
      * Watch for changes on `filename`. The callback `listener` will be called each time the file is accessed.
      */
-    watchFile(filename: PathLike, options: { persistent?: boolean; interval?: number; } | undefined, listener: (curr: Stats, prev: Stats) => void): void;
+    watchFile(filename: PathLike, options: { persistent?: boolean; interval?: number; } | undefined, listener: (curr: FSLibrary.Stats, prev: FSLibrary.Stats) => void): void;
 
     /**
      * Watch for changes on `filename`. The callback `listener` will be called each time the file is accessed.
      * @param filename A path to a file or directory. If a URL is provided, it must use the `file:` protocol.
      * URL support is _experimental_.
      */
-    watchFile(filename: PathLike, listener: (curr: Stats, prev: Stats) => void): void;
+    watchFile(filename: PathLike, listener: (curr: FSLibrary.Stats, prev: FSLibrary.Stats) => void): void;
 
     /**
      * Stop watching for changes on `filename`.
      * @param filename A path to a file or directory. If a URL is provided, it must use the `file:` protocol.
      * URL support is _experimental_.
      */
-    unwatchFile(filename: PathLike, listener?: (curr: Stats, prev: Stats) => void): void;
+    unwatchFile(filename: PathLike, listener?: (curr: FSLibrary.Stats, prev: FSLibrary.Stats) => void): void;
 
     /**
      * Watch for changes on `filename`, where `filename` is either a file or a directory, returning an `FSWatcher`.

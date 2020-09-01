@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>TemplateManager - SGApps Server - Framework</title>
+    <title>Controller - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,7 +46,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">TemplateManager</h1>
+    <h1 class="page-title">Controller</h1>
     
 
     
@@ -59,7 +59,9 @@
 <header>
     
         <h2>
-        TemplateManager
+            <span class="ancestors"><a href="SGAppsServer.html">SGAppsServer</a><a href="SGAppsServer.NodeJsMvc.html">.NodeJsMvc</a>.</span>
+        
+        Controller
         </h2>
         
     
@@ -73,7 +75,7 @@
 
     
 
-    <h4 class="name" id="TemplateManager"><span class="type-signature"></span>new TemplateManager<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Controller"><span class="type-signature"></span>new Controller<span class="signature">(controllerName, options, server)</span><span class="type-signature"></span></h4>
 
     
 
@@ -85,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line3">line 3</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -159,6 +161,29 @@
 
         <tr>
             
+                <td class="name"><code>controllerName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>options</code></td>
             
 
@@ -189,6 +214,8 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -201,18 +228,28 @@
 
         <tr>
             
-                <td class="name"><code>_fs</code></td>
+                <td class="name"><code>shared</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="FSLibrary.html">FSLibrary</a></span>
+<span class="param-type">object</span>
 
 
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -225,6 +262,29 @@
 </table>
 
             </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>server</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServer.html">SGAppsServer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -258,6 +318,13 @@
     
 
     
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="SGAppsServer.NodeJsMvc.Controller.Action.html">Action</a></dt>
+            <dd></dd>
+        </dl>
+    
     
     
 
@@ -270,7 +337,7 @@
 
         
             
-<h4 class="name" id="_env"><span class="type-signature"></span>_env<span class="type-signature"> :Object.&lt;string, any></span></h4>
+<h4 class="name" id="name"><span class="type-signature"></span>name<span class="type-signature"> :string</span></h4>
 
 
 
@@ -281,7 +348,76 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line36">line 36</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="shared"><span class="type-signature"></span>shared<span class="type-signature"> :Object.&lt;string, any></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line294">line 294</a>
     </li></ul></dd>
     
 
@@ -339,7 +475,7 @@
 
         
             
-<h4 class="name" id="_options"><span class="type-signature"></span>_options<span class="type-signature"> :object</span></h4>
+<h4 class="name" id="viewer"><span class="type-signature"></span>viewer<span class="type-signature"> :<a href="TemplateManagerViewer.html">TemplateManagerViewer</a></span></h4>
 
 
 
@@ -350,128 +486,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>_fs</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="FSLibrary.html">FSLibrary</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="_viewer"><span class="type-signature"></span>_viewer<span class="type-signature"> :<a href="TemplateManagerViewer.html">TemplateManagerViewer</a></span></h4>
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line27">line 27</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line161">line 161</a>
     </li></ul></dd>
     
 
@@ -538,7 +553,7 @@
 
     
 
-    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(templateName, filePath)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="actionExists"><span class="type-signature"></span>actionExists<span class="signature">(actionName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
@@ -550,7 +565,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line80">line 80</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line253">line 253</a>
     </li></ul></dd>
     
 
@@ -624,294 +639,7 @@
 
         <tr>
             
-                <td class="name"><code>templateName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>filePath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="addList"><span class="type-signature"></span>addList<span class="signature">(templates)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line93">line 93</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>templates</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, string></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(templateName)</span><span class="type-signature"> &rarr; {<a href="global.html#TemplateManagerTemplate">TemplateManagerTemplate</a>}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line108">line 108</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>templateName</code></td>
+                <td class="name"><code>actionName</code></td>
             
 
             <td class="type">
@@ -960,7 +688,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="global.html#TemplateManagerTemplate">TemplateManagerTemplate</a></span>
+<span class="param-type">boolean</span>
 
 
     </dd>
@@ -975,7 +703,7 @@
 
     
 
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">(templateName)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addAction"><span class="type-signature"></span>addAction<span class="signature">(actionName, options)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
@@ -987,7 +715,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line69">line 69</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -1061,7 +789,330 @@
 
         <tr>
             
-                <td class="name"><code>templateName</code></td>
+                <td class="name"><code>actionName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addView"><span class="type-signature"></span>addView<span class="signature">(view)</span><span class="type-signature"> &rarr; {<a href="SGAppsServer.NodeJsMvc.Controller.html#.View">SGAppsServer.NodeJsMvc.Controller.View</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line193">line 193</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>view</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SGAppsServer.NodeJsMvc.Controller.html#.View">SGAppsServer.NodeJsMvc.Controller.View</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SGAppsServer.NodeJsMvc.Controller.html#.View">SGAppsServer.NodeJsMvc.Controller.View</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAction"><span class="type-signature"></span>getAction<span class="signature">(actionName)</span><span class="type-signature"> &rarr; {<a href="SGAppsServer.NodeJsMvc.Controller.Action.html">SGAppsServer.NodeJsMvc.Controller.Action</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line241">line 241</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>actionName</code></td>
             
 
             <td class="type">
@@ -1099,6 +1150,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SGAppsServer.NodeJsMvc.Controller.Action.html">SGAppsServer.NodeJsMvc.Controller.Action</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1107,7 +1176,7 @@
 
     
 
-    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(response, templateName, vars<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getView"><span class="type-signature"></span>getView<span class="signature">(viewName)</span><span class="type-signature"> &rarr; {<a href="SGAppsServer.NodeJsMvc.Controller.html#.View">SGAppsServer.NodeJsMvc.Controller.View</a>}</span></h4>
 
     
 
@@ -1119,7 +1188,457 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line121">line 121</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line173">line 173</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>viewName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SGAppsServer.NodeJsMvc.Controller.html#.View">SGAppsServer.NodeJsMvc.Controller.View</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeAction"><span class="type-signature"></span>removeAction<span class="signature">(actionName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line281">line 281</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>actionName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeView"><span class="type-signature"></span>removeView<span class="signature">(viewName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>viewName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(response, viewName, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line206">line 206</a>
     </li></ul></dd>
     
 
@@ -1226,7 +1745,7 @@
 
         <tr>
             
-                <td class="name"><code>templateName</code></td>
+                <td class="name"><code>viewName</code></td>
             
 
             <td class="type">
@@ -1257,13 +1776,13 @@
 
         <tr>
             
-                <td class="name"><code>vars</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object.&lt;string, any></span>
+<span class="param-type">object</span>
 
 
             
@@ -1313,7 +1832,7 @@
 
     
 
-    <h4 class="name" id="templateExists"><span class="type-signature"></span>templateExists<span class="signature">(templateName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="viewExists"><span class="type-signature"></span>viewExists<span class="signature">(viewName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
@@ -1325,7 +1844,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="prototypes_server_extend_response-template.js.html">prototypes/server/extend/response-template.js</a>, <a href="prototypes_server_extend_response-template.js.html#line58">line 58</a>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line184">line 184</a>
     </li></ul></dd>
     
 
@@ -1399,7 +1918,7 @@
 
         <tr>
             
-                <td class="name"><code>templateName</code></td>
+                <td class="name"><code>viewName</code></td>
             
 
             <td class="type">
@@ -1461,6 +1980,344 @@
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id=".View">View</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id=".View">View</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="decorators_nodejs-mvc-bootstrap.js.html">decorators/nodejs-mvc-bootstrap.js</a>, <a href="decorators_nodejs-mvc-bootstrap.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
     
 
     

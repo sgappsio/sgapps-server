@@ -11,6 +11,7 @@ const TemplateManager = function (options) {
 	 * @typedef {object} TemplateManagerTemplate
 	 * @property {string} name
 	 * @property {string} path
+	 * @property {string} [code]
 	 */
 	this._templates	= {};
 

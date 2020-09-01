@@ -76,14 +76,13 @@ function TemplateManagerViewer(options) {
 
 /**
  * @memberof TemplateManagerViewer#
- * @method renderCode
+ * @method render
  * @param {SGAppsServerResponse} response 
  * @param {TemplateManagerTemplate} view
  * @param {Object<string,any>} vars
  * @this TemplateManagerViewer
  */
 TemplateManagerViewer.prototype.render	= function( response, view, vars ) {
-	// { name, path, code }
 	var getStackTrace = function() {
 		var obj = {};
 		Error.captureStackTrace(obj, getStackTrace);
@@ -91,21 +90,41 @@ TemplateManagerViewer.prototype.render	= function( response, view, vars ) {
 	};
 	var err;
 	if( view.path.match(/\.(tpl|fbx-tpl)$/) ) {
-		try {
-			this._facebox.renderFile( view.path, vars, function( err, html ) {
-				if (err) {
-					if(Array.isArray(err)) {
-						err.forEach(function(v) {
-							throw v;
-						})
-					} else {
-						throw err;
+		if (view.code) {
+			this._facebox.renderCode(
+				view.code,
+				vars,
+				function( err, html ) {
+					if (err) {
+						if(Array.isArray(err)) {
+							err.forEach(function(v) {
+								throw v;
+							})
+						} else {
+							throw err;
+						}
 					}
-				}
-				response.send(html);
-			});
-		} catch (err) {
-			response.sendError(err);
+					response.send(html);
+				},
+				view.path
+			);
+		} else {
+			try {
+				this._facebox.renderFile( view.path, vars, function( err, html ) {
+					if (err) {
+						if(Array.isArray(err)) {
+							err.forEach(function(v) {
+								throw v;
+							})
+						} else {
+							throw err;
+						}
+					}
+					response.send(html);
+				});
+			} catch (err) {
+				response.sendError(err);
+			}
 		}
 	} else {
 		response.pipeFile(
