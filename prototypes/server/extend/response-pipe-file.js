@@ -21,7 +21,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 		var returned = false;
 		var _callback = function (err) { if (!returned && callback) callback(err); };
 
-		if (!(response.response && !response.response.writableEnded)) {
+		if (response._flags.finished) {
 			_callback(Error('Response is already ended'));
 			return;
 		}
@@ -47,8 +47,7 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 
 					if (
 						!response.response.headersSent
-						&& response.response.writable
-						&& response.response.writableEnded
+						&& !response._flags.finished
 					) {
 						response.response.statusCode	= 206;
 						response.response.setHeader(

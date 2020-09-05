@@ -20,7 +20,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 	 * @param {Object<string,(string|string[])>} [options.headers]
 	 */
 	response.send = function (data, options) {
-		if (!(response.response && !response.response.writableEnded))
+		if (response._flags.finished)
 			return;
 		options = Object.assign(
 			{

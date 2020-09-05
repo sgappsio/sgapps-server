@@ -1,4 +1,5 @@
 const TemplateManagerViewer = require("../prototypes/server/extend/template-manager/viewer");
+const { rejects } = require("assert");
 
 /**
  * @memberof SGAppsServer.NodeJsMvc.Controller
@@ -16,7 +17,7 @@ const TemplateManagerViewer = require("../prototypes/server/extend/template-mana
  * @param {SGAppsServerResponse} response
  * @param {SGAppsServer} server
  * @param {SGAppsServer.NodeJsMvc.Controller} controller
- * @param {SGAppsServer.NodeJsMvc.action} action
+ * @param {SGAppsServer.NodeJsMvc.Controller.Action} action
  */
 
 /**
@@ -145,11 +146,6 @@ function NodeJsMvcAction(actionName, controller, options, server ) {
  * @param {SGAppsServer} server
  */
 function NodeJsMvcController(controllerName, options, server ) {
-	var _config	= {};
-	var _views	= {};
-	var _actions	= {};
-	_config.controllerName	= controllerName;
-
 	// options._onAction( actionName, controllerObject );
 	// options._noAction( actionName, controllerObject );
 	
@@ -158,6 +154,18 @@ function NodeJsMvcController(controllerName, options, server ) {
 	 * @type {SGAppsServer.NodeJsMvc.Controller}
 	 */
 	var controllerObject	= {
+		/**
+		 * @memberof SGAppsServer.NodeJsMvc.Controller#
+		 * @name _actions
+		 * @type {Object<string,SGAppsServer.NodeJsMvc.Controller.Action>}
+		 */
+		_actions: {},
+		/**
+		 * @memberof SGAppsServer.NodeJsMvc.Controller#
+		 * @name _views
+		 * @type {Object<string,SGAppsServer.NodeJsMvc.Controller.View>}
+		 */
+		_views: {},
 		/**
 		 * @memberof SGAppsServer.NodeJsMvc.Controller#
 		 * @name viewer
@@ -178,7 +186,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 */
 		getView	: function (viewName) {
 			return (
-				(viewName in _views) ? _views[viewName] : null
+				(viewName in controllerObject._views) ? controllerObject._views[viewName] : null
 			)
 		},
 		/**
@@ -188,7 +196,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {boolean}
 		 */
 		viewExists	: function (viewName) {
-			return (viewName in _views);
+			return (viewName in controllerObject._views);
 		},
 		/**
 		 * @memberof SGAppsServer.NodeJsMvc.Controller#
@@ -197,9 +205,9 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {SGAppsServer.NodeJsMvc.Controller.View}
 		 */
 		addView	: function (view) {
-			if(!(view.name in _views)) {
-				_views[view.name]	= view;
-				return _views[view.name];
+			if(!(view.name in controllerObject._views)) {
+				controllerObject._views[view.name]	= view;
+				return controllerObject._views[view.name];
 			}
 			return null;
 		},
@@ -211,7 +219,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @param {object} [options]
 		 */
 		render	: function (response, viewName, options) {
-			if(viewName in _views) {
+			if(viewName in controllerObject._views) {
 				var err;
 				try {
 					controllerObject.viewer.render(
@@ -222,6 +230,8 @@ function NodeJsMvcController(controllerName, options, server ) {
 				} catch (err) {
 					console.error(err);
 				}
+			} else {
+				response.sendError(Error('[SGAppsServer.Response] template not found'));
 			}
 		},
 		/**
@@ -231,8 +241,8 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {boolean}
 		 */
 		removeView	: function (viewName) {
-			if (viewName in _views) {
-				delete	_views[viewName];
+			if (viewName in controllerObject._views) {
+				delete	controllerObject._views[viewName];
 				return true;
 			}
 			return false;
@@ -245,8 +255,8 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {SGAppsServer.NodeJsMvc.Controller.Action}
 		 */
 		getAction	: function( actionName ) {
-			if (actionName in _actions) {
-				return _actions[actionName];
+			if (actionName in controllerObject._actions) {
+				return controllerObject._actions[actionName];
 			}
 			return null;
 		},
@@ -257,7 +267,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {boolean}
 		 */
 		actionExists	: function (actionName) {
-			return (actionName in _actions);
+			return (actionName in controllerObject._actions);
 		},
 		/**
 		 * @memberof SGAppsServer.NodeJsMvc.Controller#
@@ -267,14 +277,16 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @returns {boolean}
 		 */
 		addAction	: function( actionName, options ) {
-			if (!(actionName in _actions)) {
-				_actions[actionName]	= new NodeJsMvcAction(
+			if (!(actionName in controllerObject._actions)) {
+				//@ts-ignore
+				controllerObject._actions[actionName]	= new NodeJsMvcAction(
 					actionName,
 					controllerObject,
 					options,
 					server
 				);
-				return _actions[actionName];
+				//@ts-ignore
+				return controllerObject._actions[actionName];
 			}
 			return null;
 		},
@@ -286,7 +298,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 */
 		removeAction	: function( actionName ) {
 			if( controllerObject.actionExists( actionName ) ) {
-				delete	_actions[actionName];
+				delete	controllerObject._actions[actionName];
 				return true;
 			}
 			return false;
@@ -362,6 +374,8 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 				//@ts-ignore
 				controllers[controllerName] = controller;
 
+				server.logger.info(`[NodeJsMvc.Controller] added ${controllerName}`);
+
 				_fs.readdir(
 					_path.join(
 						_appPath,
@@ -381,14 +395,14 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 								return;
 							}
 
-							const fileName = actions.shift();
+							const actionFileName = actions.shift();
 
-							if (!fileName.match(/\.js$/)) {
+							if (!actionFileName.match(/\.js$/)) {
 								_tickAction();
 								return;
 							}
 
-							const actionName = fileName.replace(/\.js$/, '');
+							const actionName = actionFileName.replace(/\.js$/, '');
 
 							/**
 							 * @private
@@ -401,7 +415,7 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 									_appPath,
 									controllerName,
 									'controller',
-									actionName
+									actionFileName
 								),
 								(err, stats) => {
 									if (err) {
@@ -410,8 +424,7 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 										return;
 									}
 
-									if (stats.isFile()) {
-										server.logger.error(err);
+									if (!stats.isFile()) {
 										_tickAction();
 										return;
 									}
@@ -424,10 +437,12 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 												_appPath,
 												controllerName,
 												'controller',
-												actionName
+												actionFileName
 											)
 										)
 									);
+
+									server.logger.info(`    [NodeJsMvc.Action] added ${controllerName}:${actionName}`);
 
 									_fs.stat(
 										_path.join(
@@ -489,7 +504,7 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 																	return;
 																}
 
-																if (!stats.isFile()) {
+																if (!stats.isDirectory()) {
 																	_tickView();
 																	return;
 																}
@@ -534,17 +549,6 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 									);
 								}
 							);
-							fs.readdirSync(appPath+folder+"/views/").forEach(function(item) {
-								stats = fs.statSync(appPath+folder+"/views/"+item);
-								if(stats.isFile() && item.match(/\.(fbx\-tpl|tpl|html|htm|txt)$/) ) {
-									view = controller.addView(
-										item.replace(/\.[^\.]+$/,''),
-										appPath+folder+"/views/"+item,
-										fs.readFileSync(appPath+folder+"/views/"+item,"utf-8")
-									);
-									console.log( '\t\tview » ', view.name );
-								}
-							});
 						}
 
 						_tickAction();
@@ -552,6 +556,8 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 				);
 			})
 		}
+
+		_tick();
 	});
 }
 
@@ -596,7 +602,13 @@ function NodeJsMvcDecorator(request, response, server, callback) {
 		 * @memberof SGAppsServer.NodeJsMvc#
 		 * @name controllers
 		 * @type {Object<string,SGAppsServer.NodeJsMvc.Controller>}
-		 */
+		 */;
+
+		let _ready, _reject;
+		const _whenReady = new Promise((resolve, reject) => {
+			_ready = resolve;
+			_reject = reject;
+		});
 
 		Object.defineProperty(
 			server.NodeJsMvc,
@@ -618,14 +630,81 @@ function NodeJsMvcDecorator(request, response, server, callback) {
 							function (err, controllers) {
 								if (err) {
 									server.logger.error(err);
+									_reject(err);
+									return;
 								}
-								server.NodeJsMvc.controllers
+								server.NodeJsMvc.controllers = controllers;
+								_ready(server.NodeJsMvc.controllers);
 							}
 						);
 					}
 				}
 			}
 		);
+
+		/**
+		 * @memberof SGAppsServer.NodeJsMvc#
+		 * @name whenReady
+		 * @type {Promise<Object<string,SGAppsServer.NodeJsMvc.Controller>>}
+		 */;
+		Object.defineProperty(
+			server.NodeJsMvc,
+			'whenReady',
+			{
+				get: () => _whenReady,
+				set: (v) => {
+					server.logger.warn('[SGAppsServer.NodeJsMvc.whenReady] is readonly');
+				}
+			}
+		);
+
+		server.NodeJsMvc.whenReady.then((controllers) => {
+			Object.values(
+				controllers
+			).forEach((controller) => {
+				Object.values(controller._actions).forEach((action) => {
+					const handler = function (request, response, next) {
+						//@ts-ignore
+						request.params.shift();
+						//@ts-ignore
+						request.params.shift();
+						action.run(
+							request,
+							response
+						)
+					};
+
+					handler.toString = () => `NodeJSMvcAction() => {
+						/**
+						 * @controller ${controller.name}
+						 * @action ${action.name}
+						 * @file ${server.NodeJsMvc.appPath}/${controller.name}/controllers/${action.name}.js
+						 */
+
+						// code is protected
+					}`;
+
+					const applyPath = (path) => {
+						server.get(path, handler);
+						if (action.postData) {
+							server.post(path, server.handlePostData(), handler);
+						} else {
+							server.post(path, handler);
+						}
+					};
+
+					if (controller.name === 'index' && action.name === 'index') {
+						applyPath('/');
+					}
+
+					if (action.name === 'index') {
+						applyPath(`^/${controller.name}(/|$)`);
+					}
+
+					applyPath(`^/${controller.name}/${action.name}(|/.*)`);
+				});
+			});
+		}, server.logger.error);
 	}
 
 	callback();

@@ -56,7 +56,7 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 	 * @name _id
 	 * @type {string}
 	 */
-	this._id = (
+	this._id = request.cookies ? (
 		request.cookies.get(
 			options.cookie,
 			{ secure: true }
@@ -64,7 +64,7 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 			options.cookie,
 			{ secure: false }
 		) || null
-	);
+	) : null;
 
 	if (this._id === null) {
 		this._id = `sess-${

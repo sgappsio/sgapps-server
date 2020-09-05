@@ -47,7 +47,7 @@ const TemplateManager = function (options) {
 			set: (data) => {
 				Object.assign(_env, data);
 				//@ts-ignore
-				this._viewer._env = { global: _env };
+				this._viewer._env = _env;
 			}
 		}
 	);

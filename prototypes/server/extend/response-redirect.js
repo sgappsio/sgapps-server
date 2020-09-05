@@ -22,14 +22,20 @@ function ResponseRedirectDecorator(request, response, server, callback) {
 	 * @param {string} url
 	 * @param {object} [options]
 	 * @param {number} [options.statusCode=302]
+	 * @param {Object<string,(string|string[])>} [options.headers]
 	 */
 	response.redirect = function (url, options) {
 		options = Object.assign(
 			{
-				statusCode: 302
+				statusCode: 302,
+				headers: {}
 			},
 			options || {}
 		);
+		if (!options.headers) {
+			options.headers = {};
+		}
+		options.headers.location = url;
 		response.send(
 			`Redirecting to: ${url}`,
 			options

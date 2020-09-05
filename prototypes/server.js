@@ -79,6 +79,7 @@ const _decorators = [
  * @typedef {object} SGAppsServerOptions
  * @property {Server} [server]
  * @property {boolean} [strictRouting=false]
+ * @property {number} [_DEBUG_MAX_HANDLER_EXECUTION_TIME=500]
  */
 
 /**
@@ -125,6 +126,7 @@ const _decorators = [
  * @param {object} [options] 
  * @param {Server} [options.server]
  * @param {boolean} [options.strictRouting=true]
+ * @param {object} [options._DEBUG_MAX_HANDLER_EXECUTION_TIME=500] console shows an warn if handler is executed more than ( works in debug mode )
  * @param {SGAppsServerDecorator[]} [options.decorators]
  */
 function SGAppsServer(options) {
@@ -133,7 +135,8 @@ function SGAppsServer(options) {
 		{
 			server: null,
 			strictRouting: true,
-			decorators: []
+			decorators: [],
+			_DEBUG_MAX_HANDLER_EXECUTION_TIME: 500
 		}, options || {}
 	);
 
@@ -381,30 +384,37 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
 			method in this._requestListeners
 		)
 	) {
-		this._requestListeners[method].run(
+		this._requestListeners.use.run(
 			request,
 			response,
 			//@ts-ignore
 			this,
-			function (request, response, server) {
-				server._requestListeners._finalHandler.run(
+			(request, response, server) => {
+				this._requestListeners[method].run(
 					request,
 					response,
-					server,
-					function () {
-						if (callback) {
-							callback(request, response, server);
-						} else if (
-							response.response
-							&& !response.response.writableEnded
-						) {
-							response.sendError(
-								Error(`Unable to handle path ${request.request ? request.request.url : ''}`),
-								{
-									statusCode: 404
+					//@ts-ignore
+					this,
+					(request, response, server) => {
+						server._requestListeners._finalHandler.run(
+							request,
+							response,
+							server,
+							() => {
+								if (callback) {
+									callback(request, response, server);
+								} else if (
+									!response._flags.finished
+								) {
+									response.sendError(
+										Error(`Unable to handle path ${request.request ? request.request.url : ''}`),
+										{
+											statusCode: 404
+										}
+									);
 								}
-							);
-						}
+							}
+						);
 					}
 				);
 			}

@@ -42,10 +42,16 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 		 * @var {object} CookiesManager
 		 * @property {string} COOKIES_KEY
 		 * @property {boolean} [_enabled=true] if is changed to false server will not decorate requests with cookie manager
+		 * @property {function (SGAppsServerRequest,SGAppsServerResponse):object} handle
 		 */
 		server.CookiesManager = {
 			COOKIES_KEY: 'your secret key',
-			_enabled: true
+			_enabled: true,
+			handle: (request, response) => {
+				return new Cookies(request.request, response.response, {
+					keys: [server.CookiesManager.COOKIES_KEY]
+				});
+			}
 		};
 		callback();
 		return;
@@ -64,7 +70,7 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 	//@ts-ignore
 	request.cookies = new Cookies(request.request, response.response, {
 		keys: [server.CookiesManager.COOKIES_KEY]
-	})
+	});
 
 	response._destroy.push(() => {
 		delete request.cookies;

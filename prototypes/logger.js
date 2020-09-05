@@ -99,13 +99,44 @@ function LoggerBuilder() {
 	 * @type {boolean}
 	 */
 	this._debug  = true;
+
+	/**
+	 * @memberof LoggerBuilder
+	 * @typedef {object} headerFormatterInfo
+	 * @property {string} time
+	 * @property {string} type
+	 * @property {string} file
+	 * @property {string} line
+	 * @property {string} method
+	 * @property {string} path
+	 * @property {string} stack
+	 */
+
+	/**
+	 * @memberof LoggerBuilder
+	 * @callback headerFormatter
+	 * @param {LoggerBuilder.headerFormatterInfo} info
+	 */
+
+	/**
+	 * @memberof LoggerBuilder#
+	 * @name _headerFormatters
+	 * @type {Array<LoggerBuilder.headerFormatter>}
+	 */
+	this._headerFormatters  = [];
 	return this;
 }
+
 LoggerBuilder.prototype.pushHeader = function (args, type, stack) {
 	const data = stackList();
+	data.time = new Date().toISOString();
+	data.type = type.toUpperCase();
+	if (this._headerFormatters.length) {
+		this._headerFormatters.forEach(handler => { handler(data) });
+	}
 	let format = this._format;
-	format = format.replace('{{timestamp}}', new Date().toISOString());
-	format = format.replace('{{TYPE}}', type.toUpperCase());
+	format = format.replace('{{timestamp}}', data.time);
+	format = format.replace('{{TYPE}}', data.type);
 	format = format.replace('{{file}}', data.file);
 	format = format.replace('{{line}}', data.line);
 	format = format.replace('{{method}}', data.method);

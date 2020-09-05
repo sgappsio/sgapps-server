@@ -1,6 +1,4 @@
 const ePrototype = require("application-prototype/constructors/extensions/prototype");
-const { IncomingMessage } = require("http");
-const SGAppsServer = require("../server");
 
 /**
  * @class
@@ -18,9 +16,11 @@ function SGAppsServerRequest(request, server) {
 
 	//@ts-ignore
 	const _urlInfo = `${request.protocol || 'http'}://${request.headers.host || 'localhost'}/${request.url}`.parseUrl(true);
+	_urlInfo.pathname = _urlInfo.pathname.replace(/\/{2,}/g, '/');
 	/**
 	 * @memberof SGAppsServerRequest#
-	 * @var {object} urlInfo
+	 * @name urlInfo
+	 * @type {object}
 	 * @property {string} original
 	 * @property {string} origin 
 	 * @property {string} domain full domain of url
@@ -103,10 +103,57 @@ function SGAppsServerRequest(request, server) {
 	 */
 	this._destroy = [];
 
+
+	/**
+	 * @memberof SGAppsServerRequest
+	 * @typedef {(Object<(string|number),string>|string[])} RequestParams
+	 */
+
+	/**
+	 * Array of functions to be called on response end
+	 * @memberof SGAppsServerRequest#
+	 * @name params
+	 * @type {SGAppsServerRequest.RequestParams}
+	 */;
+	//@ts-ignore
+	this.params = this.urlInfo.pathname.split('/');
+
+	/**
+	 * Array of functions to be called on response end
+	 * @memberof SGAppsServerRequest#
+	 * @var {object} _flags
+	 * @property {boolean} complete The message.complete property will be true if a complete HTTP message has been received and successfully parsed.
+	 * @property {boolean} aborted The message.aborted property will be true if the request has been aborted.
+	 * @property {boolean} closed Indicates that the underlying connection was closed.
+	 */
+	this._flags = {
+		aborted: request.aborted || false,
+		closed: false
+	};
+
+	Object.defineProperties(
+		this._flags,
+		{
+			complete: {
+				get: () => request.complete || false
+			}
+		}
+	);
+
+	request.on('abort', () => {
+		this._flags.aborted = true;
+	});
+
+	request.on('close', () => {
+		this._flags.closed = true;
+	})
+
+
 	request.on('end', () => {
 		this._destroy.forEach((unbindCall) => {
 			unbindCall();
 		});
+		delete this.params;
 		request.removeAllListeners();
 	});
 

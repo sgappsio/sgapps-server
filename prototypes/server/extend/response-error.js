@@ -38,7 +38,7 @@ function ResponseSendErrorDecorator(request, response, server, callback) {
 				response.response.write(
 					error.message,
 					function _ResponseErrorWriteCallback() {
-						if (!response.response.writableEnded) {
+						if (!response._flags.finished) {
 							response.response.end();
 						}
 					}
@@ -46,7 +46,7 @@ function ResponseSendErrorDecorator(request, response, server, callback) {
 				return;
 			}
 		}
-		if (!response.response.writableEnded) {
+		if (!response._flags.finished) {
 			response.response.end();
 		}
 	};

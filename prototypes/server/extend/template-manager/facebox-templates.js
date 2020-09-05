@@ -27,8 +27,7 @@ function FaceboxTemplate(options) {
 
 	/**
 	 * @memberof FaceboxTemplate#
-	 * @name _debug
-	 * @type {boolean}
+	 * @var {boolean} _debug
 	 */
 	let _debug = false;
 	Object.defineProperty(
@@ -44,8 +43,7 @@ function FaceboxTemplate(options) {
 	
 	/**
 	 * @memberof FaceboxTemplate#
-	 * @name _env
-	 * @type {Object<string,any>}
+	 * @var {Object<string,any>} _env
 	 */;
 	let _env = {};
 	Object.defineProperty(
@@ -65,12 +63,13 @@ function FaceboxTemplate(options) {
 	 */
 	this._cachedFiles = {};
 
-	function readFileSync(addr) {
+	const readFileSync = (addr) => {
 		if (addr in this._cachedFiles) {
 			return this._cachedFiles[addr];
 		} else {
 			//@ts-ignore
 			const content	= options._fs.readFileSync( addr, { encoding: "utf-8" } );
+			// @ts-ignore
 			if (!this._debug) {
 				this._cachedFiles[addr]	= content;
 			}

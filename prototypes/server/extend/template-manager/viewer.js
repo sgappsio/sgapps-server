@@ -54,7 +54,7 @@ function TemplateManagerViewer(options) {
 			set: (data) => {
 				Object.assign(_env, data);
 				//@ts-ignore
-				this._facebox._env = { shared: _env };
+				this._facebox._env = _env;
 			}
 		}
 	);
@@ -130,7 +130,7 @@ TemplateManagerViewer.prototype.render	= function( response, view, vars ) {
 		response.pipeFile(
 			view.path,
 			function (err) {
-				if (response.response && !response.response.writableEnded) {
+				if (!response._flags.finished) {
 					if (err) {
 						response.sendError(err);
 					} else {
