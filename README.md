@@ -9,9 +9,9 @@
 
 
 [![npm](https://img.shields.io/npm/v/sgapps-server)](https://www.npmjs.com/package/sgapps-server)
-[![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/sergiu-gordienco/sgapps-server/master)](https://github.com/sgappsio/sgapps-server)
-[![GitHub issues](https://img.shields.io/github/issues/sergiu-gordienco/sgapps-server)](https://github.com/sgappsio/sgapps-server/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/sergiu-gordienco/sgapps-server)](https://github.com/sgappsio/sgapps-server/pulls)
+[![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/sgappsio/sgapps-server/master)](https://github.com/sgappsio/sgapps-server)
+[![GitHub issues](https://img.shields.io/github/issues/sgappsio/sgapps-server)](https://github.com/sgappsio/sgapps-server/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/sgappsio/sgapps-server)](https://github.com/sgappsio/sgapps-server/pulls)
 
 A network solution for web applications.
 
