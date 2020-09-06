@@ -38,11 +38,12 @@ function SGAppsServerResponse(response, server) {
 		closed: false
 	};
 
+	let _finished = false;
 	Object.defineProperties(
 		this._flags,
 		{
 			finished: {
-				get: () => response.finished || response.writableEnded
+				get: () => _finished || response.finished || response.writableEnded
 			}
 		}
 	);
@@ -56,6 +57,7 @@ function SGAppsServerResponse(response, server) {
 	})
 
 	response.on('end', () => {
+		_finished = true;
 		this._destroy.forEach((unbindCall) => {
 			unbindCall();
 		});
