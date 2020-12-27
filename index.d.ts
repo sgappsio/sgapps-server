@@ -676,6 +676,7 @@ declare class SGAppsServer {
     constructor(options?: {
         server?: Server;
         strictRouting?: boolean;
+        debug?: boolean;
         _DEBUG_MAX_HANDLER_EXECUTION_TIME?: any;
         decorators?: SGAppsServerDecorator[];
     });

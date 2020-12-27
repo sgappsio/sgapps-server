@@ -126,6 +126,7 @@ const _decorators = [
  * @param {object} [options] 
  * @param {Server} [options.server]
  * @param {boolean} [options.strictRouting=true]
+ * @param {boolean} [options.debug=true]
  * @param {object} [options._DEBUG_MAX_HANDLER_EXECUTION_TIME=500] console shows an warn if handler is executed more than ( works in debug mode )
  * @param {SGAppsServerDecorator[]} [options.decorators]
  */
@@ -136,6 +137,7 @@ function SGAppsServer(options) {
 			server: null,
 			strictRouting: true,
 			decorators: [],
+			debug: true,
 			_DEBUG_MAX_HANDLER_EXECUTION_TIME: 500
 		}, options || {}
 	);
@@ -196,6 +198,8 @@ function SGAppsServer(options) {
 	 * @type {LoggerBuilder}
 	 */
 	this.logger = new LoggerBuilder();
+
+	this.logger._debug = options.debug;
 
 	/**
 	 * @memberof SGAppsServer#
