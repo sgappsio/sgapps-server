@@ -13,7 +13,7 @@ if (!version) {
 	process.exit(1);
 }
 
-if (!version.match(/^(current|\d\.\d\.\d)$/)) {
+if (!version.match(/^(current|\d{1,3}\.\d{1,3}\.\d{1,3})$/)) {
 	process.stderr.write(
 		`\n\x1b[0;31;1;7m Version has not correct format [\x1b[0;33;1;7m${version}\x1b[0;31;1;7m] \x1b[0m\n\n`
 	);

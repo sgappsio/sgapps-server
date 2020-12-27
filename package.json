@@ -1,19 +1,19 @@
 {
   "name": "sgapps-server",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "SGApps Network Server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "rm -rf ./documentation/* ; jsdoc -c jsdoc.json ; ",
-    "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/fs.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; rm types.d.ts ;",
+    "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/fs.d.ts >> index.d.ts ;",
     "docs-dictionary-build": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ; rm types.d.ts ;",
     "docs-dictionary-dev": "npm run docs-dictionary; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary; done",
     "docs-dictionary-build-dev": "npm run docs-dictionary-build; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary-build; done",
     "docs-dev": "npm run docs; while true; do find . -not -path './documentation' | entr -pd npm run docs; done",
     "docs-preview": "live-server --wait=2500 --no-browser documentation",
     "version": "node ./resources/version.js --version ",
-    "prepare": "npm run docs-dictionary-build ; npm run docs ; npm run version "
+    "build": "npm run docs-dictionary-build ; npm run docs ; npm run version "
   },
   "repository": {
     "type": "git",
@@ -41,8 +41,10 @@
     "multistr": true,
     "-W002": true,
     "-W014": true,
+    "-W032": true,
     "-W069": true,
-    "-W032": true
+    "-W104": true,
+    "-W119": true
   },
   "author": "Sergiu Gordienco <sergiu.gordienco@gmail.com> ( https://sgapps.io/about-us )",
   "license": "Apache-2.0",
@@ -51,12 +53,12 @@
   },
   "homepage": "https://labs.sgapps.io/open-source/sgapps-server",
   "dependencies": {
-    "application-prototype": "^1.25.12",
+    "application-prototype": "^1.25.14",
     "busboy": "0.3.1",
     "module-require": ">=1.4.2"
   },
   "devDependencies": {
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.10.1",
     "docdash": "^1.2.0",
     "jsdoc": "^3.6.3",
     "tsd-jsdoc": "^2.4.0"
