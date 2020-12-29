@@ -79,14 +79,14 @@ Cookies.prototype.get = function(name, opts) {
   index = this.keys.index(data, remote)
 
   if (index < 0) {
-    this.set(sigName, null, {path: "/", signed: false })
+    this.set(sigName, null, {path: "/", signed: false }, true);
   } else {
-    index && this.set(sigName, this.keys.sign(data), { signed: false })
+    index && this.set(sigName, this.keys.sign(data), { signed: false }, true)
     return value
   }
 };
 
-Cookies.prototype.set = function(name, value, opts) {
+Cookies.prototype.set = function(name, value, opts, skipError) {
   var res = this.response
     , req = this.request
     , headers = res.getHeader("Set-Cookie") || []
@@ -97,6 +97,7 @@ Cookies.prototype.set = function(name, value, opts) {
   if (typeof headers == "string") headers = [headers]
 
   if (!secure && opts && opts.secure) {
+    if (skipError) return this;
     throw new Error('Cannot send secure cookie over unencrypted connection')
   }
 
@@ -104,14 +105,19 @@ Cookies.prototype.set = function(name, value, opts) {
   if (opts && "secure" in opts) cookie.secure = opts.secure
 
   if (opts && "secureProxy" in opts) {
-    deprecate('"secureProxy" option; use "secure" option, provide "secure" to constructor if needed')
+    if (!skipError) {
+      deprecate('"secureProxy" option; use "secure" option, provide "secure" to constructor if needed')
+    }
     cookie.secure = opts.secureProxy
   }
 
   pushCookie(headers, cookie)
 
   if (opts && signed) {
-    if (!this.keys) throw new Error('.keys required for signed cookies');
+    if (!this.keys) {
+      if (skipError) return this;
+      throw new Error('.keys required for signed cookies');
+    }
     cookie.value = this.keys.sign(cookie.toString())
     cookie.name += ".sig"
     pushCookie(headers, cookie)

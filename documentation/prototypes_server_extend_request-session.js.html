@@ -136,14 +136,16 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 			this._id,
 			{
 				secure: true
-			}
+			},
+			true
 		);
 		request.cookies.set(
 			options.cookie,
 			this._id,
 			{
 				secure: false
-			}
+			},
+			true
 		);
 	} else {
 		this._confirmed = true;
