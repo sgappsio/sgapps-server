@@ -562,7 +562,13 @@ declare class SGAppsServerResponse {
     sendError(error: Error, options?: {
         statusCode?: number;
     }): void;
-    pipeFileStatic(filePath: string, fileName: string, callback: SGAppsServerResponse.pipeFileStaticCallback): void;
+    /**
+     * @param [options.autoIndex] - <p>list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']</p>
+     */
+    pipeFileStatic(filePath: string, fileName: string, callback: SGAppsServerResponse.pipeFileStaticCallback, options?: {
+        timeout?: number;
+        autoIndex?: string[];
+    }): void;
     /**
      * @param callback - <p>represents a <code>Function(Error)</code></p>
      */
@@ -713,7 +719,13 @@ declare class SGAppsServer {
     MAX_POST_SIZE: number;
     whenReady: Promise<SGAppsServer>;
     handleRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, callback: SGAppsServerDictionaryRunCallBack): void;
-    handleStaticRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, path: string, callback: SGAppsServerErrorCallBack): void;
+    /**
+     * @param [options.autoIndex] - <p>list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']</p>
+     */
+    handleStaticRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, path: string, callback: SGAppsServerErrorCallBack, options?: {
+        timeout?: number;
+        autoIndex?: string[];
+    }): void;
     handle(request: IncomingMessage, response: ServerResponse, callback?: SGAppsServerDictionaryRunCallBack): void;
     server(): Server;
     use(path: string | RequestHandler, ...handlers?: RequestHandler[]): SGAppsServer;

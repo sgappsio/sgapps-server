@@ -493,8 +493,11 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
  * @param {SGAppsServerResponse} response
  * @param {string} path
  * @param {SGAppsServerErrorCallBack} callback
+ * @param {object} [options]
+ * @param {number} [options.timeout=0]
+ * @param {string[]} [options.autoIndex] list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']
  */
-SGAppsServer.prototype.handleStaticRequest = function (request, response, path, callback) {
+SGAppsServer.prototype.handleStaticRequest = function (request, response, path, callback, options = { timeout: 0, autoIndex: [] }) {
 	if (response.response) {
 		response.pipeFileStatic(
 			this._path.join(
@@ -530,7 +533,8 @@ SGAppsServer.prototype.handleStaticRequest = function (request, response, path, 
 						);
 					}
 				}
-			}
+			},
+			options
 		);
 	} else {
 		if (callback) {
