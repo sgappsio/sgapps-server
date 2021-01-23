@@ -146,7 +146,7 @@ function SGAppsServerRequest(request, server) {
 
 	request.on('close', () => {
 		this._flags.closed = true;
-	})
+	});
 
 
 	request.on('end', () => {
@@ -155,6 +155,9 @@ function SGAppsServerRequest(request, server) {
 		});
 		delete this.params;
 		request.removeAllListeners();
+
+		//? TODO CHECK request destroy
+		// request.shouldKeepAlive
 	});
 
 	return this;

@@ -54,7 +54,7 @@ function SGAppsServerResponse(response, server) {
 
 	response.on('close', () => {
 		this._flags.closed = true;
-	})
+	});
 
 	response.on('end', () => {
 		_finished = true;
@@ -62,6 +62,8 @@ function SGAppsServerResponse(response, server) {
 			unbindCall();
 		});
 		response.removeAllListeners();
+
+		//? TODO CHECK response destroy
 	});
 
 	return this;
