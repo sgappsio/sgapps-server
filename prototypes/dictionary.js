@@ -293,13 +293,15 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 						next();
 					} else {
 						let err, timer = null;
+						const _startTime = _debug ? ( new Date().valueOf() ) : null;
+						let _endTime = null;
 						if (_debug) {
 							timer = setTimeout(() => {
-								if (response._flags.finished) return;
+								if (response._flags.finished || _endTime !== null) return;
 								server.logger.warn(
 									`[SGAppsServer.Handler] Max Execution time exceeded ( ${
 										server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME
-									} ms )`
+									} ms ) ; time spend ${ _endTime - _startTime } ms`
 								);
 								server.logger.warn(this._paths[index].path);
 								server.logger.warn(this._paths[index].handlers[itemIndex].toString());
@@ -314,6 +316,7 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 										response,
 										function () {
 											if (_debug && timer !== null) {
+												_endTime = new Date().valueOf();
 												clearTimeout(timer);
 												timer = null;
 											}
@@ -324,6 +327,9 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 								);
 						} catch (err) {
 							server.logger.error(err);
+							if (_debug) {
+								_endTime = new Date().valueOf();
+							}
 							itemNext();
 						}
 					}

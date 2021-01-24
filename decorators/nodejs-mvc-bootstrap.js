@@ -1,5 +1,4 @@
 const TemplateManagerViewer = require("../prototypes/server/extend/template-manager/viewer");
-const { rejects } = require("assert");
 
 /**
  * @memberof SGAppsServer.NodeJsMvc.Controller
@@ -664,14 +663,13 @@ function NodeJsMvcDecorator(request, response, server, callback) {
 			).forEach((controller) => {
 				Object.values(controller._actions).forEach((action) => {
 					const handler = function (request, response, next) {
-						//@ts-ignore
 						request.params.shift();
-						//@ts-ignore
+						request.params.shift();
 						request.params.shift();
 						action.run(
 							request,
 							response
-						)
+						);
 					};
 
 					handler.toString = () => `NodeJSMvcAction() => {
