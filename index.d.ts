@@ -563,10 +563,12 @@ declare class SGAppsServerResponse {
         statusCode?: number;
     }): void;
     /**
+     * @param [options.filePath] - <p>originap path is autoIndex was applied</p>
      * @param [options.autoIndex] - <p>list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']</p>
      */
     pipeFileStatic(filePath: string, fileName: string, callback: SGAppsServerResponse.pipeFileStaticCallback, options?: {
         timeout?: number;
+        filePath?: string;
         autoIndex?: string[];
     }): void;
     /**
