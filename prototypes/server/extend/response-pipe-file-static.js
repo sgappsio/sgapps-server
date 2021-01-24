@@ -31,6 +31,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 	 * @param {SGAppsServerResponse.pipeFileStaticCallback} callback
 	 * @param {object} [options]
 	 * @param {number} [options.timeout=0]
+	 * @param {string} [options.filePath] originap path is autoIndex was applied
 	 * @param {string[]} [options.autoIndex] list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']
 	 */
 	response.pipeFileStatic = function ResponsePipeFileStatic(filePath, fileName, callback, options = { timeout: 0, autoIndex: [] }) {
@@ -45,20 +46,45 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 			stat
 		) {
 			if (err) {
-				if (callback) {
+				if (
+					options.filePath
+					&& options.filePath !== filePath
+					&& options.autoIndex
+					&& options.autoIndex.length
+					&& !options.autoIndex.includes(_path.basename(filePath))
+				) {
+					return response.pipeFileStatic(
+						_path.resolve(options.filePath, options.autoIndex[0]),
+						fileName,
+						callback,
+						Object.assign(
+							{},
+							options || {},
+							{
+								filePath: options.filePath || filePath,
+								autoIndex: options.autoIndex.slice(1)
+							}
+						)
+					);
+				} else if (callback) {
 					_callback(err);
 				} else {
-					if (options.autoIndex.length && !options.autoIndex.includes(_path.basename(filePath))) {
-						return response.pipeFileStatic(
-							_path.resolve(_path.dirname(fileName), options.autoIndex[0]),
-							fileName,
-							callback,
-							options.autoIndex.slice(1)
-						);
-					} else {
-						response.sendError(err);
-					}
+					response.sendError(err);
 				}
+			} else if (stat.isDirectory() && options.autoIndex && options.autoIndex.length) {
+				return response.pipeFileStatic(
+					_path.resolve(filePath, options.autoIndex[0]),
+					fileName,
+					callback,
+					Object.assign(
+						{},
+						options || {},
+						{
+							filePath: options.filePath || filePath,
+							autoIndex: options.autoIndex.slice(1)
+						}
+					)
+				);
 			} else if (!stat.isFile()) {
 				const err = Error('IS_NOT_FILE File not allowed to be accessed');
 				if (callback) {
