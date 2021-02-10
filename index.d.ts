@@ -323,6 +323,15 @@ declare class SGAppsServerRequestCookie {
     }): string;
     set(name: string, value: string, options?: {
         secure?: boolean;
+        secureProxy?: boolean;
+        signed?: boolean;
+        path?: string;
+        expires?: Date;
+        domain?: string;
+        httpOnly?: boolean;
+        sameSite?: boolean;
+        secure?: boolean;
+        overwrite?: boolean;
     }): string;
 }
 
@@ -639,6 +648,7 @@ declare type SGAppsServerOptions = {
     server?: Server;
     strictRouting?: boolean;
     _DEBUG_MAX_HANDLER_EXECUTION_TIME?: number;
+    _DEBUG_REQUEST_HANDLERS_STATS?: boolean;
 };
 
 /**
@@ -679,6 +689,7 @@ declare type SGAppsServerOptions = {
  *   })
  * }, app.logger.error);
  * @param [options._DEBUG_MAX_HANDLER_EXECUTION_TIME = 500] - <p>console shows an warn if handler is executed more than ( works in debug mode )</p>
+ * @param [options._DEBUG_REQUEST_HANDLERS_STATS = false] - <p>console shows an warn if handler is executed more than ( works in debug mode )</p>
  */
 declare class SGAppsServer {
     constructor(options?: {
@@ -686,6 +697,7 @@ declare class SGAppsServer {
         strictRouting?: boolean;
         debug?: boolean;
         _DEBUG_MAX_HANDLER_EXECUTION_TIME?: any;
+        _DEBUG_REQUEST_HANDLERS_STATS?: any;
         decorators?: SGAppsServerDecorator[];
     });
     NodeJsMvc: SGAppsServer.NodeJsMvc;

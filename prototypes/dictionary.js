@@ -293,8 +293,9 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 						next();
 					} else {
 						let err, timer = null;
-						const _startTime = _debug ? ( new Date().valueOf() ) : null;
+						let _startTime = _debug ? ( new Date().valueOf() ) : null;
 						let _endTime = null;
+						const path = this._paths[index].path;
 						if (_debug) {
 							timer = setTimeout(() => {
 								if (response._flags.finished || _endTime !== null) return;
@@ -317,6 +318,16 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 										function () {
 											if (_debug && timer !== null) {
 												_endTime = new Date().valueOf();
+												if (server._options._DEBUG_REQUEST_HANDLERS_STATS) {
+													server.logger.info(
+														`[STATS] ${request.request.method} ${path} : `, {
+															time: _endTime - _startTime,
+															bytesRead: (request.request.socket || {}).bytesRead || 0,
+															bytesWritten: (request.request.socket || {}).bytesWritten || 0,
+															url: request.request.url
+														}
+													);
+												}
 												clearTimeout(timer);
 												timer = null;
 											}

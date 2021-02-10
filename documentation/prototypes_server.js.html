@@ -138,6 +138,7 @@ const _decorators = [
  * @property {Server} [server]
  * @property {boolean} [strictRouting=false]
  * @property {number} [_DEBUG_MAX_HANDLER_EXECUTION_TIME=500]
+ * @property {boolean} [_DEBUG_REQUEST_HANDLERS_STATS=false]
  */
 
 /**
@@ -186,6 +187,7 @@ const _decorators = [
  * @param {boolean} [options.strictRouting=true]
  * @param {boolean} [options.debug=true]
  * @param {object} [options._DEBUG_MAX_HANDLER_EXECUTION_TIME=500] console shows an warn if handler is executed more than ( works in debug mode )
+ * @param {object} [options._DEBUG_REQUEST_HANDLERS_STATS=false] console shows an warn if handler is executed more than ( works in debug mode )
  * @param {SGAppsServerDecorator[]} [options.decorators]
  */
 function SGAppsServer(options) {
@@ -196,7 +198,8 @@ function SGAppsServer(options) {
 			strictRouting: true,
 			decorators: [],
 			debug: true,
-			_DEBUG_MAX_HANDLER_EXECUTION_TIME: 500
+			_DEBUG_MAX_HANDLER_EXECUTION_TIME: 500,
+			_DEBUG_REQUEST_HANDLERS_STATS: false
 		}, options || {}
 	);
 
