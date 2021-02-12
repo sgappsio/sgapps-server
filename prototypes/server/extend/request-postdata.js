@@ -539,6 +539,35 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 								//@ts-ignore
 								readable.pipe(busboy); // consume the Stream
 						} else {
+							if (
+								(
+									(
+										request.request.headers['content-type'] || ''
+									) || ''
+								).indexOf('application/json') === 0
+							) {
+								const data = request._postDataBuffer.toString('utf-8', 0, request._postDataBuffer.length);
+
+								try {
+									const jsonData = JSON.parse(data);
+									if (jsonData && typeof(jsonData) === "object") {
+										Object.assign(_body, jsonData);
+									}
+								} catch (err) {
+									if (server.logger._debug) {
+										server.logger.warn(`[Request._body] Unable to parse JSON data`);
+									}
+								}
+							} else {
+								const data = request._postDataBuffer.toString('utf-8', 0, request._postDataBuffer.length);
+								
+								//@ts-ignore
+								const formData = data.parseUrlVars(true);
+
+								if (formData && typeof(formData) === "object") {
+									Object.assign(_body, formData);
+								}
+							}
 							resolve(request._postDataBuffer);
 						}
 					});
