@@ -23,7 +23,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 * @name _postDataBuffer
 	 * @type {Buffer}
 	 */
-	request._postDataBuffer = new Buffer('');
+	request._postDataBuffer = Buffer.from('', 'binary');
 
 	/**
 	 * @typedef {object} SGAppsServerRequestFile
@@ -71,7 +71,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 */
 	Object.defineProperty(request, 'bodyItems', {
 		get: () => _bodyItems,
-		set: () => server.logger.warn("[Request.body] is not configurable"),
+		set: () => server.logger.warn("[Request.bodyItems] is not configurable"),
 		enumerable: true,
 		configurable: true
 	});
@@ -88,6 +88,266 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		enumerable: true,
 		configurable: true
 	});
+
+
+	/**
+	 * @memberof SGAppsServerRequest#
+	 * @name fileItems
+	 * @type {SGAppsServerRequestFile[]}
+	 */
+	let _fileItems = [];
+	Object.defineProperty(request, 'fileItems', {
+		get: () => _fileItems,
+		set: () => server.logger.warn("[Request.fileItems] is not configurable"),
+		enumerable: true,
+		configurable: true
+	});
+
+	/**
+	 * Automatically used procedure for parsing formData field name if option `server._options._REQUEST_FORM_PARAMS_DEEP_PARSE = true`. it's by default enabled but can be disabled when needed
+	 * @memberof SGAppsServerRequest#
+	 * @method _parseDeepFieldName
+	 * @param {object} container
+	 * @param {string} fieldName
+	 * @param {any} fieldData
+	 * @param {object} [options]
+	 * @param {boolean} [options.transform2ArrayOnDuplicate=false]
+	 * @example
+	 * paramsContainer = {};
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][data]', 2);
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+	 * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+	 * // if _debug enabled warns will be emitted
+	 * // [Warn] [Request._parseDeepFieldName] Writing Array field "test[arr][]" into a object
+	 * // [Warn] [Request._parseDeepFieldName] Overwriting field "test[data]" value
+	 * console.log(paramsContainer)
+	 * {
+	 *     "test": {
+	 *         "arr": {
+	 *             "1": "2021-02-12T21:23:01.913Z",
+	 *             "2": 2,
+	 *             "data": 2
+	 *         },
+	 *         "data": 2
+	 *     }
+	 * }
+	 * @example
+	 * paramsContainer = {};
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][data]', 2);
+	 * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+	 * // if _debug enabled warns will be emitted
+	 * // [Warn] [Request._parseDeepFieldName] Converting array to object due incorrect field "test[arr][data]" name 
+	 * console.log(paramsContainer)
+	 * {
+	 *     "test": {
+	 *         "arr": {
+	 *             "0": "2021-02-12T21:34:47.359Z",
+	 *             "1": 2,
+	 *             "data": 2
+	 *         },
+	 *         "data": 2
+	 *     }
+	 * }
+	 * @example
+	 * paramsContainer = {};
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+	 * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+	 * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+	 * console.log(paramsContainer)
+	 * {
+	 *     "test": {
+	 *         "arr": [
+	 *             "2021-02-12T21:26:43.766Z",
+	 *             2
+	 *         ],
+	 *         "data": 2
+	 *     }
+	 * }
+	 */
+	request._parseDeepFieldName = (container, fieldName, fieldData, options) => {
+		if (!fieldName[0] || fieldName[0] === '[') {
+			console.warn(
+				`[Warn] [Request._parseDeepFieldName] Unable to parse fieldName without base`, {
+					container,
+					fieldName,
+					fieldData
+				}
+			);
+			return;
+		}
+	
+		let fieldNamePrefix = fieldName.replace(/\[.*$/, '');
+		container[fieldNamePrefix] = container[fieldNamePrefix] || {};
+		let p = container[fieldNamePrefix];
+		let pPrev = container;
+		const _debug = server.logger._debug;
+	
+		const parts = fieldName
+			.match(/\[[^\[]*\]/g);
+	
+		if (!parts) {
+			if (fieldNamePrefix in container) {
+				if (_debug) {
+					server.logger.warn(
+						`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
+							container,
+							fieldName,
+							fieldData
+						}
+					);
+				}
+			}
+			container[fieldNamePrefix] = fieldData;
+			return;
+		}
+	
+		parts
+			.map(v => v.replace(/^\[([^\]]*)\]$/, '$1'))
+			.forEach((k, i, a) => {
+				if (p && typeof (p) === "object") {
+					if (i === a.length - 1) {
+						if (k === '') {
+							if (pPrev) {
+								const prevIndex = i ? a[i - 1] : fieldNamePrefix;
+								if (!Array.isArray(pPrev[prevIndex])) {
+									if (prevIndex in pPrev) {
+										if (pPrev[prevIndex] && typeof (pPrev[prevIndex]) === "object") {
+											const index = Object.keys(pPrev[prevIndex]).length;
+	
+											if (index === 0) {
+												pPrev[prevIndex] = [];
+												pPrev[prevIndex].push(fieldData);
+											} else {
+												if (_debug) {
+													server.logger.warn(
+														`[Warn] [Request._parseDeepFieldName] Writing Array field "${fieldName}" into a object`, {
+															container,
+															fieldName,
+															fieldData
+														}
+													);
+												}
+												if (index in pPrev[prevIndex]) {
+													if (_debug) {
+														server.logger.warn(
+															`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
+																container,
+																fieldName,
+																fieldData
+															}
+														);
+													}
+												}
+												pPrev[prevIndex][index] = fieldData;
+											}
+										} else {
+											pPrev[prevIndex] = [];
+											pPrev[prevIndex].push(fieldData);
+										}
+									} else {
+										pPrev[prevIndex] = [];
+										pPrev[prevIndex].push(fieldData);
+									}
+								} else {
+									pPrev[prevIndex].push(fieldData);
+								}
+							} else {
+								if (_debug) {
+									console.warn(
+										`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`, {
+											container,
+											fieldName,
+											fieldData
+										}
+									);
+								}
+								p = null;
+							}
+						} else {
+							if (k in p) {
+								if (_debug) {
+									console.warn(
+										`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
+											container,
+											fieldName,
+											fieldData
+										}
+									);
+								}
+							} else {
+								if (Array.isArray(p)) {
+									if (k.match(/^\d+$/)) {
+										if (p[k] === undefined) {
+											p[k] = fieldData;
+										} else {
+											if (_debug) {
+												server.logger.warn(
+													`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
+														container,
+														fieldName,
+														fieldData
+													}
+												);
+											}
+											p[k] = fieldData;
+										}
+									} else {
+										if (_debug) {
+											server.logger.warn(
+												`[Warn] [Request._parseDeepFieldName] Converting array to object due incorrect field "${fieldName}" name`, {
+													container,
+													fieldName,
+													fieldData
+												}
+											);
+										}
+	
+										const prevIndex = i ? a[i - 1] : fieldNamePrefix;
+										pPrev[prevIndex] = Object.assign({}, p);
+										pPrev[prevIndex][k] = fieldData;
+									}
+								} else {
+									p[k] = fieldData;
+								}
+							}
+						}
+					} else {
+						if (k === '') {
+							if (_debug) {
+								server.logger.warn(
+									`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`, {
+										container,
+										fieldName,
+										fieldData
+									}
+								);
+							}
+							p = null;
+						} else {
+							p[k] = p[k] || {};
+							pPrev = p;
+							p = p[k];
+						}
+					}
+				} else {
+					if (p !== null) {
+						p = null;
+						if (_debug) {
+							server.logger.warn(
+								`[Warn] [Request._parseDeepFieldName] Unable to parse Request params. Setting field "${fieldName}" in structure`, {
+									container,
+									fieldName,
+									fieldData
+								}
+							);
+						}
+					}
+				}
+			});
+	};
 
 	/**
 	 * request's post received data
@@ -148,8 +408,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 						) {
 			
 							let Readable = require('stream').Readable;
-							let readable = new Readable()
-							readable._read = () => {} // _read is required but you can noop it
+							let readable = new Readable();
+							readable._read = () => {}; // _read is required but you can noop it
 							readable.push(request._postDataBuffer);
 							readable.push(null);
 				
@@ -216,10 +476,19 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 												loaded: false
 											}
 										};
-										if (!(fieldName in _files)) _files[fieldName] = [];
-			
+
 										//@ts-ignore
-										_files[fieldName].push(file);
+										_fileItems.push(file);
+
+										if (server._options._REQUEST_FORM_PARAMS_DEEP_PARSE) {
+											request._parseDeepFieldName(
+												_files, fieldName, file
+											);
+										} else {
+											if (!(fieldName in _files)) _files[fieldName] = [];
+											//@ts-ignore
+											_files[fieldName].push(file);
+										}
 			
 										fileStream.on('data', function (data) {
 											file.data.fileData.push(data);
@@ -249,7 +518,13 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 											mimeType: mimeType
 										}
 									});
-									_body[fieldName] = value;
+									if (server._options._REQUEST_FORM_PARAMS_DEEP_PARSE) {
+										request._parseDeepFieldName(
+											_body, fieldName, value
+										);
+									} else {
+										_body[fieldName] = value;
+									}
 								});
 				
 								busboy.on('error', function (err) {
@@ -262,7 +537,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 								});
 				
 								//@ts-ignore
-								readable.pipe(busboy) // consume the stream
+								readable.pipe(busboy); // consume the Stream
 						} else {
 							resolve(request._postDataBuffer);
 						}
@@ -271,20 +546,22 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 				return _postData;
 			},
 			set: (v) => {
-				server.logger.warn('[Request.postData] is not writeable')
+				server.logger.warn('[Request.postData] is not writeable');
 			}
 		}
-	)
+	);
 
 	response._destroy.push(function () {
 		_postData = null;
 		_body = null;
 		_bodyItems = null;
+		_fileItems = null;
 		_files = null;
+		delete request._parseDeepFieldName;
 		delete request._postDataBuffer;
 		delete request.postData;
-	})
+	});
 
 	callback();
-}
+};
 

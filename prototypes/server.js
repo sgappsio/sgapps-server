@@ -81,6 +81,7 @@ const _decorators = [
  * @property {boolean} [strictRouting=false]
  * @property {number} [_DEBUG_MAX_HANDLER_EXECUTION_TIME=500]
  * @property {boolean} [_DEBUG_REQUEST_HANDLERS_STATS=false]
+ * @property {boolean} [_REQUEST_FORM_PARAMS_DEEP_PARSE=true] parse formData field names to create deep object request.body
  */
 
 /**
@@ -130,6 +131,7 @@ const _decorators = [
  * @param {boolean} [options.debug=true]
  * @param {object} [options._DEBUG_MAX_HANDLER_EXECUTION_TIME=500] console shows an warn if handler is executed more than ( works in debug mode )
  * @param {object} [options._DEBUG_REQUEST_HANDLERS_STATS=false] console shows an warn if handler is executed more than ( works in debug mode )
+ * @param {boolean} [options._REQUEST_FORM_PARAMS_DEEP_PARSE=true] parse formData field names to create deep object request.body
  * @param {SGAppsServerDecorator[]} [options.decorators]
  */
 function SGAppsServer(options) {
@@ -141,7 +143,8 @@ function SGAppsServer(options) {
 			decorators: [],
 			debug: true,
 			_DEBUG_MAX_HANDLER_EXECUTION_TIME: 500,
-			_DEBUG_REQUEST_HANDLERS_STATS: false
+			_DEBUG_REQUEST_HANDLERS_STATS: false,
+			_REQUEST_FORM_PARAMS_DEEP_PARSE: true
 		}, options || {}
 	);
 
@@ -165,7 +168,7 @@ function SGAppsServer(options) {
 		{
 			get: () => _decoratorsComputed,
 			set: (decorators) => {
-				[ ..._decorators, ...decorators ];
+				_decoratorsComputed = [ ..._decorators, ...decorators ];
 			},
 			enumerable: true,
 			configurable: false
@@ -289,7 +292,7 @@ function SGAppsServer(options) {
 				this.handle(
 					request,
 					response
-				)
+				);
 			}
 		).bind(this)
 	);
@@ -359,7 +362,7 @@ function SGAppsServer(options) {
 						} else {
 							index++;
 							if (this.logger._debug) {
-								process.stderr.write(' \x1b[32;1mDone\x1b[0m')
+								process.stderr.write(' \x1b[32;1mDone\x1b[0m');
 							}
 							loadDecorator();
 						}
@@ -367,7 +370,7 @@ function SGAppsServer(options) {
 				);
 			} else {
 				if (this.logger._debug) {
-					process.stderr.write('\n\n\t\t\x1b[32;1mDecorators Loaded\x1b[0m\n')
+					process.stderr.write('\n\n\t\t\x1b[32;1mDecorators Loaded\x1b[0m\n');
 				}
 				resolve(this);
 			}
@@ -429,7 +432,7 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
 	} else {
 		response.sendError(Error(`[Request.method] is unknown; ${method}`));
 	}
-}
+};
 
 
 /**
@@ -492,7 +495,7 @@ SGAppsServer.prototype.handleStaticRequest = function (request, response, path, 
 			);
 		}
 	}
-}
+};
 
 /**
  * @memberof SGAppsServer
@@ -544,7 +547,7 @@ SGAppsServer.prototype.handle = function (request, response, callback) {
 				_response,
 				function () {
 					if (callback) {
-						callback(_request, _response, this)
+						callback(_request, _response, this);
 					} else {
 						_response.sendError(
 							Error(`Unable to handle path ${request.url}`),
@@ -572,7 +575,7 @@ SGAppsServer.prototype.handle = function (request, response, callback) {
  */
 SGAppsServer.prototype.server = function () {
 	return this._server;
-}
+};
 
 /**
  * @memberof SGAppsServer
@@ -587,7 +590,7 @@ SGAppsServer.prototype.use = function (path, ...handlers) {
 		typeof(path) === "function" ? [path, ...handlers] : handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `POST` method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.
@@ -603,7 +606,7 @@ SGAppsServer.prototype.post = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `GET` method requests a representation of the specified resource. Requests using GET should only retrieve data.
@@ -619,7 +622,7 @@ SGAppsServer.prototype.get = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `HEAD` method asks for a response identical to that of a GET request, but without the response body.
@@ -635,7 +638,7 @@ SGAppsServer.prototype.head = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `PUT` method replaces all current representations of the target resource with the request payload.
@@ -651,7 +654,7 @@ SGAppsServer.prototype.put = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `TRACE` method performs a message loop-back test along the path to the target resource.
@@ -667,7 +670,7 @@ SGAppsServer.prototype.trace = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `DELETE` method deletes the specified resource.
@@ -683,7 +686,7 @@ SGAppsServer.prototype.delete = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `OPTIONS` method is used to describe the communication options for the target resource.
@@ -699,7 +702,7 @@ SGAppsServer.prototype.options = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `CONNECT` method establishes a tunnel to the server identified by the target resource.
@@ -715,7 +718,7 @@ SGAppsServer.prototype.connect = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * The `PATCH` method is used to apply partial modifications to a resource.
@@ -731,7 +734,7 @@ SGAppsServer.prototype.patch = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * add handler to all methods
@@ -753,7 +756,7 @@ SGAppsServer.prototype.all = function (path, ...handlers) {
 		}
 	});
 	return this;
-}
+};
 
 /**
  * add final handler to all methods, last added is first
@@ -769,7 +772,7 @@ SGAppsServer.prototype.finalHandler = function (path, ...handlers) {
 		handlers
 	);
 	return this;
-}
+};
 
 /**
  * @callback SGAppsServerHandlerPostData
@@ -801,7 +804,7 @@ SGAppsServer.prototype.handlePostData = function (options) {
 		}
 		request.postData.then(
 			() => {
-				next()
+				next();
 			},
 			(err) => {
 				response.sendError(
@@ -814,10 +817,10 @@ SGAppsServer.prototype.handlePostData = function (options) {
 					{
 						statusCode: options.error.statusCode
 					}
-				)
+				);
 			}
 		);
-	}
-}
+	};
+};
 
 module.exports = SGAppsServer;

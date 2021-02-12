@@ -501,6 +501,67 @@ declare class SGAppsServerRequest {
     files: {
         [key: string]: SGAppsServerRequestFile[];
     };
+    fileItems: SGAppsServerRequestFile[];
+    /**
+     * <p>Automatically used procedure for parsing formData field name if option <code>server._options._REQUEST_FORM_PARAMS_DEEP_PARSE = true</code>. it's by default enabled but can be disabled when needed</p>
+     * @example
+     * paramsContainer = {};
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][data]', 2);
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+     * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+     * // if _debug enabled warns will be emitted
+     * // [Warn] [Request._parseDeepFieldName] Writing Array field "test[arr][]" into a object
+     * // [Warn] [Request._parseDeepFieldName] Overwriting field "test[data]" value
+     * console.log(paramsContainer)
+     * {
+     *     "test": {
+     *         "arr": {
+     *             "1": "2021-02-12T21:23:01.913Z",
+     *             "2": 2,
+     *             "data": 2
+     *         },
+     *         "data": 2
+     *     }
+     * }
+     * @example
+     * paramsContainer = {};
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][data]', 2);
+     * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+     * // if _debug enabled warns will be emitted
+     * // [Warn] [Request._parseDeepFieldName] Converting array to object due incorrect field "test[arr][data]" name
+     * console.log(paramsContainer)
+     * {
+     *     "test": {
+     *         "arr": {
+     *             "0": "2021-02-12T21:34:47.359Z",
+     *             "1": 2,
+     *             "data": 2
+     *         },
+     *         "data": 2
+     *     }
+     * }
+     * @example
+     * paramsContainer = {};
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', new Date());
+     * request._parseDeepFieldName(paramsContainer, 'test[arr][]', 2);
+     * request._parseDeepFieldName(paramsContainer, 'test[data]', 2);
+     * console.log(paramsContainer)
+     * {
+     *     "test": {
+     *         "arr": [
+     *             "2021-02-12T21:26:43.766Z",
+     *             2
+     *         ],
+     *         "data": 2
+     *     }
+     * }
+     */
+    _parseDeepFieldName(container: any, fieldName: string, fieldData: any, options?: {
+        transform2ArrayOnDuplicate?: boolean;
+    }): void;
     /**
      * <p>request's post received data</p>
      */
@@ -644,11 +705,15 @@ declare type RequestPathStructure = string | RegExp;
 
 declare type RequestHandler = (request: SGAppsServerRequest, response: SGAppsServerResponse, next: (...params: any[]) => any) => void;
 
+/**
+ * @property [_REQUEST_FORM_PARAMS_DEEP_PARSE = true] - <p>parse formData field names to create deep object request.body</p>
+ */
 declare type SGAppsServerOptions = {
     server?: Server;
     strictRouting?: boolean;
     _DEBUG_MAX_HANDLER_EXECUTION_TIME?: number;
     _DEBUG_REQUEST_HANDLERS_STATS?: boolean;
+    _REQUEST_FORM_PARAMS_DEEP_PARSE?: boolean;
 };
 
 /**
@@ -690,6 +755,7 @@ declare type SGAppsServerOptions = {
  * }, app.logger.error);
  * @param [options._DEBUG_MAX_HANDLER_EXECUTION_TIME = 500] - <p>console shows an warn if handler is executed more than ( works in debug mode )</p>
  * @param [options._DEBUG_REQUEST_HANDLERS_STATS = false] - <p>console shows an warn if handler is executed more than ( works in debug mode )</p>
+ * @param [options._REQUEST_FORM_PARAMS_DEEP_PARSE = true] - <p>parse formData field names to create deep object request.body</p>
  */
 declare class SGAppsServer {
     constructor(options?: {
@@ -698,6 +764,7 @@ declare class SGAppsServer {
         debug?: boolean;
         _DEBUG_MAX_HANDLER_EXECUTION_TIME?: any;
         _DEBUG_REQUEST_HANDLERS_STATS?: any;
+        _REQUEST_FORM_PARAMS_DEEP_PARSE?: boolean;
         decorators?: SGAppsServerDecorator[];
     });
     NodeJsMvc: SGAppsServer.NodeJsMvc;

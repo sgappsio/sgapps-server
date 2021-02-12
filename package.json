@@ -3,6 +3,7 @@
   "version": "0.0.14",
   "description": "SGApps Network Server",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "rm -rf ./documentation/* ; jsdoc -c jsdoc.json ; ",
@@ -12,8 +13,9 @@
     "docs-dictionary-build-dev": "npm run docs-dictionary-build; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary-build; done",
     "docs-dev": "npm run docs; while true; do find . -not -path './documentation' | entr -pd npm run docs; done",
     "docs-preview": "live-server --wait=2500 --no-browser documentation",
+    "readme": "./node_modules/update-markdown-jsdoc/index.js -f ./prototypes -r readme.md -S -s API ; cat readme.md | sed -r 's/\\]\\(https\\:\\/\\/[^\\/]*@hub.sgapps.io\\/\\:/\\]\\(https\\:\\/\\/hub.sgapps.io\\//' | sed -r 's/(\\.js\\x23L[0-9]+)-L[0-9]+\\)/\\1)/' | tee readme.md",
     "version": "node ./resources/version.js --version ",
-    "build": "npm run docs-dictionary-build ; npm run docs ; npm run version "
+    "build": "npm run docs-dictionary-build ; npm run docs ; npm run readme ; npm run version "
   },
   "repository": {
     "type": "git",
@@ -61,6 +63,7 @@
     "@types/node": "^14.10.1",
     "docdash": "^1.2.0",
     "jsdoc": "^3.6.3",
-    "tsd-jsdoc": "^2.4.0"
+    "tsd-jsdoc": "^2.4.0",
+    "update-markdown-jsdoc": "^1.0.11"
   }
 }

@@ -67,7 +67,7 @@ function routeMatch(route, url, strictRouting, _cache) {
 				)
 			)
 		) {
-			const params = parseParams(url, route, { cache: _cache || {} })
+			const params = parseParams(url, route, { cache: _cache || {} });
 			if (
 				params !== null
 			) {
@@ -136,11 +136,11 @@ function SGAppsServerDictionary(options) {
 		if (typeof(path) === "string") {
 			return `s:${path}`;
 		} else if (path instanceof RegExp) {
-			return `r:${path.toString()}`
+			return `r:${path.toString()}`;
 		} else {
-			return `*:${path}`
+			return `*:${path}`;
 		}
-	}
+	};
 
 	return this;
 }
@@ -198,7 +198,7 @@ SGAppsServerDictionary.prototype.push = function (path, handlers) {
 	if (typeof(path) === "string" && path[0] === "^") {
 		// (?<name>...)
 		const rule = path
-			.replace(/([^\w\*\$\{\}\|\+\?\#\!\<\>\\\(\)\[\]\-\=\,\.\~\:\;\&\^])/g,'\\$1')
+			.replace(/([^\w\*\$\{\}\|\+\?\#\!<\>\\\(\)\[\]\-\=\,\.\~\:\;\&\^])/g,'\\$1')
 			.replace(/\/\*$/, '\/.*')
 			.replace(/\:([a-zA-Z][a-zA-Z\d]*)\((.*?)\)/g, '(?<$1>$2)')
 			.replace(/\:([a-zA-Z][a-zA-Z\d]*)/g, '(?<$1>[^\/\:]+)') + '$';
@@ -351,7 +351,7 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 				next();
 			}
 		}
-	}
+	};
 	next();
 };
 
