@@ -437,6 +437,19 @@ SGAppsServer.prototype.handleRequest = function (request, response, callback) {
 
 /**
  * @memberof SGAppsServer
+ * @param {SGAppsServerRequest} request 
+ * @param {SGAppsServerResponse} response 
+ * @param {Error} [err] 
+ */
+SGAppsServer.prototype.handleErrorRequest = function (request, response, err) {
+	response.sendError(err || Error('unknown error'), {
+		statusCode: 500
+	});
+};
+
+
+/**
+ * @memberof SGAppsServer
  * @param {SGAppsServerRequest} request
  * @param {SGAppsServerResponse} response
  * @param {string} path

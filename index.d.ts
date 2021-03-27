@@ -800,6 +800,7 @@ declare class SGAppsServer {
     MAX_POST_SIZE: number;
     whenReady: Promise<SGAppsServer>;
     handleRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, callback: SGAppsServerDictionaryRunCallBack): void;
+    handleErrorRequest(request: SGAppsServerRequest, response: SGAppsServerResponse, err?: Error): void;
     /**
      * @param [options.autoIndex] - <p>list of auto-index files, ex: ['index.html', 'index.htm', 'default.html']</p>
      */

@@ -251,9 +251,15 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 	const url = request.urlInfo.pathname.replace(/^\/+/, '/');
 	const _cache = this._cache;
 	const _debug = server.logger._debug;
-
+	const _errorDetected = null;
 	let next  = () => {
-		if (!this._paths[index]) {
+		if (_errorDetected) {
+			server.handleErrorRequest(
+				request,
+				response,
+				_errorDetected
+			);
+		} else if (!this._paths[index]) {
 			callback(request, response, server);
 		} else {
 			const matchResult = routeMatch(
@@ -264,7 +270,7 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 			);
 
 			// TODO apply cache
-			// IF response is 200 && mathched by a string path
+			// IF response is 200 && matched by a string path
 			// TODO add cache pathname|pathkey
 			// TODO add cache pathname|handlers
 			// console.info(
@@ -288,7 +294,9 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 			) {
 				let itemIndex = 0;
 				let itemNext = () => {
-					if (itemIndex >= this._paths[index].handlers.length) {
+					if (_errorDetected) {
+						next();
+					} else if (itemIndex >= this._paths[index].handlers.length) {
 						index++;
 						next();
 					} else {
@@ -337,6 +345,8 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 									]
 								);
 						} catch (err) {
+							_errorDetected = err;
+							// TODO Server Error page handler
 							server.logger.error(err);
 							if (_debug) {
 								_endTime = new Date().valueOf();
