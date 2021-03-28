@@ -307,10 +307,11 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 						if (_debug) {
 							timer = setTimeout(() => {
 								if (response._flags.finished || _endTime !== null) return;
+								const endTime = _endTime || new Date().valueOf();
 								server.logger.warn(
 									`[SGAppsServer.Handler] Max Execution time exceeded ( ${
 										server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME
-									} ms ) ; time spend ${ _endTime - _startTime } ms`
+									} ms ) ; time spend ${_endTime === null ? 'more than' : ''} ${ endTime - _startTime } ms`
 								);
 								server.logger.warn(this._paths[index].path);
 								server.logger.warn(this._paths[index].handlers[itemIndex].toString());
