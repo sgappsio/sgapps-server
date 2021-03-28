@@ -306,7 +306,7 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 						const path = this._paths[index].path;
 						if (_debug) {
 							timer = setTimeout(() => {
-								if (response._flags.finished || _endTime !== null) return;
+								if (request._flags.aborted || response._flags.finished || _endTime !== null) return;
 								const endTime = _endTime || new Date().valueOf();
 								server.logger.warn(
 									`[SGAppsServer.Handler] Max Execution time exceeded ( ${

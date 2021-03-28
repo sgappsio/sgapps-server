@@ -127,7 +127,6 @@ function SGAppsServerRequest(request, server) {
 	 * @property {boolean} closed Indicates that the underlying connection was closed.
 	 */
 	this._flags = {
-		aborted: request.aborted || false,
 		closed: false
 	};
 
@@ -136,13 +135,12 @@ function SGAppsServerRequest(request, server) {
 		{
 			complete: {
 				get: () => request.complete || false
+			},
+			aborted: {
+				get: () => request.aborted || false
 			}
 		}
 	);
-
-	request.on('abort', () => {
-		this._flags.aborted = true;
-	});
 
 	request.on('close', () => {
 		this._flags.closed = true;
