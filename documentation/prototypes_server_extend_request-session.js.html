@@ -243,6 +243,19 @@ SGAppsSessionManager.prototype.handleRequest = function (request) {
 		request,
 		this._options
 	);
+
+	const SessionManager = this;
+
+	if (request.session._id in SessionManager._sessions) {
+		request.session.data = SessionManager._sessions[request.session._id].data;
+		SessionManager._sessions[request.session._id].expire = request.session._created + SessionManager._options.SESSION_LIFE * 1000;
+	} else {
+		SessionManager._sessions[request.session._id] = {
+			expire: request.session._created + SessionManager._options.SESSION_LIFE * 1000,
+			data: {}
+		};
+		request.session.data = SessionManager._sessions[request.session._id].data;
+	}
 };
 
 
@@ -284,21 +297,7 @@ function RequestSessionDecorator(request, response, server, callback) {
 	 * @name session
 	 * @type {SGAppsServerRequestSession}
 	 */
-	request.session = new SGAppsServerRequestSessionBuilder(
-		request,
-		server.SessionManager._options
-	);
-
-	if (request.session._id in server.SessionManager._sessions) {
-		request.session.data = server.SessionManager._sessions[request.session._id].data;
-		server.SessionManager._sessions[request.session._id].expire = request.session._created + server.SessionManager._options.SESSION_LIFE * 1000;
-	} else {
-		server.SessionManager._sessions[request.session._id] = {
-			expire: request.session._created + server.SessionManager._options.SESSION_LIFE * 1000,
-			data: {}
-		};
-		request.session.data = server.SessionManager._sessions[request.session._id].data;
-	}
+	server.SessionManager.handleRequest(request);
 
 	response._destroy.push(function () {
 		request.session.destroy();
