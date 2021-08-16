@@ -186,7 +186,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		getView	: function (viewName) {
 			return (
 				(viewName in controllerObject._views) ? controllerObject._views[viewName] : null
-			)
+			);
 		},
 		/**
 		 * @memberof SGAppsServer.NodeJsMvc.Controller#
@@ -531,7 +531,9 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 																				viewFileName
 																			),
 																			name: viewName,
-																			code
+																			code: (
+																				server.logger._debug ? null : code
+																			)
 																		});
 
 																		_tickView();

@@ -99,7 +99,7 @@ TemplateManagerViewer.prototype.render	= function( response, view, vars ) {
 						if(Array.isArray(err)) {
 							err.forEach(function(v) {
 								throw v;
-							})
+							});
 						} else {
 							throw err;
 						}
@@ -115,7 +115,7 @@ TemplateManagerViewer.prototype.render	= function( response, view, vars ) {
 						if(Array.isArray(err)) {
 							err.forEach(function(v) {
 								throw v;
-							})
+							});
 						} else {
 							throw err;
 						}

@@ -251,7 +251,7 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 	const url = request.urlInfo.pathname.replace(/^\/+/, '/');
 	const _cache = this._cache;
 	const _debug = server.logger._debug;
-	const _errorDetected = null;
+	let _errorDetected = null;
 	let next  = () => {
 		if (_errorDetected) {
 			server.handleErrorRequest(
