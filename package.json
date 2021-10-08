@@ -1,6 +1,6 @@
 {
   "name": "sgapps-server",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "SGApps Network Server",
   "main": "index.js",
   "types": "index.d.ts",

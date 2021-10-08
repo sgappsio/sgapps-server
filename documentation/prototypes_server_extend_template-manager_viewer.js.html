@@ -126,7 +126,7 @@ function TemplateManagerViewer(options) {
 	 * @param {function} callback 
 	 */
 	this.renderCode	= function (code, vars, virtualFilePath, callback) {
-		return this.facebox.renderCode(code, vars, virtualFilePath, callback);
+		return this._facebox.renderCode(code, vars, callback, virtualFilePath);
 	}.bind(this);
 
 	return this;
