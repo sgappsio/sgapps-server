@@ -534,6 +534,14 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 				
 								busboy.on('finish', function () {
 									resolve(request._postDataBuffer);
+									var err;
+									try {
+										readable.destroy();
+									} catch (err) {};
+
+									try {
+										busboy.destroy();
+									} catch (err) {};
 								});
 				
 								//@ts-ignore
