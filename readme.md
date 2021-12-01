@@ -198,7 +198,7 @@ the license is [Apache-2.0](./LICENSE)
 -   [LoggerBuilderPrompt](#loggerbuilderprompt)
 -   [SGAppsServerHandlerPostData](#sgappsserverhandlerpostdata)
 
-### [SGAppsServerRequestSession](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L7)
+### [SGAppsServerRequestSession](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L7)
 
 Type: `function (request, options)`
 
@@ -207,19 +207,19 @@ Type: `function (request, options)`
 
 * * *
 
-#### [\_created](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L25)
+#### [\_created](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L25)
 
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
 * * *
 
-#### [\_ip](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L32)
+#### [\_ip](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L32)
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 * * *
 
-#### [\_confirmed](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L52)
+#### [\_confirmed](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L52)
 
 Session was received from previously saved cookie
 
@@ -227,31 +227,31 @@ Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Glob
 
 * * *
 
-#### [\_id](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L59)
+#### [\_id](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L59)
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 * * *
 
-#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L101)
+#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L101)
 
 Type: [SGAppsSessionManagerOptions](#sgappssessionmanageroptions)
 
 * * *
 
-#### [data](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L111)
+#### [data](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L111)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-#### [destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L117)
+#### [destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L117)
 
 Type: `function ()`
 
 * * *
 
-### [TemplateManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L9)
+### [TemplateManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L9)
 
 Type: `function (options)`
 
@@ -260,7 +260,7 @@ Type: `function (options)`
 
 * * *
 
-#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L23)
+#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L23)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -268,19 +268,19 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [\_viewer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L31)
+#### [\_viewer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L31)
 
 Type: [TemplateManagerViewer](#templatemanagerviewer)
 
 * * *
 
-#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L40)
+#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L40)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>
 
 * * *
 
-#### [templateExists](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L64)
+#### [templateExists](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L64)
 
 Type: `function (templateName): boolean`
 
@@ -288,7 +288,7 @@ Type: `function (templateName): boolean`
 
 * * *
 
-#### [remove](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L74)
+#### [remove](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L74)
 
 Type: `function (templateName)`
 
@@ -296,7 +296,7 @@ Type: `function (templateName)`
 
 * * *
 
-#### [add](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L86)
+#### [add](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L86)
 
 Type: `function (templateName, filePath)`
 
@@ -305,7 +305,7 @@ Type: `function (templateName, filePath)`
 
 * * *
 
-#### [addList](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L98)
+#### [addList](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L98)
 
 Type: `function (templates)`
 
@@ -313,7 +313,7 @@ Type: `function (templates)`
 
 * * *
 
-#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L114)
+#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L114)
 
 Type: `function (templateName): TemplateManagerTemplate`
 
@@ -321,7 +321,7 @@ Type: `function (templateName): TemplateManagerTemplate`
 
 * * *
 
-#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L128)
+#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L128)
 
 Type: `function (response, templateName, vars)`
 
@@ -331,7 +331,7 @@ Type: `function (response, templateName, vars)`
 
 * * *
 
-### [SGAppsServerRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L9)
+### [SGAppsServerRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L9)
 
 Type: `function (request, server)`
 
@@ -340,13 +340,13 @@ Type: `function (request, server)`
 
 * * *
 
-#### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L15)
+#### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L15)
 
 Type: IncomingMessage
 
 * * *
 
-#### [\_postDataBuffer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L26)
+#### [\_postDataBuffer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L26)
 
 post data buffer cache
 
@@ -354,7 +354,7 @@ Type: [Buffer](https://nodejs.org/api/buffer.html)
 
 * * *
 
-#### [getMountUpdatedUrl](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-url.js#L26)
+#### [getMountUpdatedUrl](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-url.js#L26)
 
 Type: `function (url): MountUpdatedURL`
 
@@ -362,7 +362,7 @@ Type: `function (url): MountUpdatedURL`
 
 * * *
 
-#### [urlInfo](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L34)
+#### [urlInfo](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L34)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -379,37 +379,37 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [query](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L47)
+#### [query](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L47)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-#### [mountPath](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L59)
+#### [mountPath](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L59)
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 * * *
 
-#### [body](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L60)
+#### [body](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L60)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-#### [bodyItems](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L72)
+#### [bodyItems](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L72)
 
 Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[SGAppsServerRequestPostDataItem](#sgappsserverrequestpostdataitem)>
 
 * * *
 
-#### [cookies](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-cookie.js#L78)
+#### [cookies](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-cookie.js#L78)
 
 Type: [SGAppsServerRequestCookie](#sgappsserverrequestcookie)
 
 * * *
 
-#### [MAX_POST_SIZE](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L83)
+#### [MAX_POST_SIZE](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L83)
 
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
@@ -427,19 +427,19 @@ request.MAX_POST_SIZE = -1;
 
 * * *
 
-#### [files](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L84)
+#### [files](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L84)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[SGAppsServerRequestFile](#sgappsserverrequestfile)>>
 
 * * *
 
-#### [fileItems](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L98)
+#### [fileItems](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L98)
 
 Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[SGAppsServerRequestFile](#sgappsserverrequestfile)>
 
 * * *
 
-#### [\_destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L104)
+#### [\_destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L104)
 
 Array of functions to be called on response end
 
@@ -447,7 +447,7 @@ Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global
 
 * * *
 
-#### [params](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L117)
+#### [params](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L117)
 
 Array of functions to be called on response end
 
@@ -455,7 +455,7 @@ Type: SGAppsServerRequest.RequestParams
 
 * * *
 
-#### [\_flags](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L130)
+#### [\_flags](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L130)
 
 Array of functions to be called on response end
 
@@ -468,7 +468,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [\_parseDeepFieldName](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L170)
+#### [\_parseDeepFieldName](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L170)
 
 Automatically used procedure for parsing formData field name if option `server._options._REQUEST_FORM_PARAMS_DEEP_PARSE = true`. it's by default enabled but can be disabled when needed
 
@@ -544,13 +544,13 @@ console.log(paramsContainer)
 
 * * *
 
-#### [session](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L242)
+#### [session](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L242)
 
 Type: [SGAppsServerRequestSession](#sgappsserverrequestsession)
 
 * * *
 
-#### [postData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L358)
+#### [postData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L358)
 
 request's post received data
 
@@ -558,13 +558,13 @@ Type: [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Glob
 
 * * *
 
-#### [RequestParams](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/request.js#L107)
+#### [RequestParams](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/request.js#L107)
 
 Type: ([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)
 
 * * *
 
-### [routeMatch](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L10)
+### [routeMatch](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L10)
 
 Type: `function (route, url, strictRouting, _cache)`
 
@@ -575,7 +575,7 @@ Type: `function (route, url, strictRouting, _cache)`
 
 * * *
 
-### [SGAppsServerResponse](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/response.js#L10)
+### [SGAppsServerResponse](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/response.js#L10)
 
 Type: `function (response, server)`
 
@@ -584,13 +584,13 @@ Type: `function (response, server)`
 
 * * *
 
-#### [response](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/response.js#L17)
+#### [response](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/response.js#L17)
 
 Type: ServerResponse
 
 * * *
 
-#### [pipeFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-pipe-file.js#L20)
+#### [pipeFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-pipe-file.js#L20)
 
 Type: `function (filePath, callback)`
 
@@ -599,7 +599,7 @@ Type: `function (filePath, callback)`
 
 * * *
 
-#### [send](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-send.js#L22)
+#### [send](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-send.js#L22)
 
 Type: `function (data, options)`
 
@@ -610,7 +610,7 @@ Type: `function (data, options)`
 
 * * *
 
-#### [sendError](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-error.js#L25)
+#### [sendError](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-error.js#L25)
 
 Type: `function (error, options)`
 
@@ -620,7 +620,7 @@ Type: `function (error, options)`
 
 * * *
 
-#### [\_destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/response.js#L25)
+#### [\_destroy](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/response.js#L25)
 
 Array of functions to be called on response end
 
@@ -628,7 +628,7 @@ Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global
 
 * * *
 
-#### [redirect](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-redirect.js#L27)
+#### [redirect](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-redirect.js#L27)
 
 if it returns `false` than the action was not possible
 
@@ -641,7 +641,7 @@ Type: `function (url, options)`
 
 * * *
 
-#### [\_flags](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/response.js#L36)
+#### [\_flags](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/response.js#L36)
 
 Array of functions to be called on response end
 
@@ -653,7 +653,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [pipeFileStaticCallback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-pipe-file-static.js#L19)
+#### [pipeFileStaticCallback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-pipe-file-static.js#L19)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -661,7 +661,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-#### [pipeFileStatic](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-pipe-file-static.js#L37)
+#### [pipeFileStatic](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-pipe-file-static.js#L37)
 
 Type: `function (filePath, fileName, callback, options)`
 
@@ -675,7 +675,7 @@ Type: `function (filePath, fileName, callback, options)`
 
 * * *
 
-#### [sendStatusCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-send.js#L79)
+#### [sendStatusCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-send.js#L79)
 
 Type: `function (statusCode)`
 
@@ -683,13 +683,13 @@ Type: `function (statusCode)`
 
 * * *
 
-### [TemplateManagerRenderOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L3)
+### [TemplateManagerRenderOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L3)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-### [TemplateManagerViewer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L13)
+### [TemplateManagerViewer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L13)
 
 Type: `function (options)`
 
@@ -698,25 +698,25 @@ Type: `function (options)`
 
 * * *
 
-#### [\_facebox](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L19)
+#### [\_facebox](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L19)
 
 Type: [FaceboxTemplate](#faceboxtemplate)
 
 * * *
 
-#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L29)
+#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L29)
 
 Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
 * * *
 
-#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L47)
+#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L47)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>
 
 * * *
 
-#### [renderCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L70)
+#### [renderCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L70)
 
 Type: `function (code, vars, virtualFilePath, callback)`
 
@@ -727,7 +727,7 @@ Type: `function (code, vars, virtualFilePath, callback)`
 
 * * *
 
-#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/viewer.js#L85)
+#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/viewer.js#L85)
 
 Type: `function (response, view, vars)`
 
@@ -737,7 +737,7 @@ Type: `function (response, view, vars)`
 
 * * *
 
-### [TemplateManagerTemplate](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L10)
+### [TemplateManagerTemplate](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L10)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -747,7 +747,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [SGAppsServerEmail](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L44)
+### [SGAppsServerEmail](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L44)
 
 Type: `function (config)`
 
@@ -771,7 +771,7 @@ Example:
 
 * * *
 
-#### [send](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L133)
+#### [send](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L133)
 
 Send email
 
@@ -781,7 +781,7 @@ Type: `function (callback)`
 
 * * *
 
-#### [options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L133)
+#### [options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L133)
 
 get message options
 
@@ -791,7 +791,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [encodedBody](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L133)
+#### [encodedBody](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L133)
 
 getter generate encoded body
 
@@ -799,7 +799,7 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [msg](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L133)
+#### [msg](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L133)
 
 getter generate all email structure
 
@@ -807,7 +807,7 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [valid](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L133)
+#### [valid](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L133)
 
 check if email is valid
 
@@ -817,7 +817,7 @@ Type: `function (callback)`
 
 * * *
 
-#### [Config](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L1)
+#### [Config](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L1)
 
 Email : Sends email using the sendmail command.
 
@@ -844,7 +844,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [from](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L56)
+#### [from](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L56)
 
 Email address from which messages are sent. Used
 when `from` was not set on a message.
@@ -855,7 +855,7 @@ Type: `function (email): string`
 
 * * *
 
-#### [isValidAddress](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L67)
+#### [isValidAddress](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L67)
 
 Type: `function (email): boolean`
 
@@ -863,7 +863,7 @@ Type: `function (email): boolean`
 
 * * *
 
-#### [timeout](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L80)
+#### [timeout](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L80)
 
 Duration in milliseconds to wait before
 killing the process. Defaults to 3000. Used when `timeout` is not set
@@ -875,7 +875,7 @@ Type: `function (milliseconds): number`
 
 * * *
 
-#### [Callback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/email.js#L85)
+#### [Callback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/email.js#L85)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -883,7 +883,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [SGAppsSessionManagerOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L8)
+### [SGAppsSessionManagerOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L8)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -892,7 +892,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [SGAppsServerRequestSessionCache](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L14)
+### [SGAppsServerRequestSessionCache](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L14)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -901,13 +901,13 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [MountUpdatedURL](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-url.js#L17)
+### [MountUpdatedURL](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-url.js#L17)
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 * * *
 
-### [FaceboxTemplate](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L26)
+### [FaceboxTemplate](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L26)
 
 Type: `function (options)`
 
@@ -916,31 +916,31 @@ Type: `function (options)`
 
 * * *
 
-#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L32)
+#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L32)
 
 Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
 * * *
 
-#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L47)
+#### [\_env](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L47)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>
 
 * * *
 
-#### [\_cachedFiles](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L64)
+#### [\_cachedFiles](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L64)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>
 
 * * *
 
-#### [INCLUDE_LEVEL](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L84)
+#### [INCLUDE_LEVEL](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L84)
 
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
 * * *
 
-#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L94)
+#### [render](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L94)
 
 Type: `function (text, vars, env)`
 
@@ -950,7 +950,7 @@ Type: `function (text, vars, env)`
 
 * * *
 
-#### [renderFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L224)
+#### [renderFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L224)
 
 Type: `function (filePath, vars, callback)`
 
@@ -960,7 +960,7 @@ Type: `function (filePath, vars, callback)`
 
 * * *
 
-#### [renderCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/template-manager/facebox-templates.js#L247)
+#### [renderCode](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/template-manager/facebox-templates.js#L247)
 
 Type: `function (code, vars, callback, virtualFilePath)`
 
@@ -971,13 +971,13 @@ Type: `function (code, vars, callback, virtualFilePath)`
 
 * * *
 
-### [SGAppsServerRequestCookie](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-cookie.js#L37)
+### [SGAppsServerRequestCookie](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-cookie.js#L37)
 
 Type: `function ()`
 
 * * *
 
-#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-cookie.js#L37)
+#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-cookie.js#L37)
 
 Type: `function (name, options): string`
 
@@ -987,7 +987,7 @@ Type: `function (name, options): string`
 
 * * *
 
-#### [set](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-cookie.js#L37)
+#### [set](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-cookie.js#L37)
 
 Type: `function (name, value, options): string`
 
@@ -1007,13 +1007,13 @@ Type: `function (name, value, options): string`
 
 * * *
 
-### [SGAppsServerDecoratorsLibrary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L45)
+### [SGAppsServerDecoratorsLibrary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L45)
 
 Type: `function ()`
 
 * * *
 
-### [SGAppsServerErrorCallBack](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L22)
+### [SGAppsServerErrorCallBack](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L22)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1024,7 +1024,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [SGAppsServerErrorOnlyCallback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L31)
+### [SGAppsServerErrorOnlyCallback](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L31)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1032,19 +1032,19 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [FSLibrary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L45)
+### [FSLibrary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L45)
 
 Type: `function ()`
 
 * * *
 
-### [SGAppsServerShared](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L45)
+### [SGAppsServerShared](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L45)
 
 Type: `function ()`
 
 * * *
 
-### [SGAppsServerRequestFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L28)
+### [SGAppsServerRequestFile](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L28)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1060,7 +1060,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [SGAppsServerRequestPostDataItem](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-postdata.js#L41)
+### [SGAppsServerRequestPostDataItem](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-postdata.js#L41)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1074,7 +1074,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [SGAppsServerDecorator](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L47)
+### [SGAppsServerDecorator](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L47)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1085,7 +1085,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [SGAppsServer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L137)
+### [SGAppsServer](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L137)
 
 HTTP Server for high performance results
 
@@ -1143,7 +1143,7 @@ app.whenReady.then(() => {
 
 * * *
 
-#### [CookiesManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-cookie.js#L56)
+#### [CookiesManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-cookie.js#L56)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1153,49 +1153,49 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [\_server](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L157)
+#### [\_server](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L157)
 
 Type: Server
 
 * * *
 
-#### [\_decorators](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L163)
+#### [\_decorators](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L163)
 
 Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[SGAppsServerDecorator](#sgappsserverdecorator)>
 
 * * *
 
-#### [TemplateManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/response-template.js#L166)
+#### [TemplateManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/response-template.js#L166)
 
 Type: [TemplateManager](#templatemanager)
 
 * * *
 
-#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L183)
+#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L183)
 
 Type: [SGAppsServerOptions](#sgappsserveroptions)
 
 * * *
 
-#### [STATUS_CODES](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L192)
+#### [STATUS_CODES](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L192)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>
 
 * * *
 
-#### [shared](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L199)
+#### [shared](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L199)
 
 Type: [SGAppsServerShared](#sgappsservershared)
 
 * * *
 
-#### [logger](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L206)
+#### [logger](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L206)
 
 Type: [LoggerBuilder](#loggerbuilder)
 
 * * *
 
-#### [Email](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L217)
+#### [Email](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L217)
 
 Type: `function (config): SGAppsServerEmail`
 
@@ -1203,43 +1203,43 @@ Type: `function (config): SGAppsServerEmail`
 
 * * *
 
-#### [SessionManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L222)
+#### [SessionManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L222)
 
 Type: [SGAppsSessionManager](#sgappssessionmanager)
 
 * * *
 
-#### [mountPath](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L225)
+#### [mountPath](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L225)
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 * * *
 
-#### [\_fs](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L243)
+#### [\_fs](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L243)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-#### [\_path](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L250)
+#### [\_path](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L250)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 * * *
 
-#### [EXTENSIONS](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L258)
+#### [EXTENSIONS](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L258)
 
 Type: ResourcesExtensions
 
 * * *
 
-#### [\_requestListeners](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L266)
+#### [\_requestListeners](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L266)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [SGAppsServerDictionary](#sgappsserverdictionary)>
 
 * * *
 
-#### [MAX_POST_SIZE](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L319)
+#### [MAX_POST_SIZE](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L319)
 
 default value is `16 Kb` » `16 * 1024`
 
@@ -1247,13 +1247,13 @@ Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [whenReady](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L339)
+#### [whenReady](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L339)
 
 Type: [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[SGAppsServer](#sgappsserver)>
 
 * * *
 
-#### [handleRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L390)
+#### [handleRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L390)
 
 Type: `function (request, response, callback)`
 
@@ -1263,7 +1263,7 @@ Type: `function (request, response, callback)`
 
 * * *
 
-#### [handleErrorRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L444)
+#### [handleErrorRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L444)
 
 Type: `function (request, response, err)`
 
@@ -1273,7 +1273,7 @@ Type: `function (request, response, err)`
 
 * * *
 
-#### [handleStaticRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L461)
+#### [handleStaticRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L461)
 
 Type: `function (request, response, path, callback, options)`
 
@@ -1287,7 +1287,7 @@ Type: `function (request, response, path, callback, options)`
 
 * * *
 
-#### [handle](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L519)
+#### [handle](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L519)
 
 Type: `function (request, response, callback)`
 
@@ -1297,13 +1297,13 @@ Type: `function (request, response, callback)`
 
 * * *
 
-#### [server](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L589)
+#### [server](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L589)
 
 Type: `function (): Server`
 
 * * *
 
-#### [use](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L599)
+#### [use](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L599)
 
 Type: `function (path, handlers): SGAppsServer`
 
@@ -1312,7 +1312,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [post](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L616)
+#### [post](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L616)
 
 The `POST` method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.
 
@@ -1323,7 +1323,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L632)
+#### [get](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L632)
 
 The `GET` method requests a representation of the specified resource. Requests using GET should only retrieve data.
 
@@ -1334,7 +1334,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [head](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L648)
+#### [head](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L648)
 
 The `HEAD` method asks for a response identical to that of a GET request, but without the response body.
 
@@ -1345,7 +1345,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [put](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L664)
+#### [put](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L664)
 
 The `PUT` method replaces all current representations of the target resource with the request payload.
 
@@ -1356,7 +1356,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [trace](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L680)
+#### [trace](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L680)
 
 The `TRACE` method performs a message loop-back test along the path to the target resource.
 
@@ -1367,7 +1367,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [delete](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L696)
+#### [delete](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L696)
 
 The `DELETE` method deletes the specified resource.
 
@@ -1378,7 +1378,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L712)
+#### [options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L712)
 
 The `OPTIONS` method is used to describe the communication options for the target resource.
 
@@ -1389,7 +1389,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [connect](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L728)
+#### [connect](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L728)
 
 The `CONNECT` method establishes a tunnel to the server identified by the target resource.
 
@@ -1400,7 +1400,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [patch](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L744)
+#### [patch](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L744)
 
 The `PATCH` method is used to apply partial modifications to a resource.
 
@@ -1411,7 +1411,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [all](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L760)
+#### [all](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L760)
 
 add handler to all methods
 
@@ -1422,7 +1422,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [finalHandler](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L782)
+#### [finalHandler](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L782)
 
 add final handler to all methods, last added is first
 
@@ -1433,7 +1433,7 @@ Type: `function (path, handlers): SGAppsServer`
 
 * * *
 
-#### [handlePostData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L806)
+#### [handlePostData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L806)
 
 Type: `function (options): SGAppsServerHandlerPostData`
 
@@ -1445,7 +1445,7 @@ Type: `function (options): SGAppsServerHandlerPostData`
 
 * * *
 
-### [LoggerBuilder](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L77)
+### [LoggerBuilder](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L77)
 
 Pretty CLI Logger, with possibility to replace default nodejs' console logger
 
@@ -1477,7 +1477,7 @@ console.log("Console Messages are decorated now");
 
 * * *
 
-#### [\_format](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L95)
+#### [\_format](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L95)
 
 this parameter may be changed if you decide to change decoration schema
 
@@ -1492,19 +1492,19 @@ logger._format = "\x1b[7m {{timestamp}} [{{TYPE}}] <{{title}}> {{file}}:{{line}}
 
 * * *
 
-#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L101)
+#### [\_debug](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L101)
 
 Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
 * * *
 
-#### [\_headerFormatters](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L126)
+#### [\_headerFormatters](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L126)
 
 Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;LoggerBuilder.headerFormatter>
 
 * * *
 
-#### [prettyCli](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L155)
+#### [prettyCli](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L155)
 
 Type: `function (ref, indent, separator)`
 
@@ -1514,7 +1514,7 @@ Type: `function (ref, indent, separator)`
 
 * * *
 
-#### [log](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L236)
+#### [log](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L236)
 
 Type: `function (messages)`
 
@@ -1522,7 +1522,7 @@ Type: `function (messages)`
 
 * * *
 
-#### [info](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L251)
+#### [info](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L251)
 
 Type: `function (messages)`
 
@@ -1530,7 +1530,7 @@ Type: `function (messages)`
 
 * * *
 
-#### [warn](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L266)
+#### [warn](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L266)
 
 Type: `function (messages)`
 
@@ -1538,7 +1538,7 @@ Type: `function (messages)`
 
 * * *
 
-#### [error](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L281)
+#### [error](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L281)
 
 Type: `function (messages)`
 
@@ -1546,7 +1546,7 @@ Type: `function (messages)`
 
 * * *
 
-#### [prompt](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L315)
+#### [prompt](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L315)
 
 Type: `function (callback, message)`
 
@@ -1567,13 +1567,13 @@ logger.prompt("rerun tests? [y/n]: ", function (err, buffer) {
 
 * * *
 
-#### [decorateGlobalLogger](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L325)
+#### [decorateGlobalLogger](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L325)
 
 Type: `function ()`
 
 * * *
 
-#### [headerFormatterInfo](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L103)
+#### [headerFormatterInfo](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L103)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1587,7 +1587,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-#### [headerFormatter](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L115)
+#### [headerFormatter](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L115)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1595,7 +1595,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [RequestPathStructureMap](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L92)
+### [RequestPathStructureMap](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L92)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1605,7 +1605,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [SGAppsServerDictionary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L107)
+### [SGAppsServerDictionary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L107)
 
 a dictionary for storing
 
@@ -1617,19 +1617,19 @@ Type: `function (options)`
 
 * * *
 
-#### [\_paths](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L113)
+#### [\_paths](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L113)
 
 Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[RequestPathStructureMap](#requestpathstructuremap)>
 
 * * *
 
-#### [\_dictionary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L119)
+#### [\_dictionary](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L119)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[RequestHandler](#requesthandler)>>
 
 * * *
 
-#### [generatePathKey](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L135)
+#### [generatePathKey](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L135)
 
 Type: `function (path): string`
 
@@ -1637,7 +1637,7 @@ Type: `function (path): string`
 
 * * *
 
-#### [push](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L193)
+#### [push](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L193)
 
 Type: `function (path, handlers)`
 
@@ -1688,7 +1688,7 @@ server.get('/', (req, res) => {
 
 * * *
 
-#### [run](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L245)
+#### [run](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L245)
 
 Type: `function (request, response, server, callback)`
 
@@ -1699,7 +1699,7 @@ Type: `function (request, response, server, callback)`
 
 * * *
 
-### [SGAppsSessionManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L134)
+### [SGAppsSessionManager](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L134)
 
 Type: `function (server, options)`
 
@@ -1708,31 +1708,31 @@ Type: `function (server, options)`
 
 * * *
 
-#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L140)
+#### [\_options](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L140)
 
 Type: [SGAppsSessionManagerOptions](#sgappssessionmanageroptions)
 
 * * *
 
-#### [\_enabled](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L151)
+#### [\_enabled](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L151)
 
 Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
 * * *
 
-#### [\_sessions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L158)
+#### [\_sessions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L158)
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [SGAppsServerRequestSessionCache](#sgappsserverrequestsessioncache)>
 
 * * *
 
-#### [removeExpiredSessions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L167)
+#### [removeExpiredSessions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L167)
 
 Type: `function ()`
 
 * * *
 
-#### [handleRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L183)
+#### [handleRequest](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L183)
 
 Type: `function (request)`
 
@@ -1740,13 +1740,13 @@ Type: `function (request)`
 
 * * *
 
-### [RequestPathStructure](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L67)
+### [RequestPathStructure](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L67)
 
 Type: ([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [RegExp](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp))
 
 * * *
 
-### [RequestHandler](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L71)
+### [RequestHandler](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L71)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1756,7 +1756,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [SGAppsServerOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L78)
+### [SGAppsServerOptions](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L78)
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -1768,7 +1768,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 * * *
 
-### [RequestSessionDecorator](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server/extend/request-session.js#L211)
+### [RequestSessionDecorator](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server/extend/request-session.js#L211)
 
 Type: `function (request, response, server, callback)`
 
@@ -1779,7 +1779,7 @@ Type: `function (request, response, server, callback)`
 
 * * *
 
-### [SGAppsServerDictionaryRunCallBack](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/dictionary.js#L230)
+### [SGAppsServerDictionaryRunCallBack](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/dictionary.js#L230)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1789,7 +1789,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L291)
+### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L291)
 
 Type: `function (request, response)`
 
@@ -1798,7 +1798,7 @@ Type: `function (request, response)`
 
 * * *
 
-### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L308)
+### [request](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L308)
 
 Type: `function (request, socket, data)`
 
@@ -1808,7 +1808,7 @@ Type: `function (request, socket, data)`
 
 * * *
 
-### [LoggerBuilderPrompt](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/logger.js#L295)
+### [LoggerBuilderPrompt](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/logger.js#L295)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
@@ -1816,7 +1816,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 * * *
 
-### [SGAppsServerHandlerPostData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/48ea29f7202dcf3ff40549989dded77115eb7a47/prototypes/server.js#L790)
+### [SGAppsServerHandlerPostData](https://git@labs.sgapps.io/:open-source/sgapps-server/blob/105b363969699c00a833fbf42b7e2d7106429197/prototypes/server.js#L790)
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
