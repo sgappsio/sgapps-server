@@ -613,11 +613,13 @@ declare class SGAppsServerRequest {
      * @property complete - <p>The message.complete property will be true if a complete HTTP message has been received and successfully parsed.</p>
      * @property aborted - <p>The message.aborted property will be true if the request has been aborted.</p>
      * @property closed - <p>Indicates that the underlying connection was closed.</p>
+     * @property [_DEBUG_MAX_HANDLER_EXECUTION_TIME] - <p>define a bigger request timeout</p>
      */
     _flags: {
         complete: boolean;
         aborted: boolean;
         closed: boolean;
+        _DEBUG_MAX_HANDLER_EXECUTION_TIME?: number;
     };
 }
 

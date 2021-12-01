@@ -366,13 +366,49 @@ SGAppsServerDictionary.prototype.run = function (request, response, server, call
 							timer = setTimeout(() => {
 								if (request._flags.aborted || response._flags.finished || _endTime !== null) return;
 								const endTime = _endTime || new Date().valueOf();
-								server.logger.warn(
-									`[SGAppsServer.Handler] Max Execution time exceeded ( ${
-										server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME
-									} ms ) ; time spend ${_endTime === null ? 'more than' : ''} ${ endTime - _startTime } ms`
-								);
-								server.logger.warn(this._paths[index].path);
-								server.logger.warn(this._paths[index].handlers[itemIndex].toString());
+								
+								if (
+									typeof(request._flags._DEBUG_MAX_HANDLER_EXECUTION_TIME) === "number"
+									&amp;&amp;
+									request._flags._DEBUG_MAX_HANDLER_EXECUTION_TIME >= 1
+								) {
+									var remain = request._flags._DEBUG_MAX_HANDLER_EXECUTION_TIME - ( endTime - _startTime );
+
+									if (remain > 0) {
+										timer = setTimeout(() => {
+											if (request._flags.aborted || response._flags.finished || _endTime !== null) return;
+
+											const endTime = _endTime || new Date().valueOf();
+
+											server.logger.warn(
+												`[SGAppsServer.Handler] Max Execution time exceeded ( ${
+													request._flags._DEBUG_MAX_HANDLER_EXECUTION_TIME
+												} ms ) ; time spend ${_endTime === null ? 'more than' : ''} ${ endTime - _startTime } ms`
+											);
+										
+											server.logger.warn(this._paths[index].path);
+											server.logger.warn(this._paths[index].handlers[itemIndex].toString());
+										}, remain);
+									} else {
+										server.logger.warn(
+											`[SGAppsServer.Handler] Max Execution time exceeded ( ${
+												server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME
+											} ms ) ; time spend ${_endTime === null ? 'more than' : ''} ${ endTime - _startTime } ms`
+										);
+									
+										server.logger.warn(this._paths[index].path);
+										server.logger.warn(this._paths[index].handlers[itemIndex].toString());
+									}
+								} else {
+									server.logger.warn(
+										`[SGAppsServer.Handler] Max Execution time exceeded ( ${
+											server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME
+										} ms ) ; time spend ${_endTime === null ? 'more than' : ''} ${ endTime - _startTime } ms`
+									);
+									
+									server.logger.warn(this._paths[index].path);
+									server.logger.warn(this._paths[index].handlers[itemIndex].toString());
+								}
 							}, server._options._DEBUG_MAX_HANDLER_EXECUTION_TIME);
 						}
 						try {

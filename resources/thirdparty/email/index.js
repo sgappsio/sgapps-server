@@ -5,7 +5,7 @@
  * Module dependencies.
  */
 
-var spawn = require('child_process').spawn;
+var _childProcess = require('child_process');
 
 /**
  * Generates a boundry string.
@@ -91,17 +91,31 @@ Email.prototype = {
         cb(err);
       };
     })();
-    this.valid((err) => {
+    var _this = this;
+    _this.valid(function (err) {
       if (err) {
         return callback(err);
       }
       var args = ['-i', '-t'];
-      if (this.debug) {
+      if (_this.debug) {
         args.push('-v');
       }
-      var sendmail = spawn(this.path, args, this.options);
+      var sendmail = _childProcess.spawn(
+        _this.path,
+        args,
+        Object.assign(
+          {},
+          _this.options,
+          {
+            stdio: 'pipe',
+            detached: false,
+            shell: false
+          }
+        )
+      );
+      
       sendmail.on('error', function(err) {
-        if (this.debug) {
+        if (_this.debug) {
           console.error('Sendmail Error: ', err);
         }
         callback(err);
@@ -116,7 +130,22 @@ Email.prototype = {
           callback(err);
         }
       });
-      if (this.debug) {
+
+
+      var _err = null;
+      ['stdout', 'stdin', 'stderr'].forEach(function (item) {
+        if (
+          (item in sendmail)
+          && sendmail[item]
+          && typeof(sendmail[item].on) === "function"
+        ) {
+          sendmail[item].on('error', function (err) {
+            _err = err;
+          });
+        }
+      });
+
+      if (_this.debug) {
         if (sendmail.stdout) {
           sendmail.stdout.on('data', function (chunk) {
             process.stdout.write('\033[0mmail:: >> \033[36m' + chunk.toString() + '\033[0m');
@@ -134,26 +163,28 @@ Email.prototype = {
         }
       }
 
-      sendmail.stdin.end(this.msg);
+      if (!sendmail.stdin) {
+        callback(_err || Error('incorrent sendmail process stdin'));
+      } else {
+        sendmail.stdin.end(_this.msg);
+      }
 
       sendmail.on('close', function () {
-        callback();
-      })
+        callback(_err);
+      });
     });
-  }
-
-, get options () {
+  },
+  get options () {
     return { timeout: this.timeout || exports.timeout };
-  }
-
-, get msg () {
-    var msg = new Msg()
-      , boundry = genBoundry()
-      , to = formatAddress(this.to)
-      , cc = formatAddress(this.cc)
-      , bcc = formatAddress(this.bcc)
-      , html = this.bodyType && 'html' === this.bodyType.toLowerCase()
-      , plaintext = !html ? this.body
+  },
+  get msg () {
+    var msg = new Msg(),
+      boundry = genBoundry()
+      to = formatAddress(this.to),
+      cc = formatAddress(this.cc),
+      bcc = formatAddress(this.bcc),
+      html = this.bodyType && 'html' === this.bodyType.toLowerCase(),
+      plaintext = !html ? this.body
           : this.altText  ? this.altText
           : '';
 
@@ -190,25 +221,24 @@ Email.prototype = {
     }
 
     return msg.toString();
-  }
+  },
+  get encodedBody () {
+    var encoded = Buffer.from(this.body, 'utf8').toString('base64'),
+      len = encoded.length,
+      size = 100,
+      start = 0,
+      ret = '',
+      chunk;
 
-, get encodedBody () {
-    var encoded = (new Buffer(this.body)).toString('base64')
-      , len = encoded.length
-      , size = 100
-      , start = 0
-      , ret = ''
-      , chunk;
-
+    // jshint -W084
     while (chunk = encoded.substring(start, start + size > len ? len : start + size)) {
       ret += chunk + '\n';
       start += size;
     }
 
     return ret;
-  }
-
-, valid: function (callback) {
+  },
+  valid: function (callback) {
     if (!requiredFieldsExist(this, callback)) return false;
     if (!fieldsAreClean(this, callback)) return false;
 

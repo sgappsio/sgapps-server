@@ -125,6 +125,7 @@ function SGAppsServerRequest(request, server) {
 	 * @property {boolean} complete The message.complete property will be true if a complete HTTP message has been received and successfully parsed.
 	 * @property {boolean} aborted The message.aborted property will be true if the request has been aborted.
 	 * @property {boolean} closed Indicates that the underlying connection was closed.
+	 * @property {number} [_DEBUG_MAX_HANDLER_EXECUTION_TIME] define a bigger request timeout
 	 */
 	this._flags = {
 		closed: false
