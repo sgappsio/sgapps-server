@@ -27,20 +27,28 @@ function ResponseSendDecorator(request, response, server, callback) {
 				statusCode: 200,
 				headers: {}
 			},
-			options
+			options || {}
 		);
 
 		if (!response.response.headersSent) {
-			if (typeof(data) === "string") {
-				options.headers["Content-Type"] = (
-					data[0] === '<' ? "text/html" : "text/plain"
-				)
-			} else if (data instanceof Buffer) {
-				options.headers["Content-type"] = 'application/octet-stream';
-			} else if (Array.isArray(data) || typeof(data) === "object") {
-				options.headers['Content-Type'] = 'application/json';
-			} else {
-				options.headers["Content-type"] = 'application/octet-stream';
+			if (
+				!options.headers["Content-type"]
+				&&
+				!options.headers["Content-Type"]
+				&&
+				!options.headers["content-type"]
+			) {
+				if (typeof(data) === "string") {
+					options.headers["Content-type"] = (
+						data[0] === '<' ? "text/html" : "text/plain"
+					);
+				} else if (data instanceof Buffer) {
+					options.headers["Content-type"] = 'application/octet-stream';
+				} else if (Array.isArray(data) || typeof(data) === "object") {
+					options.headers['Content-type'] = 'application/json';
+				} else {
+					options.headers["Content-type"] = 'application/octet-stream';
+				}
 			}
 
 			response.response.statusCode = options.statusCode;
@@ -55,16 +63,19 @@ function ResponseSendDecorator(request, response, server, callback) {
 			|| data instanceof Buffer
 		) {
 			response.response.write(data, function (err) {
+				//@ts-ignore
 				if (err) server.logger.error(err);
 				response.response.end();
 			});
 		} else if (Array.isArray(data) || (typeof(data) === "object" && data)) {
 			response.response.write(JSON.stringify(data), function (err) {
+				//@ts-ignore
 				if (err) server.logger.error(err);
 				response.response.end();
 			});
 		} else {
 			response.response.write((data.toString ? data.toString() : (data + '')), function (err) {
+				//@ts-ignore
 				if (err) server.logger.error(err);
 				response.response.end();
 			});
@@ -78,6 +89,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 	*/
 	response.sendStatusCode = function (statusCode) {
 		response.send(
+			//@ts-ignore
 			server.STATUS_CODES[statusCode] || 'Unknown status code',
 			{
 				statusCode
