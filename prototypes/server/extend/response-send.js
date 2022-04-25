@@ -95,7 +95,7 @@ function ResponseSendDecorator(request, response, server, callback) {
 				statusCode
 			}
 		);
-	}
+	};
 	
 	response._destroy.push(function () {
 		// @ts-ignore

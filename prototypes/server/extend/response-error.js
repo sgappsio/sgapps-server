@@ -31,7 +31,7 @@ function ResponseSendErrorDecorator(request, response, server, callback) {
 		);
 		if (!response.response.headersSent) {
 			response.response.statusCode = options.statusCode;
-			response.response.statusMessage = STATUS_CODES[options.statusCode] || `Unknown status code: ${options.statusCode}`
+			response.response.statusMessage = STATUS_CODES[options.statusCode] || `Unknown status code: ${options.statusCode}`;
 		}
 		if (error && (error instanceof Error)) {
 			if (response.response.writable) {

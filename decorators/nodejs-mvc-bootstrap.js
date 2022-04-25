@@ -170,6 +170,7 @@ function NodeJsMvcController(controllerName, options, server ) {
 		 * @name viewer
 		 * @type {TemplateManagerViewer}
 		 */
+		//@ts-ignore
 		viewer: server.TemplateManager._viewer,
 		/**
 		 * @memberof SGAppsServer.NodeJsMvc.Controller#
@@ -540,7 +541,7 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 																	}
 																);
 															}
-														)
+														);
 													};
 
 													_tickView();
@@ -550,13 +551,13 @@ function loadNodeJsMvcApp(request, response, server, callback) {
 									);
 								}
 							);
-						}
+						};
 
 						_tickAction();
 					}
 				);
-			})
-		}
+			});
+		};
 
 		_tick();
 	});

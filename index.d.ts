@@ -26,7 +26,34 @@ interface WritableStream extends EventEmitter {
     end(cb?: () => void): void;
     end(data: string | Uint8Array, cb?: () => void): void;
     end(str: string, encoding?: BufferEncoding, cb?: () => void): void;
-}declare namespace SGAppsServer {
+}/**
+ * <p>Access Logger for HTTP Web Servers</p>
+ */
+declare class AccessLogger {
+    logRequest(request: IncomingMessage, response: ServerResponse): string;
+    formattedDate(timeStamp: Date): string;
+    getUsername(request: IncomingMessage | SGAppsServerRequest): string;
+    getReferer(request: IncomingMessage | SGAppsServerRequest): string;
+    getProtocol(request: IncomingMessage | SGAppsServerRequest): string;
+    getSize(data: Buffer | string): number;
+    getRemoteIp(request: IncomingMessage): string;
+}
+
+declare namespace AccessLogger {
+    type AccessLoggerHandle = (dataLog: string) => null | string;
+    /**
+     * @property [path] - <p>file path where logs will be written, placeholders: {year} {month} {date} {day} {pid} {worker-id}</p>
+     * @property [waitAllHandlers = false] - <p>file path where logs will be written</p>
+     */
+    type AccessLoggerPath = {
+        isEnabled?: boolean;
+        path?: string | null;
+        waitAllHandlers?: boolean;
+        handle?: AccessLogger.AccessLoggerHandle | null;
+    };
+}
+
+declare namespace SGAppsServer {
     namespace NodeJsMvc {
         namespace Controller {
             type View = {
@@ -282,7 +309,7 @@ declare class LoggerBuilder {
      */
     _format: string;
     _debug: boolean;
-    _headerFormatters: LoggerBuilder.headerFormatter[];
+    _headerFormatters: headerFormatter[];
     prettyCli(ref: any, indent?: number, separator?: string): void;
     log(...messages: any[]): void;
     info(...messages: any[]): void;
@@ -312,7 +339,7 @@ declare namespace LoggerBuilder {
         path: string;
         stack: string;
     };
-    type headerFormatter = (info: LoggerBuilder.headerFormatterInfo) => void;
+    type headerFormatter = (info: headerFormatterInfo) => void;
 }
 
 declare type LoggerBuilderPrompt = (message: Buffer) => void;
@@ -332,7 +359,7 @@ declare class SGAppsServerRequestCookie {
         sameSite?: boolean;
         secure?: boolean;
         overwrite?: boolean;
-    }): string;
+    }, skipErrors?: boolean): string;
 }
 
 /**
@@ -491,6 +518,9 @@ declare class TemplateManagerViewer {
 
 declare class SGAppsServerRequest {
     constructor(request: IncomingMessage, server: SGAppsServer);
+    AccessLoggerPaths: {
+        [key: string]: AccessLogger.AccessLoggerPath;
+    };
     cookies: SGAppsServerRequestCookie;
     /**
      * <p>post data buffer cache</p>
@@ -685,6 +715,10 @@ declare class SGAppsServerDecoratorsLibrary {
     /**
      * <p>this decorator is not enabled by default</p>
      */
+    static AccessLoggerDecorator(request: SGAppsServerRequest, response: SGAppsServerResponse, server: SGAppsServer, callback: (...params: any[]) => any): void;
+    /**
+     * <p>this decorator is not enabled by default</p>
+     */
     static NodeJsMvcDecorator(request: SGAppsServerRequest, response: SGAppsServerResponse, server: SGAppsServer, callback: (...params: any[]) => any): void;
 }
 
@@ -769,6 +803,10 @@ declare class SGAppsServer {
         _REQUEST_FORM_PARAMS_DEEP_PARSE?: boolean;
         decorators?: SGAppsServerDecorator[];
     });
+    AccessLogger: AccessLogger;
+    AccessLoggerPaths: {
+        [key: string]: AccessLogger.AccessLoggerPath;
+    };
     NodeJsMvc: SGAppsServer.NodeJsMvc;
     /**
      * @property [_enabled = true] - <p>if is changed to false server will not decorate requests with cookie manager</p>

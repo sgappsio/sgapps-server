@@ -152,6 +152,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 						pipeline(
 							raw(),
 							_zlib.createDeflate(),
+							//@ts-ignore
 							response.response,
 							(err) => {
 								response.sendError(err, {statusCode: 500});
@@ -178,6 +179,7 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 						pipeline(
 							raw(),
 							_zlib.createGzip(),
+							//@ts-ignore
 							response.response,
 							(err) => {
 								response.sendError(err, {statusCode: 500});

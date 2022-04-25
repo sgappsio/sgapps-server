@@ -28,10 +28,11 @@ const Cookies = require('./../../../resources/thirdparty/cookies');
  * @param {string}  [options.path="/"]
  * @param {Date}    [options.expires]
  * @param {string}  [options.domain]
- * @param {boolean} [options.httpOnly=true;]
- * @param {boolean} [options.sameSite=false;]
- * @param {boolean} [options.secure=false;]
- * @param {boolean} [options.overwrite=false;]
+ * @param {boolean} [options.httpOnly=true]
+ * @param {boolean} [options.sameSite=false]
+ * @param {boolean} [options.secure=false]
+ * @param {boolean} [options.overwrite=false]
+ * @param {boolean} [skipErrors=false]
  * @returns {string}
  */
 ;

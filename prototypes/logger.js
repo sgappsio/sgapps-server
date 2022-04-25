@@ -115,13 +115,13 @@ function LoggerBuilder() {
 	/**
 	 * @memberof LoggerBuilder
 	 * @callback headerFormatter
-	 * @param {LoggerBuilder.headerFormatterInfo} info
+	 * @param {headerFormatterInfo} info
 	 */
 
 	/**
 	 * @memberof LoggerBuilder#
 	 * @name _headerFormatters
-	 * @type {Array<LoggerBuilder.headerFormatter>}
+	 * @type {Array<headerFormatter>}
 	 */
 	this._headerFormatters  = [];
 	return this;
@@ -132,7 +132,10 @@ LoggerBuilder.prototype.pushHeader = function (args, type, stack) {
 	data.time = new Date().toISOString();
 	data.type = type.toUpperCase();
 	if (this._headerFormatters.length) {
-		this._headerFormatters.forEach(handler => { handler(data) });
+		this._headerFormatters.forEach(handler => {
+			//@ts-ignore
+			handler(data);
+		});
 	}
 	let format = this._format;
 	format = format.replace('{{timestamp}}', data.time);
@@ -165,26 +168,26 @@ LoggerBuilder.prototype.prettyCli = function (ref, indent, separator) {
 						(index < ref.length - 1) ? ',' : '\n'
 					}`
 				).join('')
-		}\x1b[0m]`
+		}\x1b[0m]`;
 	} else {
 		switch (typeof(ref)) {
 			case "boolean":
-				data += `\x1b[0;34m${ref}\x1b[0m`
+				data += `\x1b[0;34m${ref}\x1b[0m`;
 			break;
 			case "function":
-				data += `\x1b[0;36m${ref}\x1b[0m`
+				data += `\x1b[0;36m${ref}\x1b[0m`;
 			break;
 			case "number":
-				data += `\x1b[0;33m${ref}\x1b[0m`
+				data += `\x1b[0;33m${ref}\x1b[0m`;
 			break;
 			case "undefined":
-				data += `\x1b[0;35m${ref}\x1b[0m`
+				data += `\x1b[0;35m${ref}\x1b[0m`;
 			break;
 			case "object":
 				if (ref === null) {
-					data += `\x1b[0;35m${ref}\x1b[0m`
+					data += `\x1b[0;35m${ref}\x1b[0m`;
 				} else if (ref instanceof RegExp) {
-					data += `\x1b[0;32mRegExp\x1b[34m(\x1b[32m${ref.toString()}\x1b[34m)\x1b[0m`
+					data += `\x1b[0;32mRegExp\x1b[34m(\x1b[32m${ref.toString()}\x1b[34m)\x1b[0m`;
 				} else if (ref instanceof Buffer) {
 					data += `\x1b[0;32mBuffer\x1b[34m(\x1b[32m${
 							ref.slice(0,16)
@@ -194,7 +197,7 @@ LoggerBuilder.prototype.prettyCli = function (ref, indent, separator) {
 								.replace(/,/g, '\x1b[0m,\x1b[32m')
 						}\x1b[0m${
 							ref.byteLength > 16 ? '...' : ''
-						}\x1b[34m)\x1b[0m`
+						}\x1b[34m)\x1b[0m`;
 				} else {
 					data += '\x1b[0m{\n';
 					let prop, firstProp = true;
@@ -202,7 +205,7 @@ LoggerBuilder.prototype.prettyCli = function (ref, indent, separator) {
 						if (firstProp) {
 							firstProp = false;
 						} else {
-							data += '\x1b[0m,\n'
+							data += '\x1b[0m,\n';
 						}
 						if (`${prop}`.match(/^[\_\da-zA-Z]+$/)) {
 							data += `\n${separator}\x1b[0m${prop} \: `;
@@ -216,7 +219,7 @@ LoggerBuilder.prototype.prettyCli = function (ref, indent, separator) {
 			break;
 			case "string":
 			default:
-				data += `\x1b[0;32m${JSON.stringify(ref)}\x1b[0m`
+				data += `\x1b[0;32m${JSON.stringify(ref)}\x1b[0m`;
 			break;
 		}
 	}
@@ -241,7 +244,7 @@ LoggerBuilder.prototype.log	= function () {
 		args.push('\x1b[0m');
 		this._console.log.apply(this._console, args);
 	}
-}
+};
 
 /**
  * @memberof LoggerBuilder#
@@ -256,7 +259,7 @@ LoggerBuilder.prototype.info = function () {
 		args.push("\x1b[0m");
 		this._console.log.apply(this._console, args);
 	}
-}
+};
 
 /**
  * @memberof LoggerBuilder#
@@ -290,7 +293,7 @@ LoggerBuilder.prototype.error	= function () {
 	this._console.error.apply(this._console, args);
 	this._console.log(getStackTrace());
 	this._console.log("\x1b[0m\n");
-}
+};
 
 /**
  * @callback LoggerBuilderPrompt
@@ -316,7 +319,7 @@ LoggerBuilder.prototype.prompt = function (callback, message) {
 	if (typeof (message) !== "undefined")
 		process.stdout.write(message);
 	promptCallbacks.push(callback);
-}
+};
 		
 /**
  * @memberof LoggerBuilder#
@@ -345,6 +348,6 @@ LoggerBuilder.prototype.decorateGlobalLogger = function () {
 		//@ts-ignore
 		global.console.prompt = this.prompt;
 	}
-}
+};
 
 module.exports = LoggerBuilder;

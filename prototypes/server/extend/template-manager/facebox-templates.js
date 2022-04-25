@@ -108,9 +108,11 @@ function FaceboxTemplate(options) {
 				return `${env.dirname.replace(/\/+$/,'')}/${addr.subs(1,0)}`;
 			} else {
 				try {
+					// jshint -W054
 					return (new Function(
 						`const env	= arguments[1];const vars = arguments[0];\n return ${addr}`
 					))(vars, env);
+					// jshint +W054
 				} catch(err) {
 					throw Error(
 						`Unable to eval path: ${addr} ; ${err.meesage} ;`
@@ -152,7 +154,9 @@ function FaceboxTemplate(options) {
 		);
 
 		text = text.replace(
+			// jshint -W049
 			/\<script[^\>]+?type\s*?=\s*?\"text\/facebox\-template\"[^\>]*?\>([\s\S]*?)\<\/script\>/g,
+			// jshint +W049
 			function (match, p1, p2, offset, string) {
 				const x	= '[[replacer-'+Math.floor(Math.random()*10000000)+'-'+Math.floor(Math.random()*10000000)+'-'+new Date().valueOf()+']]';
 				replacers.push({ id : x, type : 'js-return', code : p1 });
@@ -185,10 +189,14 @@ function FaceboxTemplate(options) {
 					text = text.split(replacers[i].id).join(replacers[i].code);
 				break;
 				case 'js-return':
+					// jshint -W054
 					text	= text.split(replacers[i].id).join((new Function("var vars = arguments[0];var env = arguments[1];\nvar result = (function faceBoxTemplate_jsReturn() {\n"+replacers[i].code + "\n})(); if (result === undefined) return ''; return result;" ))( vars, env ));
+					// jshint +W054
 				break;
 				case 'eval':
+					// jshint -W054
 					(new Function("var vars = arguments[0];var env = arguments[1];\n"+replacers[i].code ))( vars, env );
+					// jshint +W054
 					text = text.split(replacers[i].id).join('');
 				break;
 				case 'js-script':

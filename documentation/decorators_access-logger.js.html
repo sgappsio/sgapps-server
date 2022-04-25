@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>prototypes/server/extend/template-manager/facebox-templates.js - SGApps Server - Framework</title>
+    <title>decorators/access-logger.js - SGApps Server - Framework</title>
     
     <meta name="description" content="SGApps Server for high performance results" />
     
@@ -46,7 +46,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">prototypes/server/extend/template-manager/facebox-templates.js</h1>
+    <h1 class="page-title">decorators/access-logger.js</h1>
     
 
     
@@ -56,277 +56,354 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/*
-	On template Rendering we have
-	following variables
-
-	var vars	= {}; // variables that a sent from controllers
-	var env		= {
-		error	: [],
-		vars	: envVars,
-		path	: "", // filePath
-		dirname	: "", // dirname
-		render	: function( text, vars, env ) {}, // render function
-		renderFile	: function( file, vars, callback ) {}, // render file function
-			// callback( error {{ [] or false }}, htm)
-	};
-	env.vars = {
-		// env varssent from app
-		response : [object] // http reponse object
-	}
-*/
+            <pre class="prettyprint source linenums"><code>var _fs      = require("fs");
+var _path    = require("path");
+var _cluster = require("cluster");
 /**
  * @class
- * @name FaceboxTemplate
- * @param {object} options
- * @param {FSLibrary} options._fs
+ * @name AccessLogger
+ * @description Access Logger for HTTP Web Servers
  */
-function FaceboxTemplate(options) {
+function AccessLogger() {
+	this.months = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	];
+	this.combined = false;	
+};
 
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @var {boolean} _debug
-	 */
-	let _debug = false;
-	Object.defineProperty(
-		this,
-		'_debug',
-		{
-			get: () => _debug,
-			set: (v) => {
-				_debug = !!v;
-			}
-		}
-	);
-	
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @var {Object&lt;string,any>} _env
-	 */;
-	let _env = {};
-	Object.defineProperty(
-		this,
-		'_env',
-		{
-			get: () => _env,
-			set: (data) => {
-				Object.assign(_env, data);
-			}
-		}
-	);
+/**
+ * @memberof AccessLogger#
+ * @method logRequest
+ * @param {IncomingMessage} request 
+ * @param {ServerResponse} response 
+ * @returns {string}
+ */
+AccessLogger.prototype.logRequest = function (request, response) {
+	return this.getRemoteIp(request) + ' - ' +
+		this.getUsername(request) + ' [' +
+		this.formattedDate(new Date()) + '] "' +
+		(request.method || '-') + ' ' +
+		(request.url || '-') + ' ' +
+		this.getProtocol(request) + '/' +
+		request.httpVersion + '" ' +
+		response.statusCode + ' ' +
+		((response.socket || response.connection || {}).bytesWritten || '-') + ' "' +
+		(this.getReferer(request) || "-" ) + '"' + (
+			this.combined ? (
+				' "' +
+				(request.headers['user-agent'] || "-") + '"'
+			) : ''
+		);
+};
 
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @var {Object&lt;string,string>} _cachedFiles
-	 */
-	this._cachedFiles = {};
-
-	const readFileSync = (addr) => {
-		if (addr in this._cachedFiles) {
-			return this._cachedFiles[addr];
-		} else {
-			//@ts-ignore
-			const content	= options._fs.readFileSync( addr, { encoding: "utf-8" } );
-			// @ts-ignore
-			if (!this._debug) {
-				this._cachedFiles[addr]	= content;
-			}
-			return content;
-		}
+/**
+ * @memberof AccessLogger#
+ * @method formattedDate
+ * @param {Date} timeStamp 
+ * @returns {string}
+ */
+AccessLogger.prototype.formattedDate = function formattedDate(timeStamp) {
+	var _2d = function (i) {
+		return ((i &lt; 10) ? ('0' + i) : (
+			i > 99 ? (
+				i + ''
+			) : ('' + i)
+		));
 	};
+    return _2d(timeStamp.getUTCDate()) + '/' +
+        this.months[timeStamp.getMonth()].substring(0, 3) + '/' +
+        _2d(timeStamp.getUTCFullYear()) + ':' +
+        _2d(timeStamp.getUTCHours()) + ':' +
+        _2d(timeStamp.getUTCMinutes()) + ':' +
+        _2d(timeStamp.getUTCSeconds()) + ' +0000';
+};
 
+/**
+ * @memberof AccessLogger#
+ * @method getUsername
+ * @param {IncomingMessage|SGAppsServerRequest} request 
+ * @returns {string}
+ */
+AccessLogger.prototype.getUsername = function getUsername(request) {
+    var username = "-";
+	//@ts-ignore
+    if (request.session &amp;&amp; request.session.user) {
+		//@ts-ignore
+        username = request.session.user ? request.session.user.username : '';
+    }
+	
+	//@ts-ignore
+	if (username !== '-' &amp;&amp; request.session &amp;&amp; (request.session.id || request.session._id)) {
+		//@ts-ignore
+        username = request.session._id || request.session.id;
+    }
+    return username;
+};
+
+/**
+ * @memberof AccessLogger#
+ * @method getReferer
+ * @param {IncomingMessage|SGAppsServerRequest} request 
+ * @returns {string}
+ */
+AccessLogger.prototype.getReferer = function (request) {
+	//@ts-ignore
+    return (request.request || request).headers.referer || (request.request || request).headers.referrer || null;
+};
+
+/**
+ * @memberof AccessLogger#
+ * @method getProtocol
+ * @param {IncomingMessage|SGAppsServerRequest} request
+ * @returns {string}
+ */
+AccessLogger.prototype.getProtocol = function (request) {
 	/**
-	 * @memberof FaceboxTemplate#
-	 * @var {number} INCLUDE_LEVEL
+	 * @private
+	 * @type {IncomingMessage}
 	 */
-	this.INCLUDE_LEVEL = 10;
+	//@ts-ignore
+	var message = (request.request || request);
 
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @method render
-	 * @param {string} text
-	 * @param {Object&lt;string,any>} vars
-	 * @param {Object&lt;string,any>} env
-	 * @this FaceboxTemplate
-	 */
-	this.render	= function FaceboxTemplateRender( text, vars, env ) {
-		if (vars === undefined) vars = {};
+    if (message.socket &amp;&amp; message.socket.localPort === 443) {
+        return "HTTPS";
+    }
+    return "HTTP";
+};
 
-		const template	= { text: text };
-		const replacers	= [];
-		let err			= false;
-		/**
-		 * @private
-		 * @param {string} addr 
-		 * @returns {string}
-		 */
-		const parseAddr = function parseAddr(addr) {
-			let err;
-			if(addr.subs(1) == ":") {
-				return `${env.dirname.replace(/\/+$/,'')}/${addr.subs(1,0)}`;
+/**
+ * @memberof AccessLogger#
+ * @method getSize
+ * @param {Buffer|string} data
+ * @returns {number}
+ */
+AccessLogger.prototype.getSize = function (data) {
+	if (data === null) return 0;
+    if (Buffer.isBuffer(data)) {
+        return data.length;
+    }
+    if (typeof data === 'string') {
+        return Buffer.byteLength(data);
+    }
+	return null;
+};
+
+/**
+ * @memberof AccessLogger#
+ * @method getRemoteIp
+ * @param {IncomingMessage} request
+ * @returns {string}
+ */
+AccessLogger.prototype.getRemoteIp = function (request) {
+	var getData = function (data) {
+		if (Array.isArray(data)) return data[0];
+		return data;
+	};
+    return getData(request.headers['X-Forwarded-For']) || getData(request.connection.remoteAddress) || "Unknown IP Address";
+};
+
+/**
+ * @memberof AccessLogger
+ * @callback AccessLoggerHandle
+ * @param {string} dataLog
+ * @returns {null|string}
+ */
+/**
+ * @memberof AccessLogger
+ * @typedef {object} AccessLoggerPath
+ * @property {boolean} [isEnabled=false]
+ * @property {string|null} [path] file path where logs will be written, placeholders: {year} {month} {date} {day} {pid} {worker-id}
+ * @property {boolean} [waitAllHandlers=false] file path where logs will be written
+ * @property {AccessLogger.AccessLoggerHandle|null} [handle]
+ */
+
+/***
+ * @private
+ * @type {Object&lt;string,import("fs").WriteStream>}
+ */
+var AccessLoggerWriteStreams = {};
+
+var AccessLoggerWriter = function (path, data) {
+	var err;
+	var logPath = _path.resolve(path);
+	if (logPath in AccessLoggerWriteStreams) {
+		if (AccessLoggerWriteStreams[logPath] !== null) {
+			if (AccessLoggerWriteStreams[logPath].writable) {
+				AccessLoggerWriteStreams[logPath].write(data + '\n');
+			}
+		}
+	} else {
+		var date = new Date();
+		var filePath = logPath.replace(
+			'{pid}',
+			process.pid + ''
+		).replace(
+			'{year}',
+			date.getFullYear() + ''
+		).replace(
+			'{month}',
+			(date.getMonth() + 1) + ''
+		).replace(
+			'{date}',
+			date.getDate() + ''
+		).replace(
+			'{day}',
+			date.getDay() + ''
+		).replace(
+			'{worker-id}',
+			( _cluster.worker ? _cluster.worker.id : 'master' ) + ''
+		);
+
+		var dirPath = _path.dirname(filePath);
+
+		var err, dataStream;
+		try {
+			_fs.mkdirSync(dirPath, { recursive: true });
+			dataStream = _fs.createWriteStream(
+				filePath,
+				{
+					flags: 'a',
+					mode: parseInt('0644', 8)
+				}
+			);
+	
+			if (dataStream.writable) {
+				dataStream.write(data + '\n');
+			}
+
+			AccessLoggerWriteStreams[logPath] = dataStream;
+		} catch (err) {
+			AccessLoggerWriteStreams[logPath] = null;
+		};
+	}
+};
+
+/**
+ * @private
+ * @function
+ * @param {SGAppsServerRequest} request 
+ * @param {SGAppsServerResponse} response 
+ * @param {SGAppsServer} server 
+ */
+var AccessLoggerHandler = function (server, request, response) {
+	var logData = server.AccessLogger.logRequest(request.request, response.response);
+	var pathId, loggerPath, updatedLogData = logData, currentLogData;
+	var paths = [];
+	for (pathId in server.AccessLoggerPaths) {
+		if (!updatedLogData) continue;
+
+		loggerPath = server.AccessLoggerPaths[pathId];
+
+		if (loggerPath.isEnabled) {
+			if (loggerPath.handle) {
+				currentLogData = loggerPath.handle(logData);
 			} else {
-				try {
-					// jshint -W054
-					return (new Function(
-						`const env	= arguments[1];const vars = arguments[0];\n return ${addr}`
-					))(vars, env);
-					// jshint +W054
-				} catch(err) {
-					throw Error(
-						`Unable to eval path: ${addr} ; ${err.meesage} ;`
-					);
+				currentLogData = updatedLogData;
+			}
+			
+			if (currentLogData) {
+				if (loggerPath.waitAllHandlers) {
+					updatedLogData = currentLogData;
+					if (loggerPath.path) {
+						paths.push(loggerPath.path);
+					}
+				} else {
+					if (loggerPath.path) {
+						AccessLoggerWriter(loggerPath.path, currentLogData);
+					}
 				}
 			}
-		}.bind(this);
+		}
+	}
 
-		text = text.replace(
-			/\{\{(read|read\-base64|read\-hex)\:(.*?)\}\}/g,
-			function (match, p1, p2, offset, string) {
-				const x	= '[[replacer-'+Math.floor(Math.random()*10000000)+'-'+Math.floor(Math.random()*10000000)+'-'+new Date().valueOf()+']]';
-				replacers.push({ id : x, type : 'action-'+p1, param : p2 });
-				return x;
+	for (pathId in request.AccessLoggerPaths) {
+		if (!updatedLogData) continue;
+
+		loggerPath = server.AccessLoggerPaths[pathId];
+
+		if (loggerPath.isEnabled) {
+			if (loggerPath.handle) {
+				currentLogData = loggerPath.handle(logData);
+			} else {
+				currentLogData = updatedLogData;
 			}
-		);
-		text = text.replace(
-			/\{\{(include)\:(.*?)\}\}/g,
-			function (match, p1, p2, offset, string) {
-				return readFileSync( parseAddr(p2) );
-			}
-		);
-		text = text.replace(
-			/\{\{(render)\:(.*?)\}\}/g,
-			function (match, p1, p2, offset, string) {
-				const addr	= parseAddr(p2);
-				return this.render(
-					readFileSync(addr),
-					vars,
-					{
-						vars	: this._env,
-						path	: addr,
-						dirname	: ((addr).replace(/[^\/]+$/,'')+'/').replace(/^\/+$/,'/'),
-						render	: this.render,
-						renderFile	: this.renderFile
+			
+			if (currentLogData) {
+				if (loggerPath.waitAllHandlers) {
+					updatedLogData = currentLogData;
+					if (loggerPath.path) {
+						paths.push(loggerPath.path);
 					}
-				);
-			}.bind(this)
-		);
-
-		text = text.replace(
-			// jshint -W049
-			/\&lt;script[^\>]+?type\s*?=\s*?\"text\/facebox\-template\"[^\>]*?\>([\s\S]*?)\&lt;\/script\>/g,
-			// jshint +W049
-			function (match, p1, p2, offset, string) {
-				const x	= '[[replacer-'+Math.floor(Math.random()*10000000)+'-'+Math.floor(Math.random()*10000000)+'-'+new Date().valueOf()+']]';
-				replacers.push({ id : x, type : 'js-return', code : p1 });
-				return x;
-			}
-		);
-
-		text = text.replace(
-			/\{(code|js\-return|eval|js\-script|css\-style)\}([\s\S]*?)\{\/\1\}/g,
-			function (match, p1, p2, offset, string) {
-				const x	= '[[replacer-'+Math.floor(Math.random()*10000000)+'-'+Math.floor(Math.random()*10000000)+'-'+new Date().valueOf()+']]';
-				replacers.push({ id : x, type : p1, code : p2 });
-				return x;
-			}
-		);
-		
-		text = text.replace(
-			/\{\{([\s\S]*?)\}\}/g,
-			function (match, p1, offset, string) {
-				const x	= '[[replacer-'+Math.floor(Math.random()*10000000)+'-'+Math.floor(Math.random()*10000000)+'-'+new Date().valueOf()+']]';
-				replacers.push({ id : x, type : 'js-return', code : 'return '+p1 });
-				return x;
-			}
-		);
-
-		let i;
-		for (i=0; i&lt;replacers.length; i++) {
-			switch(replacers[i].type) {
-				case 'code':
-					text = text.split(replacers[i].id).join(replacers[i].code);
-				break;
-				case 'js-return':
-					// jshint -W054
-					text	= text.split(replacers[i].id).join((new Function("var vars = arguments[0];var env = arguments[1];\nvar result = (function faceBoxTemplate_jsReturn() {\n"+replacers[i].code + "\n})(); if (result === undefined) return ''; return result;" ))( vars, env ));
-					// jshint +W054
-				break;
-				case 'eval':
-					// jshint -W054
-					(new Function("var vars = arguments[0];var env = arguments[1];\n"+replacers[i].code ))( vars, env );
-					// jshint +W054
-					text = text.split(replacers[i].id).join('');
-				break;
-				case 'js-script':
-					text = text.split(replacers[i].id).join('&lt;script type="text/javascript" charset="utf-8">\n'+replacers[i].code+'\n&lt;/script>');
-				break;
-				case 'css-style':
-					text = text.split(replacers[i].id).join('&lt;style type="text/css">\n'+replacers[i].code+'\n&lt;/style>');
-				break;
-				case 'action-read':
-					text = text.split(replacers[i].id).join(readFileSync(parseAddr(replacers[i].param)));
-				break;
-				case 'action-read-base64':
-					text = text.split(replacers[i].id).join(readFileSync(parseAddr(replacers[i].param)).base64encode());
-				break;
-				case 'action-read-hex':
-					text = text.split(replacers[i].id).join(readFileSync(parseAddr(replacers[i].param)).toHex());
-				break;
+				} else {
+					if (loggerPath.path) {
+						AccessLoggerWriter(loggerPath.path, currentLogData);
+					}
+				}
 			}
 		}
-		return text;
-	}.bind(this);
+	}
 
-
-
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @method renderFile
-	 * @param {string} filePath
-	 * @param {Object&lt;string,any>} vars
-	 * @param {function} callback
-	 * @this FaceboxTemplate
-	 */
-	this.renderFile	= function( filePath, vars, callback ) {
-		const env		= {
-			vars	: this._env,
-			path	: filePath,
-			dirname	: (filePath.replace(/[^\/]+$/,'')+'/').replace(/^\/+$/,'/'),
-			render	: this.render,
-			renderFile	: this.renderFile
-		};
-		callback(
-			null,
-			this.render( readFileSync( filePath ), vars, env )
-		);
-	}.bind(this);
-
-	/**
-	 * @memberof FaceboxTemplate#
-	 * @method renderCode
-	 * @param {string} code
-	 * @param {Object&lt;string,any>} vars
-	 * @param {function} callback
-	 * @param {string} virtualFilePath
-	 * @this FaceboxTemplate
-	 */
-	this.renderCode	= function( code, vars, callback, virtualFilePath ) {
-		const env		= {
-			vars	: this._env,
-			path	: virtualFilePath || '',
-			dirname	: ((virtualFilePath || '').replace(/[^\/]+$/,'')+'/').replace(/^\/+$/,'/'),
-			render	: this.render,
-			renderFile	: this.renderFile
-		};
-		callback(
-			null,
-			this.render(code, vars, env)
-		);
-	}.bind(this);
-
-	return this;
+	if (updatedLogData) {
+		paths.forEach(function (path) {
+			AccessLoggerWriter(path, updatedLogData);
+		});
+	}
 };
-module.exports	= FaceboxTemplate;
+
+/**
+ * this decorator is not enabled by default
+ * @memberof SGAppsServerDecoratorsLibrary
+ * @method AccessLoggerDecorator
+ * @param {SGAppsServerRequest} request 
+ * @param {SGAppsServerResponse} response 
+ * @param {SGAppsServer} server 
+ * @param {function} callback
+ */
+var AccessLoggerDecorator = function (request, response, server, callback) {
+	if (
+		request === null
+		&amp;&amp; response === null
+		&amp;&amp; server
+	) {
+		/**
+		 * @memberof SGAppsServer#
+		 * @var {AccessLogger} AccessLogger
+		 */
+		server.AccessLogger = new AccessLogger();
+
+		/**
+		 * @memberof SGAppsServer#
+		 * @var {Object&lt;string,AccessLogger.AccessLoggerPath>} AccessLoggerPaths
+		 */
+		server.AccessLoggerPaths = {};
+	} else {
+		/**
+		 * @memberof SGAppsServerRequest#
+		 * @var {Object&lt;string,AccessLogger.AccessLoggerPath>} AccessLoggerPaths
+		 */
+		request.AccessLoggerPaths = {};
+		response.response.on('close', function () {
+			AccessLoggerHandler(server, request, response);
+		});
+	}
+	callback();
+};
+
+AccessLoggerDecorator.AccessLogger = AccessLogger;
+
+module.exports = AccessLoggerDecorator;
+
 </code></pre>
         </article>
     </section>

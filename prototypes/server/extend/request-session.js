@@ -23,6 +23,7 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 	 * @type {number}
 	 */
 	this._created = new Date().valueOf();
+	var _this = this;
 
 	/**
 	 * @memberof SGAppsServerRequestSession#
@@ -31,7 +32,11 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 	 */
 	this._ip = (
 		(
-			request.request ? request.request.headers['x-forwarded-for'] : null
+			request.request ? (
+				Array.isArray(request.request.headers['x-forwarded-for']) ? (
+					request.request.headers['x-forwarded-for'][0]
+				) : request.request.headers['x-forwarded-for']
+			) : null
 		) || (
 			( request.request && request.request.connection )
 			? request.request.connection.remoteAddress
@@ -115,11 +120,11 @@ function SGAppsServerRequestSessionBuilder(request, options) {
 	 * @method destroy
 	 */
 	this.destroy = function () {
-		this.data = null;
-		this._id = null;
-		this._ip = null;
-		this._options = null;
-		delete this.destroy;
+		_this.data = null;
+		_this._id = null;
+		_this._ip = null;
+		_this._options = null;
+		delete _this.destroy;
 	};
 
 	return this;

@@ -1,4 +1,4 @@
-const _faceboxTemplate = require('./facebox-templates.js')
+const _faceboxTemplate = require('./facebox-templates.js');
 
 /**
  * @typedef {object} TemplateManagerRenderOptions
