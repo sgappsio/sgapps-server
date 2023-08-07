@@ -93,10 +93,11 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 					response.sendError(err);
 				}
 			} else {
-				var eTag = `${stat.size}-${Date.parse(stat.mtime)}`;
+				var eTagTime = Date.parse(stat.mtime);
+				var eTag = `${stat.size}-${eTagTime}`;
 				response.response.setHeader(
 					'Last-Modified',
-					stat.mtime
+					new Date(eTagTime).toUTCString()
 				);
 				if (request && request.request.headers['if-none-match'] === eTag) {
 					response.response.statusCode = 304;
