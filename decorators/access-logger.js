@@ -21,20 +21,41 @@ function AccessLogger() {
 		"November",
 		"December"
 	];
+	/**
+	 * @memberof AccessLogger#
+	 * @name combined
+	 * @type {boolean}
+	 * @description log format as combined, with user agent: %h %e %^[%x] "%r" %s %b "%R" "{%u}"
+	 */
 	this.combined = false;	
+	/**
+	 * @memberof AccessLogger#
+	 * @name logsIncludeHostname
+	 * @type {boolean}
+	 * @description log format for vhosts %v, ex: %h %e %^[%x] "{%v}" "%r" %s %b "%R"
+	 */
+	this.logsIncludeHostname = false;
 };
 
 /**
  * @memberof AccessLogger#
+ * @description for go access: tail -c 67108864 -f '/var/logs/default/2024/2/data-master.log' | goaccess --log-format='%h %e %^[%x] "%v" "%r" %s %b "%R" "%u"' --date-format='%d/%b/%Y:%H:%M:%S %z' --time-format='%d/%b/%Y:%H:%M:%S %z' -
+ * with combined and logger %h %e %^[%x] "%r" %s %b "%R"
  * @method logRequest
  * @param {IncomingMessage} request 
  * @param {ServerResponse} response 
  * @returns {string}
  */
 AccessLogger.prototype.logRequest = function (request, response) {
+	// %h %e %^[%x] "{%v}" "%r" %s %b "%R" "{%u}"
 	return this.getRemoteIp(request) + ' - ' +
 		this.getUsername(request) + ' [' +
-		this.formattedDate(new Date()) + '] "' +
+		this.formattedDate(new Date()) + '] ' +
+		(
+			this.logsIncludeHostname ? (
+				'"' + (request.headers.host + '').toLowerCase() + '" '
+			) : '-'
+		) + '"' +
 		(request.method || '-') + ' ' +
 		(request.url || '-') + ' ' +
 		this.getProtocol(request) + '/' +

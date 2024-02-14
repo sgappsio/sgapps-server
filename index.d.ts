@@ -30,6 +30,18 @@ interface WritableStream extends EventEmitter {
  * <p>Access Logger for HTTP Web Servers</p>
  */
 declare class AccessLogger {
+    /**
+     * <p>log format as combined, with user agent: %h %e %^[%x] &quot;%r&quot; %s %b &quot;%R&quot; &quot;{%u}&quot;</p>
+     */
+    combined: boolean;
+    /**
+     * <p>log format for vhosts %v, ex: %h %e %^[%x] &quot;{%v}&quot; &quot;%r&quot; %s %b &quot;%R&quot;</p>
+     */
+    logsIncludeHostname: boolean;
+    /**
+     * <p>for go access: tail -c 67108864 -f '/var/logs/default/2024/2/data-master.log' | goaccess --log-format='%h %e %^[%x] &quot;%v&quot; &quot;%r&quot; %s %b &quot;%R&quot; &quot;%u&quot;' --date-format='%d/%b/%Y:%H:%M:%S %z' --time-format='%d/%b/%Y:%H:%M:%S %z' -
+     * with combined and logger %h %e %^[%x] &quot;%r&quot; %s %b &quot;%R&quot;</p>
+     */
     logRequest(request: IncomingMessage, response: ServerResponse): string;
     formattedDate(timeStamp: Date): string;
     getUsername(request: IncomingMessage | SGAppsServerRequest): string;
