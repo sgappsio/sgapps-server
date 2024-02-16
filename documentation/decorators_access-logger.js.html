@@ -228,10 +228,18 @@ AccessLogger.prototype.getSize = function (data) {
  */
 AccessLogger.prototype.getRemoteIp = function (request) {
 	var getData = function (data) {
-		if (Array.isArray(data)) return data[0];
-		return data;
+		var result = data;
+		if (Array.isArray(data)) result = data[0];
+		
+		if (result) {
+			result += '';
+			result = result.replace(/[\s\n]+/g, ',').replace(/\,+/g, ',')
+		}
+		
+		return result;
 	};
-    return getData(request.headers['X-Forwarded-For']) || getData(request.connection.remoteAddress) || "Unknown IP Address";
+
+	return getData(request.headers['x-forwarded-for']) || getData(request.headers['X-Forwarded-For']) || getData(request.connection.remoteAddress) || "???.???.???.???";
 };
 
 /**
