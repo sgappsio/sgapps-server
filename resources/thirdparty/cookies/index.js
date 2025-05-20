@@ -6,13 +6,8 @@
  * MIT Licensed
  */
 
-var mrequire = require("module-require");
-
-mrequire('depd',    __dirname + '/../depd');
-mrequire('keygrip', __dirname + '/../keygrip');
-
-var deprecate = mrequire('depd')('cookies');
-var Keygrip = mrequire('keygrip');
+var deprecate = require('../depd')('cookies');
+var Keygrip = require('../keygrip');
 var http = require('http');
 var cache = {};
 
