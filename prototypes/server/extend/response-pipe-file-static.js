@@ -41,6 +41,9 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 				callback(err);
 			}
 		};
+		function isWritable(stream) {
+			return stream && !stream.destroyed && stream.writable;
+		};
 		server._fs.stat(filePath, function (
 			err,
 			stat
@@ -104,6 +107,10 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 					response.response.end();
 					_callback();
 				} else {
+					if (!isWritable(response.response)) {
+						_callback(new Error('Client connection closed or response already destroyed.'));
+						return;
+					}
 					var acceptEncoding = request.request.headers['accept-encoding'];
 					if (Array.isArray(acceptEncoding)) acceptEncoding = acceptEncoding[0];
 					var raw = function () {
@@ -132,6 +139,10 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 					response.response.statusCode = 200;
 					let resError;
 					if (acceptEncoding.match(/\bdeflate\b/)) {
+						if (!isWritable(response.response)) {
+							_callback(new Error('Client connection closed or response already destroyed.'));
+							return;
+						}
 						response.response.setHeader(
 							'content-encoding',
 							'deflate'
@@ -160,6 +171,10 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 							}
 						);
 					} else if (acceptEncoding.match(/\bgzip\b/)) {
+						if (!isWritable(response.response)) {
+							_callback(new Error('Client connection closed or response already destroyed.'));
+							return;
+						}
 						response.response.setHeader(
 							'content-encoding',
 							'gzip'
@@ -187,6 +202,10 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 							}
 						);
 					} else {
+						if (!isWritable(response.response)) {
+							_callback(new Error('Client connection closed or response already destroyed.'));
+							return;
+						}
 						response.response.setHeader(
 							'Content-Length',
 							stat.size
