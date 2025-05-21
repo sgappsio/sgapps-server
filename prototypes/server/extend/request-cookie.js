@@ -82,9 +82,9 @@ module.exports = function RequestCookieDecorator(request, response, server, call
 		keys: [server.CookiesManager.COOKIES_KEY]
 	});
 
-	response._destroy.push(() => {
-		delete request.cookies;
-	});
+	// response._destroy.push(() => {
+	// 	delete request.cookies;
+	// });
 
 	callback();
 };

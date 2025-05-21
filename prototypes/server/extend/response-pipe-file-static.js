@@ -228,9 +228,9 @@ function ResponsePipeFileStaticDecorator(request, response, server, callback) {
 		});
 	};
 
-	response._destroy.push(function () {
-		delete response.pipeFileStatic;
-	});
+	// response._destroy.push(function () {
+	// 	delete response.pipeFileStatic;
+	// });
 
 	callback();
 }

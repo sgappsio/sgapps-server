@@ -109,9 +109,9 @@ function ResponseSendErrorDecorator(request, response, server, callback) {
 		}
 	};
 
-	response._destroy.push(() => {
-		delete response.sendError;
-	});
+	// response._destroy.push(() => {
+	// 	delete response.sendError;
+	// });
 
 	callback();
 };

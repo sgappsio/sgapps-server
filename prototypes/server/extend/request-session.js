@@ -1,3 +1,4 @@
+const _cluster = require('cluster');
 /**
  * @class
  * @name SGAppsServerRequestSession
@@ -143,7 +144,7 @@ function SGAppsSessionManager(server, options) {
 	 * @type {SGAppsSessionManagerOptions}
 	 */
 	this._options = Object.assign(
-		{ SESSION_LIFE: 600, cookie: 'ssiddyn' },
+		{ SESSION_LIFE: 600, cookie: 'ssiddyn', workersSyncMaxDelay: 200 },
 		options || {}
 	);
 
@@ -226,6 +227,74 @@ function RequestSessionDecorator(request, response, server, callback) {
 		 */
 		server.SessionManager = new SGAppsSessionManager(server);
 
+		if (_cluster.isPrimary || _cluster.isMaster) {
+			let workerId;
+			const decorateWorker = (worker) => {
+				worker.on('message', function (message) {
+					if (
+						message
+						&& typeof(message) === "object"
+						&& ( 'type' in message )
+						&& typeof(message.type) === "string"
+						&& typeof(message.pid) === "number" && message.pid
+						&& typeof(message.sessionId) === "string" && message.sessionId
+					) {
+						if (
+							message.type === "sgapps-server:session-manager:worker-data-request"
+						) {
+							if (
+								(message.sessionId in server.SessionManager._sessions)
+								&& typeof(server.SessionManager._sessions[message.sessionId].data) === "object"
+								&& server.SessionManager._sessions[message.sessionId].data
+							) {
+								server.SessionManager._sessions[message.sessionId].expire = new Date().valueOf() + server.SessionManager._options.SESSION_LIFE * 1000;
+								worker.send({
+									type: "sgapps-server:session-manager:worker-data-response",
+									sessionId: message.sessionId,
+									data: server.SessionManager._sessions[message.sessionId].data,
+									pid: process.pid
+								});
+							} else {
+								worker.send({
+									type: "sgapps-server:session-manager:worker-data-response",
+									sessionId: message.sessionId,
+									data: {},
+									pid: process.pid
+								});
+							}
+						} else if (
+							message.type === "sgapps-server:session-manager:worker-data-store"
+							&& typeof(message.data) === "object" && message.data
+						) {
+							if (
+								(message.sessionId in server.SessionManager._sessions)
+								&& typeof(server.SessionManager._sessions[message.sessionId].data) === "object"
+								&& server.SessionManager._sessions[message.sessionId].data
+							) {
+								Object.assign(
+									server.SessionManager._sessions[message.sessionId].data,
+									message.data
+								);
+								server.SessionManager._sessions[message.sessionId].expire = new Date().valueOf() + server.SessionManager._options.SESSION_LIFE * 1000;
+							} else {
+								server.SessionManager._sessions[message.sessionId] = {
+									expire: new Date().valueOf() + server.SessionManager._options.SESSION_LIFE * 1000,
+									data: Object.assign({}, message.data)
+								};
+							}
+						}
+					}
+				});
+			};
+			_cluster.on('fork', (worker) => {
+				decorateWorker(worker);
+			});
+			for (workerId in _cluster.workers) {
+				let worker = _cluster.workers[workerId];
+				decorateWorker(worker);
+			}
+		}
+
 		setInterval(() => {
 			//@ts-ignore
 			server.SessionManager.removeExpiredSessions();
@@ -245,13 +314,67 @@ function RequestSessionDecorator(request, response, server, callback) {
 	 * @type {SGAppsServerRequestSession}
 	 */
 	server.SessionManager.handleRequest(request);
-
-	response._destroy.push(function () {
-		request.session.destroy();
-		delete request.session;
-	});
 	
-	callback();
+	if (_cluster.isPrimary || _cluster.isMaster) {
+		response._destroy.push(function () {
+			request.session.destroy();
+			delete request.session;
+		});
+
+		callback();
+	} else {
+		response._destroy.unshift(function () {
+			process.send({
+				type: 'sgapps-server:session-manager:worker-data-store',
+				sessionId: request.session._id,
+				data: request.session.data,
+				pid: process.pid
+			});
+		});
+		response._destroy.push(function () {
+			request.session.destroy();
+			delete request.session;
+		});
+
+		process.send({
+			type: 'sgapps-server:session-manager:worker-data-request',
+			sessionId: request.session._id,
+			pid: process.pid
+		});
+
+		let callbackSent   = false;
+		const callbackOnce = () => {
+			if (callbackSent) return false;
+			callbackSent = true;
+			callback();
+			return true;
+		}
+
+		process.on('message', function (message) {
+			if (
+				message
+				&& typeof(message) === "object"
+				&& request.session
+				&& ( 'type' in message )
+				&& typeof(message.type) === "string"
+				&& ( 'pid' in message )
+				&& typeof(message.pid) === "number"
+				&& message.type === "sgapps-server:session-manager:worker-data-response"
+				&& typeof(message.sessionId) === "string" && message.sessionId === request.session._id
+				&& typeof(message.data) === "object" && message.data
+			) {
+				request.session.data = Object.assign(request.session.data, message.data);
+				callbackOnce();
+			}
+		});
+
+		setTimeout(function () {
+			if (callbackOnce()) server.logger.warn(
+				process.pid,
+				' SessionSync between worker and master skipped after ' + server.SessionManager._options.workersSyncMaxDelay + 'ms'
+			);
+		}, server.SessionManager._options.workersSyncMaxDelay);
+	}
 };
 
 

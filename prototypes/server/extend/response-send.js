@@ -97,10 +97,10 @@ function ResponseSendDecorator(request, response, server, callback) {
 		);
 	};
 	
-	response._destroy.push(function () {
-		// @ts-ignore
-		delete response.send;
-	});
+	// response._destroy.push(function () {
+	// 	// @ts-ignore
+	// 	delete response.send;
+	// });
 
 	callback();
 };

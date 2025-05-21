@@ -100,9 +100,9 @@ function ResponseRedirectDecorator(request, response, server, callback) {
 		);
 	};
 
-	response._destroy.push(function () {
-		delete response.redirect;
-	});
+	// response._destroy.push(function () {
+	// 	delete response.redirect;
+	// });
 
 	callback();
 };

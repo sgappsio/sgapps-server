@@ -99,9 +99,9 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 		});
 	};
 
-	response._destroy.push(function ResponsePipeEnd() {
-		delete response.pipeFile;
-	});
+	// response._destroy.push(function ResponsePipeEnd() {
+	// 	delete response.pipeFile;
+	// });
 
 	callback();
 };

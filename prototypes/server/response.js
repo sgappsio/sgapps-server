@@ -48,8 +48,20 @@ function SGAppsServerResponse(response, server) {
 		}
 	);
 
+	const _destroy = () => {
+		setTimeout(() => {
+			this._destroy.forEach((unbindCall) => {
+				unbindCall();
+			});
+			this._destroy = [];
+			response.removeAllListeners();
+		}, 0);
+	}
+
 	response.on('finish', () => {
 		this._flags.sent = true;
+
+		_destroy();
 	});
 
 	response.on('close', () => {
@@ -58,10 +70,6 @@ function SGAppsServerResponse(response, server) {
 
 	response.on('end', () => {
 		_finished = true;
-		this._destroy.forEach((unbindCall) => {
-			unbindCall();
-		});
-		response.removeAllListeners();
 
 		//? TODO CHECK response destroy
 	});

@@ -575,11 +575,11 @@ SGAppsServer.prototype.handle = function (request, response, callback) {
 	};
 	loadDecorator();
 
-	// Improve garbage collector
-	_response._destroy.push(function () {
-		delete _request.request;
-		delete _response.response;
-	});
+	// // Improve garbage collector
+	// _response._destroy.push(function () {
+	// 	delete _request.request;
+	// 	delete _response.response;
+	// });
 };
 
 /**

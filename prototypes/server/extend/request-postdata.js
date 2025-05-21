@@ -600,16 +600,16 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		}
 	);
 
-	response._destroy.push(function () {
-		_postData = null;
-		_body = null;
-		_bodyItems = null;
-		_fileItems = null;
-		_files = null;
-		delete request._parseDeepFieldName;
-		delete request._postDataBuffer;
-		delete request.postData;
-	});
+	// response._destroy.push(function () {
+	// 	_postData = null;
+	// 	_body = null;
+	// 	_bodyItems = null;
+	// 	_fileItems = null;
+	// 	_files = null;
+	// 	delete request._parseDeepFieldName;
+	// 	delete request._postDataBuffer;
+	// 	delete request.postData;
+	// });
 
 	callback();
 };

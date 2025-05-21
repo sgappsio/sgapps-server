@@ -152,7 +152,7 @@ function SGAppsServerRequest(request, server) {
 		this._destroy.forEach((unbindCall) => {
 			unbindCall();
 		});
-		delete this.params;
+		// delete this.params;
 		request.removeAllListeners();
 
 		//? TODO CHECK request destroy
