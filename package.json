@@ -1,19 +1,20 @@
 {
   "name": "sgapps-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SGApps Network Server",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "rm -rf ./documentation/* ; jsdoc -c jsdoc.json ; ",
+    "docs": "rm -rf ./jsdoc-documentation/* ; jsdoc -c jsdoc.json ; ",
     "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/fs.d.ts >> index.d.ts ;",
     "docs-dictionary-build": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ; rm types.d.ts ;",
     "docs-dictionary-dev": "npm run docs-dictionary; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary; done",
     "docs-dictionary-build-dev": "npm run docs-dictionary-build; while true; do find . -not -path './documentation' | entr -pd npm run docs-dictionary-build; done",
     "docs-dev": "npm run docs; while true; do find . -not -path './documentation' | entr -pd npm run docs; done",
+    "docs-site": "npx serve docs -l 3000",
     "docs-preview": "live-server --wait=2500 --no-browser documentation",
-    "readme": "./node_modules/update-markdown-jsdoc/index.js -f ./prototypes -r readme.md -S -s API ; cat readme.md | sed -r 's/\\]\\(https\\:\\/\\/[^\\/]*@hub.sgapps.io\\/\\:/\\]\\(https\\:\\/\\/hub.sgapps.io\\//' | sed -r 's/(\\.js\\x23L[0-9]+)-L[0-9]+\\)/\\1)/' | tee readme.md",
+    "readme": "./node_modules/update-markdown-jsdoc/index.js -f ./prototypes -r readme-jsdoc.md -S -s API ; cat readme-jsdoc.md | sed -r 's/\\]\\(https\\:\\/\\/[^\\/]*@hub.sgapps.io\\/\\:/\\]\\(https\\:\\/\\/hub.sgapps.io\\//' | sed -r 's/(\\.js\\x23L[0-9]+)-L[0-9]+\\)/\\1)/' | tee readme-jsdoc.md",
     "version": "node ./resources/version.js --version ",
     "build": "npm run docs-dictionary-build ; npm run docs ; npm run readme ; npm run version "
   },

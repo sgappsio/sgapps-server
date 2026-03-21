@@ -55,7 +55,7 @@ var stackList = function () {
  * //   Use Logger as 💻 instance
  * // =============================
  * 
- * const { LoggerBuilder } = require('@sgapps.io/server');
+ * const { LoggerBuilder } = require('sgapps-server');
  * 
  * const logger = new LoggerBuilder();
  * 
@@ -64,7 +64,7 @@ var stackList = function () {
  * @example
  * // replace default console
  * 
- * const { LoggerBuilder } = require('@sgapps.io/server');
+ * const { LoggerBuilder } = require('sgapps-server');
  * const logger = new LoggerBuilder();
  * logger.decorateGlobalLogger();
  * 

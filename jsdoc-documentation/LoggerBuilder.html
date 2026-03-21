@@ -142,7 +142,7 @@
 //   Use Logger as 💻 instance
 // =============================
 
-const { LoggerBuilder } = require('@sgapps.io/server');
+const { LoggerBuilder } = require('sgapps-server');
 
 const logger = new LoggerBuilder();
 
@@ -150,7 +150,7 @@ logger.log("Hello world");</code></pre>
 
     <pre class="prettyprint"><code>// replace default console
 
-const { LoggerBuilder } = require('@sgapps.io/server');
+const { LoggerBuilder } = require('sgapps-server');
 const logger = new LoggerBuilder();
 logger.decorateGlobalLogger();
 

@@ -90,7 +90,7 @@ const _decorators = [
  * //   Start your 🚀 Web-Server app
  * // ================================
  * 
- * const { SGAppsServer } = require('@sgapps.io/server');
+ * const { SGAppsServer } = require('sgapps-server');
  * const app = new SGAppsServer();
  * 
  * app.get('/', function (req, res) {
@@ -106,7 +106,7 @@ const _decorators = [
  * //   Start your 🚀 Web-Server app Extended
  * // ========================================
  * 
- * const { SGAppsServer } = require('@sgapps.io/server');
+ * const { SGAppsServer } = require('sgapps-server');
  * const app = new SGAppsServer();
  * 
  * app.get('/', function (req, res) {
@@ -114,8 +114,8 @@ const _decorators = [
  * })
  * 
  * app.whenReady.then(() => {
- *   app.SessionManager.cookie = 'ssid';
- *   app.SessionManager.SESSION_LIFE = 120; // seconds
+ *   app.SessionManager._options.cookie = 'ssid';
+ *   app.SessionManager._options.SESSION_LIFE = 120; // seconds
  * 
  *   app.server().listen(8080, () => {
  *     app.logger.log('Server is running on port 8080');

@@ -15,7 +15,7 @@
 		"encoding": "utf8",
 		"readme": "readme.md",
 		"mainpagetitle": "SGApps Server - by Sergiu Gordienco ( https://sgapps.io )",
-		"destination": "documentation/",
+		"destination": "jsdoc-documentation/",
 		"recurse": true,
 		"verbose": true
 	},

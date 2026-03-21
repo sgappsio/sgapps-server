@@ -298,7 +298,7 @@ declare class SGAppsServerEmail {
  * //   Use Logger as 💻 instance
  * // =============================
  *
- * const { LoggerBuilder } = require('@sgapps.io/server');
+ * const { LoggerBuilder } = require('sgapps-server');
  *
  * const logger = new LoggerBuilder();
  *
@@ -306,7 +306,7 @@ declare class SGAppsServerEmail {
  * @example
  * // replace default console
  *
- * const { LoggerBuilder } = require('@sgapps.io/server');
+ * const { LoggerBuilder } = require('sgapps-server');
  * const logger = new LoggerBuilder();
  * logger.decorateGlobalLogger();
  *
@@ -771,7 +771,7 @@ declare type SGAppsServerOptions = {
  * //   Start your 🚀 Web-Server app
  * // ================================
  *
- * const { SGAppsServer } = require('@sgapps.io/server');
+ * const { SGAppsServer } = require('sgapps-server');
  * const app = new SGAppsServer();
  *
  * app.get('/', function (req, res) {
@@ -786,7 +786,7 @@ declare type SGAppsServerOptions = {
  * //   Start your 🚀 Web-Server app Extended
  * // ========================================
  *
- * const { SGAppsServer } = require('@sgapps.io/server');
+ * const { SGAppsServer } = require('sgapps-server');
  * const app = new SGAppsServer();
  *
  * app.get('/', function (req, res) {
@@ -794,8 +794,8 @@ declare type SGAppsServerOptions = {
  * })
  *
  * app.whenReady.then(() => {
- *   app.SessionManager.cookie = 'ssid';
- *   app.SessionManager.SESSION_LIFE = 120; // seconds
+ *   app.SessionManager._options.cookie = 'ssid';
+ *   app.SessionManager._options.SESSION_LIFE = 120; // seconds
  *
  *   app.server().listen(8080, () => {
  *     app.logger.log('Server is running on port 8080');
