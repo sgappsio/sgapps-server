@@ -47,3 +47,7 @@
   - [Building a REST API](/guides/building-a-rest-api.md)
   - [Serving Static Files](/guides/serving-static-files.md)
   - [Session Management](/guides/session-management.md)
+  - [Security Best Practices](/guides/security.md)
+  - [Error Handling](/guides/error-handling.md)
+  - [Production Deployment](/guides/production-deployment.md)
+  - [Troubleshooting & FAQ](/guides/troubleshooting.md)

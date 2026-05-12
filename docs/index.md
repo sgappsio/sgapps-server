@@ -53,6 +53,10 @@ Pick a guide and build something real:
 - 🛠️ [Building a REST API](guides/building-a-rest-api.md) -- CRUD endpoints, middleware, error handling, CORS
 - 📁 [Serving Static Files](guides/serving-static-files.md) -- static + API combo, SPA fallback, multiple directories
 - 🔑 [Session Management](guides/session-management.md) -- login/logout flow, auth middleware, cluster usage
+- 🛡️ [Security Best Practices](guides/security.md) -- cookies, CORS, rate limiting, headers, input validation
+- 🔧 [Error Handling](guides/error-handling.md) -- error flow, custom error pages, async errors
+- 🚀 [Production Deployment](guides/production-deployment.md) -- cluster, nginx, PM2, systemd, graceful shutdown
+- ❓ [Troubleshooting & FAQ](guides/troubleshooting.md) -- common problems and solutions
 
 ## Use Cases
 

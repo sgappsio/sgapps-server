@@ -273,11 +273,15 @@ Complete, runnable examples. Each one replaces an Express + middleware combo wit
 
 ### Guides
 
-| Guide | What You'll Build |
+| Guide | What You'll Learn |
 |---|---|
 | [Building a REST API](docs/guides/building-a-rest-api.md) | Full CRUD API with routing, body parsing, CORS, error handling |
 | [Serving Static Files](docs/guides/serving-static-files.md) | Static + API server, SPA fallback, multiple directories |
 | [Session Management](docs/guides/session-management.md) | Login/logout flow, auth middleware, role guards, cluster usage |
+| [Security Best Practices](docs/guides/security.md) | Cookie hardening, CORS, rate limiting, security headers, input validation |
+| [Error Handling](docs/guides/error-handling.md) | Error propagation flow, custom error pages, async error patterns |
+| [Production Deployment](docs/guides/production-deployment.md) | Cluster mode, nginx reverse proxy, PM2, systemd, graceful shutdown |
+| [Troubleshooting & FAQ](docs/guides/troubleshooting.md) | Common problems, debugging tips, FAQ |
 
 ---
 

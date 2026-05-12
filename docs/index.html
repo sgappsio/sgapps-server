@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>SGApps Server - Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="A high-performance HTTP web server framework for Node.js with built-in routing, sessions, cookies, static file serving, and template management.">
+    <meta name="description" content="An Express-compatible HTTP framework for Node.js that ships with sessions, cookies, compression, static serving, body parsing, and access logging -- built in.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.min.css">
+    <!-- Alerts plugin CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts@1/dist/style.min.css">
     <style>
         :root {
             --base-font-size: 15px;
@@ -95,6 +97,22 @@
         .cover-main blockquote p {
             color: #666;
         }
+
+        /* Docsify tabs overrides */
+        .docsify-tabs__tab {
+            font-size: 0.9em;
+        }
+
+        /* Mermaid diagram styling */
+        .mermaid {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        /* Alert callout improvements */
+        .alert {
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -126,6 +144,28 @@
                 crossChapter: true,
                 crossChapterText: true
             },
+            tabs: {
+                persist: true,
+                sync: true,
+                theme: 'classic'
+            },
+            'flexible-alerts': {
+                style: 'flat',
+                note: { label: 'Note' },
+                tip: { label: 'Tip' },
+                warning: { label: 'Warning' },
+                attention: { label: 'Important' }
+            },
+            markdown: {
+                renderer: {
+                    code: function(code, lang) {
+                        if (lang === 'mermaid') {
+                            return '<div class="mermaid">' + code + '</div>';
+                        }
+                        return this.origin.code.apply(this, arguments);
+                    }
+                }
+            },
             notFoundPage: true,
             themeColor: '#4a6cf7'
         };
@@ -136,10 +176,26 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts@1/dist/docsify-plugin-flexible-alerts.min.js"></script>
+    <!-- Mermaid diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+        window.$docsify.plugins = (window.$docsify.plugins || []).concat(function(hook) {
+            hook.afterEach(function(html, next) {
+                next(html);
+            });
+            hook.doneEach(function() {
+                mermaid.run({ querySelector: '.mermaid' });
+            });
+        });
+    </script>
     <!-- Syntax highlighting -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
 </body>
 </html>

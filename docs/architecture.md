@@ -12,35 +12,54 @@
 
 ## How It Fits Together
 
-```
-+---------------------------------------------------------------+
-|                    Your Application Code                       |
-|           app.get(), app.post(), app.use(), etc.              |
-+---------------------------------------------------------------+
-         |                    |                    |
-    +----v----+        +------v------+       +-----v-----+
-    | Routing |        | Middleware  |       | Decorators|
-    | params  |        | postdata   |       | access-log|
-    | regex   |        | cookies    |       | mvc       |
-    | strict  |        | sessions   |       | custom    |
-    +---------+        +-------------+       +-----------+
-         |                    |                    |
-    +----v----+        +------v------+       +-----v-----+
-    | Request |        |  Response   |       | Templates |
-    | urlInfo |        | send/error  |       | manager   |
-    | query   |        | redirect    |       | viewer    |
-    | params  |        | pipeFile    |       | env vars  |
-    +---------+        +-------------+       +-----------+
-         |                    |                    |
-+--------v--------------------v--------------------v-----------+
-|                  SGAppsServerDictionary                       |
-|        (route matching, handler execution, caching)          |
-+--------------------------------------------------------------+
-|                       SGAppsServer                            |
-|    (server lifecycle, decorator loading, request dispatch)    |
-+--------------------------------------------------------------+
-|                     Node.js http.Server                       |
-+--------------------------------------------------------------+
+```mermaid
+graph TD
+    APP["<b>Your Application Code</b><br/>app.get(), app.post(), app.use()"]
+
+    subgraph Routing
+        R1[Path params]
+        R2[Regex patterns]
+        R3[Strict mode]
+    end
+
+    subgraph Middleware
+        M1[POST data parsing]
+        M2[Cookies]
+        M3[Sessions]
+    end
+
+    subgraph Decorators
+        D1[Access Logger]
+        D2[MVC Framework]
+        D3[Custom]
+    end
+
+    subgraph Request/Response
+        REQ["<b>Request</b><br/>urlInfo, query, params, body, files"]
+        RES["<b>Response</b><br/>send, redirect, pipeFile, sendError"]
+        TPL["<b>Templates</b><br/>TemplateManager, FaceboxTemplate"]
+    end
+
+    DICT["<b>SGAppsServerDictionary</b><br/>route matching, handler execution"]
+    CORE["<b>SGAppsServer</b><br/>lifecycle, decorator loading, dispatch"]
+    HTTP["<b>Node.js http.Server</b>"]
+
+    APP --> Routing
+    APP --> Middleware
+    APP --> Decorators
+    Routing --> REQ
+    Middleware --> RES
+    Decorators --> TPL
+    REQ --> DICT
+    RES --> DICT
+    TPL --> DICT
+    DICT --> CORE
+    CORE --> HTTP
+
+    style APP fill:#4a6cf7,color:#fff
+    style CORE fill:#1a1a2e,color:#fff
+    style HTTP fill:#1a1a2e,color:#fff
+    style DICT fill:#16213e,color:#fff
 ```
 
 ## Core Concepts
@@ -49,26 +68,24 @@
 
 When a request arrives, it flows through these stages:
 
-```
-HTTP Request
-     |
-     v
-1. handle() -- wraps IncomingMessage/ServerResponse
-     |
-     v
-2. Per-request decorators -- extend request/response objects
-     |         (URL parsing, send helpers, cookies, sessions, etc.)
-     v
-3. handleRequest() -- route through dictionaries
-     |
-     +---> "use" handlers (middleware, runs for all requests)
-     |         |
-     +---> HTTP method handlers (get, post, put, etc.)
-     |         |
-     +---> "_finalHandler" handlers (reverse order, last resort)
-     |
-     v
-4. 404 if no handler matched
+```mermaid
+flowchart TD
+    A[HTTP Request] --> B["<b>handle()</b><br/>Wrap IncomingMessage + ServerResponse"]
+    B --> C["<b>Per-request decorators</b><br/>URL parsing, send helpers,<br/>cookies, sessions, etc."]
+    C --> D{"<b>handleRequest()</b>"}
+    D --> E["<b>use</b> handlers<br/>(middleware)"]
+    E --> F["<b>HTTP method</b> handlers<br/>(get, post, put, etc.)"]
+    F --> G["<b>finalHandler</b><br/>(reverse order)"]
+    G --> H{Handler matched?}
+    H -->|Yes| I[Response sent]
+    H -->|No| J[404 Not Found]
+
+    E -->|"handler calls next()"| F
+    F -->|"handler calls next()"| G
+
+    style A fill:#4a6cf7,color:#fff
+    style I fill:#0d7,color:#fff
+    style J fill:#e44,color:#fff
 ```
 
 ### Decorator System
@@ -155,22 +172,28 @@ Multiple handlers on the same route execute in sequence. If a handler throws an 
 
 The `SessionManager` automatically synchronizes sessions between cluster workers and the master process:
 
-```
-+------------------+     IPC messages     +------------------+
-|  Worker 1        | <------------------> |  Master Process  |
-|  (handles HTTP)  |   session-request    |  (holds sessions)|
-+------------------+   session-response   +------------------+
-                       session-store
-+------------------+
-|  Worker 2        | <------------------> (same master)
-|  (handles HTTP)  |
-+------------------+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Worker as Worker (handles HTTP)
+    participant Master as Master (holds sessions)
+
+    Client->>Worker: HTTP Request + session cookie
+    Worker->>Master: IPC: session-data-request (session ID)
+    Master->>Worker: IPC: session-data-response (session data)
+    Worker->>Worker: Handler executes, modifies session.data
+    Worker->>Client: HTTP Response
+    Worker->>Master: IPC: session-data-store (updated data)
 ```
 
-Workers request session data from the master on each request and store updated data back when the response finishes.
+Workers request session data from the master on each request and store updated data back when the response finishes. If the master doesn't respond within `workersSyncMaxDelay` (default: 200ms), the worker continues with local data.
 
 ## Next Steps
 
-- [SGAppsServer Reference](core/sgapps-server.md)
-- [Routing Patterns](routing/index.md)
-- [Decorator List](middleware/index.md)
+- [SGAppsServer Reference](core/sgapps-server.md) -- full API
+- [Routing Patterns](routing/index.md) -- route matching details
+- [Middleware](middleware/index.md) -- built-in decorators
+- [Security Best Practices](guides/security.md) -- hardening your app
+- [Error Handling](guides/error-handling.md) -- error propagation flow
+- [Production Deployment](guides/production-deployment.md) -- cluster, nginx, PM2
+- [Troubleshooting](guides/troubleshooting.md) -- common problems and solutions
