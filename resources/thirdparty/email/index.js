@@ -1,5 +1,22 @@
 //@ts-nocheck
-// - node-email Copyright Aaron Heckmann <aaron.heckmann+github@gmail.com> (MIT Licensed)
+//
+// Originally: node-email — Copyright (c) Aaron Heckmann
+//             <aaron.heckmann+github@gmail.com>, MIT Licensed.
+//             https://github.com/aheckmann/node-email
+//
+// 2026 refactor — Sergiu Gordienco <sergiu.gordienco@sgapps.io>
+// (released under the original MIT license terms):
+//   - RFC 2047 — encode non-ASCII bytes in `To`/`From`/`Reply-To`/`Subject`/
+//                `CC`/`BCC` headers as `=?UTF-8?B?…?=` (previously the raw
+//                UTF-8 bytes were emitted, which strict MTAs silently drop).
+//   - RFC 5322 §3.6.1 — emit the REQUIRED `Date:` header.
+//   - RFC 5322 §3.6.4 — emit a `Message-ID:` header (strongly recommended;
+//                       its absence is a spam-filter penalty).
+//   - RFC 2046 — close `multipart/alternative` with `--<boundary>--`.
+//   - RFC 5322 — use CRLF line endings (was bare LF).
+//   - Normalize `MIME-Version` header capitalization.
+//   - Drop the bogus `.replace(/"/g, '\\"')` in `Msg.toString()` that
+//     corrupted any `"` character inside body or headers.
 
 /**
  * Module dependencies.
@@ -188,16 +205,46 @@ Email.prototype = {
           : this.altText  ? this.altText
           : '';
 
-    msg.line('To: ' + to);
-    msg.line('From: '+ (this.from || exports.from));
-    msg.line('Reply-To: ' + (this.replyTo || this.from || exports.from));
-    msg.line('Subject: '+ this.subject);
+    // RFC 2047 — encode any header value containing non-ASCII bytes as an
+    // encoded-word `=?UTF-8?B?<base64>?=`. Without this, raw UTF-8 in
+    // Subject (e.g. "Restore Password » Confirmation Link") is silently
+    // dropped by strict MTAs because it violates RFC 5322. Address
+    // headers are usually pure ASCII so the regex short-circuits there.
+    function encodeHeader(value) {
+      if (value === undefined || value === null) return '';
+      var s = String(value);
+      if (/^[\x00-\x7F]*$/.test(s)) return s;
+      return '=?UTF-8?B?' + Buffer.from(s, 'utf8').toString('base64') + '?=';
+    }
 
-    if (cc) msg.line('CC: ' + cc);
+    // Build a unique Message-ID. Domain part is derived from the `from`
+    // address so it matches DKIM/SPF alignment; falls back to "local"
+    // if no domain can be parsed.
+    function buildMessageId(fromAddr) {
+      var match = String(fromAddr || '').match(/@([^>\s]+)/);
+      var domain = match ? match[1] : 'local';
+      var rand = Math.random().toString(36).slice(2) + '.' + Math.random().toString(36).slice(2);
+      return '<' + Date.now().toString(36) + '.' + rand + '@' + domain + '>';
+    }
 
-    if (bcc) msg.line('BCC: ' + bcc);
+    msg.line('To: ' + encodeHeader(to));
+    msg.line('From: '+ encodeHeader(this.from || exports.from));
+    msg.line('Reply-To: ' + encodeHeader(this.replyTo || this.from || exports.from));
+    msg.line('Subject: '+ encodeHeader(this.subject));
 
-    msg.line('Mime-Version: 1.0');
+    if (cc) msg.line('CC: ' + encodeHeader(cc));
+
+    if (bcc) msg.line('BCC: ' + encodeHeader(bcc));
+
+    // RFC 5322 §3.6.1 — `Date:` is REQUIRED. Gmail / hostgator / most
+    // strict MTAs silently drop messages without it. Format per RFC 5322:
+    // "Day, DD Mon YYYY HH:MM:SS +ZZZZ" (UTCString-ish).
+    msg.line('Date: ' + new Date().toUTCString());
+    // RFC 5322 §3.6.4 — Message-ID is "should". Spam filters penalize
+    // its absence (lack of one signals a bulk-mailer that doesn't even
+    // try to format properly).
+    msg.line('Message-ID: ' + buildMessageId(this.from || exports.from));
+    msg.line('MIME-Version: 1.0');
     msg.line('Content-Type: multipart/alternative; boundary=' + boundry);
     msg.line();
 
@@ -219,6 +266,10 @@ Email.prototype = {
       msg.line(this.encodedBody);
       msg.line();
     }
+
+    // RFC 2046 — close the multipart with `--boundary--`. Without this,
+    // strict parsers treat the entire message as malformed.
+    msg.line('--' + boundry + '--');
 
     return msg.toString();
   },
@@ -283,8 +334,11 @@ Msg.prototype = {
     this.lines.push(text || '');
   }
 
+  // RFC 5322 mandates CRLF line endings. The previous `.replace(/"/g, '\\"')`
+  // was a no-context backslash-escape that corrupted any `"` inside body
+  // or headers (and isn't part of any email standard) — dropped.
 , toString: function () {
-    return this.lines.join('\n').replace(/"/g, '\\"');
+    return this.lines.join('\r\n');
   }
 }
 
