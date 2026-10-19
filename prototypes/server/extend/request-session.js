@@ -342,15 +342,10 @@ function RequestSessionDecorator(request, response, server, callback) {
 			pid: process.pid
 		});
 
-		let callbackSent   = false;
-		const callbackOnce = () => {
-			if (callbackSent) return false;
-			callbackSent = true;
-			callback();
-			return true;
-		}
+		let callbackSent  = false;
+		let timeoutHandle = null;
 
-		process.on('message', function (message) {
+		const listener = function (message) {
 			if (
 				message
 				&& typeof(message) === "object"
@@ -366,9 +361,26 @@ function RequestSessionDecorator(request, response, server, callback) {
 				request.session.data = Object.assign(request.session.data, message.data);
 				callbackOnce();
 			}
-		});
+		};
 
-		setTimeout(function () {
+		const callbackOnce = () => {
+			if (callbackSent) return false;
+			callbackSent = true;
+			// Detach IPC listener + cancel timeout BEFORE invoking callback: a
+			// synchronous re-emit from the callback path would otherwise hit a
+			// listener still attached, and a late timeout would re-enter.
+			process.removeListener('message', listener);
+			if (timeoutHandle !== null) {
+				clearTimeout(timeoutHandle);
+				timeoutHandle = null;
+			}
+			callback();
+			return true;
+		};
+
+		process.on('message', listener);
+
+		timeoutHandle = setTimeout(function () {
 			if (callbackOnce()) server.logger.warn(
 				process.pid,
 				' SessionSync between worker and master skipped after ' + server.SessionManager._options.workersSyncMaxDelay + 'ms'

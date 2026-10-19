@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test/request-session-listener-leak.test.js",
     "docs": "rm -rf ./jsdoc-documentation/* ; jsdoc -c jsdoc.json ; ",
     "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/fs.d.ts >> index.d.ts ;",
     "docs-dictionary-build": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ; rm types.d.ts ;",
