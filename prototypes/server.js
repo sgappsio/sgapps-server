@@ -486,8 +486,9 @@ SGAppsServer.prototype.handleStaticRequest = function (request, response, path, 
 					);
 				} else {
 					if (err) {
+						// err.message may contain the absolute file path; do not expose it
 						response.sendError(
-							Error(`404 ${this.STATUS_CODES[404]}; ${err.message}`),
+							Error(`404 ${this.STATUS_CODES[404]}`),
 							{
 								statusCode: 404
 							}

@@ -68,6 +68,8 @@ Writes the error message to the response:
 // Calls response.end()
 ```
 
+Node.js system errors (they carry `syscall`, `errno` or `path`, e.g. `ENOENT` from `fs`) are not written to the client, because their message contains absolute paths. The response body is the standard status text (e.g. `Internal Server Error`), and the original error goes to `app.logger.error` when debug is enabled. Errors you create yourself (`Error('Invalid token')`) are sent unchanged.
+
 ## Customizing Error Handling
 
 ### Override handleErrorRequest

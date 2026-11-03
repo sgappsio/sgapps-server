@@ -1,8 +1,44 @@
 /**
+ * Parses a single `Range: bytes=...` header (RFC 7233).
+ * Returns `null` when the header must be ignored (missing, malformed,
+ * multi-range, reversed bounds) so the full file is served with 200,
+ * `false` when the range cannot be satisfied (416),
+ * or `{ start, end }` with inclusive, in-file bounds.
  * @private
- * @param {SGAppsServerRequest} request 
- * @param {SGAppsServerResponse} response 
- * @param {SGAppsServer} server 
+ * @param {string} header
+ * @param {number} total file size in bytes
+ * @returns {null|false|{start: number, end: number}}
+ */
+function parseByteRange(header, total) {
+	const match = /^\s*bytes\s*=\s*(\d*)\s*-\s*(\d*)\s*$/i.exec(header || '');
+	if (!match) return null;
+
+	const [, rawStart, rawEnd] = match;
+	if (rawStart === '' && rawEnd === '') return null;
+
+	let start, end;
+	if (rawStart === '') {
+		// suffix range: "bytes=-N" » last N bytes
+		const suffixLength = parseInt(rawEnd, 10);
+		if (!suffixLength) return false;
+		start = Math.max(0, total - suffixLength);
+		end = total - 1;
+	} else {
+		start = parseInt(rawStart, 10);
+		// "bytes=5-2" is syntactically invalid » ignore the header
+		if (rawEnd !== '' && parseInt(rawEnd, 10) < start) return null;
+		if (start >= total) return false;
+		end = rawEnd === '' ? total - 1 : Math.min(parseInt(rawEnd, 10), total - 1);
+	}
+
+	return { start, end };
+}
+
+/**
+ * @private
+ * @param {SGAppsServerRequest} request
+ * @param {SGAppsServerResponse} response
+ * @param {SGAppsServer} server
  * @param {function} callback
  */
 function ResponsePipeFileDecorator(request, response, server, callback) {
@@ -32,42 +68,49 @@ function ResponsePipeFileDecorator(request, response, server, callback) {
 				return;
 			}
 
-			let readStream, start, end, total = stat.size, chunkSize;
+			let readStream, start, end, total = stat.size;
 
-			if (request.request) {
-				var range = request.request.headers.range || "";
-				if (range && total) {
-					var parts = range.replace(/bytes=/, "").split("-");
-					var partialStart = parts[0];
-					var partialEnd = parts[1];
+			if (
+				request.request
+				&& total
+				&& !response.response.headersSent
+				&& !response._flags.finished
+			) {
+				const range = parseByteRange(
+					request.request.headers.range || "",
+					total
+				);
 
-					start = parseInt(partialStart, 10);
-					end = partialEnd ? parseInt(partialEnd, 10) : total-1;
-					chunkSize = (end-start)+1;
+				if (range === false) {
+					response.response.statusCode = 416;
+					response.response.setHeader("Content-Range", `bytes */${total}`);
+					response.response.setHeader("Accept-Ranges", "bytes");
+					response.response.setHeader("Content-Length", 0);
+					response.response.end();
+					_callback(null);
+					return;
+				}
 
-					if (
-						!response.response.headersSent
-						&& !response._flags.finished
-					) {
-						response.response.statusCode	= 206;
-						response.response.setHeader(
-							"Content-Range",
-							`bytes ${start}-${end}/${total}`
-						);
-						response.response.setHeader("Accept-Ranges", "bytes");
-						response.response.setHeader("Content-Length", chunkSize);
-					}
+				if (range) {
+					start = range.start;
+					end = range.end;
+					response.response.statusCode	= 206;
+					response.response.setHeader(
+						"Content-Range",
+						`bytes ${start}-${end}/${total}`
+					);
+					response.response.setHeader("Accept-Ranges", "bytes");
+					response.response.setHeader("Content-Length", (end - start) + 1);
 				}
 			}
 
-			if (typeof(start) === "number") {
-				if (typeof(end) === "number") {
-					readStream = server._fs.createReadStream(filePath, { start: start, end: end });
-				} else {
-					readStream = server._fs.createReadStream(filePath, { start: start });
-				}
-			} else {
-				readStream = server._fs.createReadStream(filePath);
+			try {
+				readStream = typeof(start) === "number"
+					? server._fs.createReadStream(filePath, { start: start, end: end })
+					: server._fs.createReadStream(filePath);
+			} catch (err) {
+				_callback(err);
+				return;
 			}
 
 

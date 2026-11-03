@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "node test/request-session-listener-leak.test.js",
+    "test": "node test/request-session-listener-leak.test.js && node test/request-postdata-range-errors.test.js && node test/request-postdata-pollution.test.js && node test/dictionary-route-params.test.js",
     "docs": "rm -rf ./jsdoc-documentation/* ; jsdoc -c jsdoc.json ; ",
     "docs-dictionary": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/fs.d.ts >> index.d.ts ;",
     "docs-dictionary-build": "jsdoc -c jsdoc.json -t node_modules/tsd-jsdoc/dist -r -d . ; rm index.d.ts ; cat ./types/_start.d.ts >> index.d.ts ; cat types.d.ts >> index.d.ts ; cat ./types/http.d.ts >> index.d.ts ; cat ./types/stream.d.ts >> index.d.ts ; cat ./types/net.d.ts >> index.d.ts ; cat ./types/events.d.ts >> index.d.ts ; cat ./types/_end.d.ts >> index.d.ts ; rm types.d.ts ;",
@@ -56,7 +56,7 @@
   },
   "homepage": "https://labs.sgapps.io/open-source/sgapps-server",
   "dependencies": {
-    "application-prototype": "^1.25.14",
+    "application-prototype": "^1.31.2",
     "busboy": "0.3.1",
     "module-require": ">=1.4.2"
   },

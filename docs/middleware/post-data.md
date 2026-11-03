@@ -93,6 +93,7 @@ When `_REQUEST_FORM_PARAMS_DEEP_PARSE` is enabled (default), field names like `u
 - `field[]` creates arrays
 - Mixing `field[key]` and `field[]` on the same parent converts arrays to objects
 - Duplicate non-array fields emit warnings in debug mode
+- Fields whose name contains the key `__proto__`, `constructor` or `prototype` at any level (e.g. `__proto__[x]`, `a[constructor][prototype][x]`) are ignored, with a warning in debug mode, so request data cannot modify object prototypes. They still appear in `request.bodyItems` / `request.fileItems`. The same keys are dropped at the top level of JSON and URL-encoded bodies.
 
 ## Content Type Handling
 

@@ -56,6 +56,8 @@ app.get('/users/:name/:age', function (req, res) {
 // GET /users/alice/30 -> req.params = { name: "alice", age: "30" }
 ```
 
+Each `:name` captures exactly one non-empty path segment (no `/`), URL-decoded (`/users/ion%20pop` -> `"ion pop"`). The rest of the route is matched literally and the whole path must match. With `strictRouting: true` the trailing slash must match too. With `strictRouting: false` it is optional. To validate a parameter's format, use the `^` patterns described in *Advanced String Patterns* below.
+
 ### Regular Expressions
 
 ```js

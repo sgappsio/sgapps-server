@@ -1,6 +1,71 @@
 const parseParams = require('application-prototype/constructors/request/params-parser');
 
 /**
+ * detects string routes with named segments, ex: `/users/:id`
+ * @private
+ */
+const ROUTE_PARAM_TEST = /\/:[a-zA-Z_$]/;
+/** @private */
+const ROUTE_PARAM_SPLIT = /:([a-zA-Z_$][\w$]*)/;
+
+/**
+ * @private
+ * @param {string} value
+ * @returns {string}
+ */
+function decodeParam(value) {
+	try {
+		return decodeURIComponent(value);
+	} catch (err) {
+		return value;
+	}
+}
+
+/**
+ * Matches string routes with named segments (`/users/:id`).
+ * Each `:name` captures one non-empty path segment.
+ * `strictRouting: true` » exact match; `false` » trailing slash optional.
+ * @private
+ * @param {string} route
+ * @param {string} url
+ * @param {boolean} strictRouting
+ * @param {object} [_cache]
+ * @returns {false|Object<string,string>}
+ */
+function routeMatchParams(route, url, strictRouting, _cache) {
+	const cacheKey = `params:${strictRouting ? 1 : 0}:${route}`;
+	let rule = _cache ? _cache[cacheKey] : null;
+	if (!rule) {
+		const names = [];
+		const source = (strictRouting ? route : route.replace(/\/+$/, ''))
+			.split(ROUTE_PARAM_SPLIT)
+			.map((part, index) => {
+				// odd indexes are captured param names
+				if (index % 2) {
+					names.push(part);
+					return '([^\\/]+)';
+				}
+				return part.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&');
+			})
+			.join('');
+		rule = {
+			regexp: new RegExp(`^${source}${strictRouting ? '' : '\\/?'}$`),
+			names
+		};
+		if (_cache) _cache[cacheKey] = rule;
+	}
+
+	const result = rule.regexp.exec(url);
+	if (!result) return false;
+
+	const params = {};
+	rule.names.forEach((name, index) => {
+		params[name] = decodeParam(result[index + 1]);
+	});
+	return params;
+}
+
+/**
  * 
  * @param {RequestPathStructure} route 
  * @param {string} url 
@@ -22,6 +87,10 @@ function routeMatch(route, url, strictRouting, _cache) {
 			)
 		)
 	) return true;
+
+	if (typeof (route) === "string" && ROUTE_PARAM_TEST.test(route)) {
+		return routeMatchParams(route, url, strictRouting, _cache);
+	}
 
 	if (typeof (route) === "string") {
 		// if (

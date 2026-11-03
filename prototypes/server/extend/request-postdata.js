@@ -4,6 +4,47 @@ const { ServerResponse } = require("http");
 const { Stream, Readable } = require("stream");
 
 /**
+ * keys that must never be written from request data
+ * @private
+ */
+const FORBIDDEN_KEYS = ['__proto__', 'constructor', 'prototype'];
+
+/**
+ * @private
+ * @param {string} key
+ * @returns {boolean}
+ */
+function isForbiddenKey(key) {
+	return FORBIDDEN_KEYS.includes(key);
+}
+
+/**
+ * @private
+ * @param {object} object
+ * @param {string} key
+ * @returns {boolean}
+ */
+function hasOwn(object, key) {
+	return Object.prototype.hasOwnProperty.call(object, key);
+}
+
+/**
+ * `Object.assign` without forbidden keys: a JSON body like
+ * `{"__proto__": {"isAdmin": true}}` would otherwise replace
+ * the prototype of `request.body`
+ * @private
+ * @param {object} target
+ * @param {object} source
+ * @returns {object}
+ */
+function assignSafe(target, source) {
+	Object.keys(source).forEach((key) => {
+		if (!isForbiddenKey(key)) target[key] = source[key];
+	});
+	return target;
+}
+
+/**
  * @private
  * @method RequestUrlDecorator
  * @param {SGAppsServerRequest} request 
@@ -180,7 +221,23 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		}
 	
 		let fieldNamePrefix = fieldName.replace(/\[.*$/, '');
-		container[fieldNamePrefix] = container[fieldNamePrefix] || {};
+
+		// reject keys that would walk into / overwrite prototypes,
+		// ex: "__proto__[polluted]" or "constructor[prototype][polluted]"
+		const fieldKeys = [
+			fieldNamePrefix,
+			...(fieldName.match(/\[[^\[]*\]/g) || []).map(v => v.replace(/^\[([^\]]*)\]$/, '$1'))
+		];
+		if (fieldKeys.some(isForbiddenKey)) {
+			if (server.logger._debug) {
+				server.logger.warn(
+					`[Warn] [Request._parseDeepFieldName] Ignoring field with forbidden key "${fieldName}"`
+				);
+			}
+			return;
+		}
+
+		container[fieldNamePrefix] = (hasOwn(container, fieldNamePrefix) && container[fieldNamePrefix]) || {};
 		let p = container[fieldNamePrefix];
 		let pPrev = container;
 		const _debug = server.logger._debug;
@@ -327,7 +384,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 							}
 							p = null;
 						} else {
-							p[k] = p[k] || {};
+							p[k] = (hasOwn(p, k) && p[k]) || {};
 							pPrev = p;
 							p = p[k];
 						}
@@ -464,6 +521,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 										encoding,
 										mimeType
 									) {
+										/** @type {Buffer[]} */
+										const fileChunks = [];
 										const file = {
 											fieldName: fieldName,
 											data: {
@@ -484,14 +543,15 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 											request._parseDeepFieldName(
 												_files, fieldName, file
 											);
-										} else {
-											if (!(fieldName in _files)) _files[fieldName] = [];
+										} else if (!isForbiddenKey(fieldName)) {
+											// stream is still consumed below, only the mapping is skipped
+											if (!hasOwn(_files, fieldName)) _files[fieldName] = [];
 											//@ts-ignore
 											_files[fieldName].push(file);
 										}
 			
 										fileStream.on('data', function (data) {
-											file.data.fileData.push(data);
+											fileChunks.push(data);
 											file.data.fileSize += data.length;
 										});
 										fileStream.on('error', function (err) {
@@ -499,7 +559,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 											server.logger.error(err);
 										});
 										fileStream.on('end', function () {
-											file.data.fileData = Buffer.concat(file.data.fileData);
+											file.data.fileData = Buffer.concat(fileChunks);
+											fileChunks.length = 0;
 											if (!file.data.error)
 												file.data.loaded = true;
 										});
@@ -523,7 +584,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 											_body, fieldName, value
 										);
 									} else {
-										_body[fieldName] = value;
+										if (!isForbiddenKey(fieldName)) _body[fieldName] = value;
 									}
 								});
 				
@@ -559,7 +620,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 								try {
 									const jsonData = JSON.parse(data);
 									if (jsonData && typeof(jsonData) === "object") {
-										Object.assign(_body, jsonData);
+										assignSafe(_body, jsonData);
 									}
 								} catch (err) {
 									if (server.logger._debug) {
@@ -580,7 +641,7 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 									const formData = data.parseUrlVars(true);
 	
 									if (formData && typeof(formData) === "object") {
-										Object.assign(_body, formData);
+										assignSafe(_body, formData);
 									}
 								} catch (err) {
 									if (server.logger._debug) {

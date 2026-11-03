@@ -123,7 +123,9 @@ res.pipeFile('/path/to/video.mp4', function (err) {
 **Range request support:**
 - Parses `Range` header from the request
 - Responds with `206 Partial Content` and `Content-Range` header
-- Supports `bytes=start-end` format
+- Supports a single range: `bytes=start-end`, `bytes=start-` and suffix `bytes=-N` (last N bytes); an `end` beyond the file is clamped
+- A range starting at or past the end of the file gets `416 Range Not Satisfiable` with `Content-Range: bytes */<size>`
+- Malformed, reversed (`bytes=5-2`) or multi-range headers are ignored and the full file is sent with `200`
 
 ### `pipeFileStatic(filePath, fileName, callback, [options])`
 

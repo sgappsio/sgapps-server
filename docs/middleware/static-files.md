@@ -130,6 +130,10 @@ Server: 206 Partial Content
         (partial file body)
 ```
 
+Only a single range is honoured. A start at or past the end of the file answers `416 Range Not Satisfiable`. Malformed, reversed or multi-range headers are ignored, and the full file is served. Range applies to uncompressed responses, i.e. when the client does not accept `gzip` / `deflate`. See [pipeFile](../networking/response.md) for details.
+
+A missing file answers `404 Not Found` without the file system error details.
+
 ## Auto-Index
 
 When a URL points to a directory, the server tries index files in order:
