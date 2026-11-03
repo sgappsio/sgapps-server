@@ -29,6 +29,19 @@ function hasOwn(object, key) {
 }
 
 /**
+ * field name prepared for logs: quoted/escaped (no raw new lines » no log
+ * injection) and truncated. Field values and the parsed body are never
+ * logged, they may contain passwords, tokens or personal data.
+ * @private
+ * @param {string} fieldName
+ * @returns {string}
+ */
+function safeFieldName(fieldName) {
+	const value = JSON.stringify(String(fieldName));
+	return value.length > 200 ? `${value.slice(0, 200)}…` : value;
+}
+
+/**
  * `Object.assign` without forbidden keys: a JSON body like
  * `{"__proto__": {"isAdmin": true}}` would otherwise replace
  * the prototype of `request.body`
@@ -210,12 +223,9 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 	 */
 	request._parseDeepFieldName = (container, fieldName, fieldData, options) => {
 		if (!fieldName[0] || fieldName[0] === '[') {
-			console.warn(
-				`[Warn] [Request._parseDeepFieldName] Unable to parse fieldName without base`, {
-					container,
-					fieldName,
-					fieldData
-				}
+			server.logger.warn(
+				`[Warn] [Request._parseDeepFieldName] Unable to parse fieldName without base`,
+				safeFieldName(fieldName)
 			);
 			return;
 		}
@@ -231,29 +241,28 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 		if (fieldKeys.some(isForbiddenKey)) {
 			if (server.logger._debug) {
 				server.logger.warn(
-					`[Warn] [Request._parseDeepFieldName] Ignoring field with forbidden key "${fieldName}"`
+					`[Warn] [Request._parseDeepFieldName] Ignoring field with forbidden key`,
+					safeFieldName(fieldName)
 				);
 			}
 			return;
 		}
 
-		container[fieldNamePrefix] = (hasOwn(container, fieldNamePrefix) && container[fieldNamePrefix]) || {};
+		const prefixExisted = hasOwn(container, fieldNamePrefix);
+		container[fieldNamePrefix] = (prefixExisted && container[fieldNamePrefix]) || {};
 		let p = container[fieldNamePrefix];
 		let pPrev = container;
 		const _debug = server.logger._debug;
-	
+
 		const parts = fieldName
 			.match(/\[[^\[]*\]/g);
-	
+
 		if (!parts) {
-			if (fieldNamePrefix in container) {
+			if (prefixExisted) {
 				if (_debug) {
 					server.logger.warn(
-						`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
-							container,
-							fieldName,
-							fieldData
-						}
+						`[Warn] [Request._parseDeepFieldName] Overwriting field value`,
+						safeFieldName(fieldName)
 					);
 				}
 			}
@@ -280,21 +289,15 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 											} else {
 												if (_debug) {
 													server.logger.warn(
-														`[Warn] [Request._parseDeepFieldName] Writing Array field "${fieldName}" into a object`, {
-															container,
-															fieldName,
-															fieldData
-														}
+														`[Warn] [Request._parseDeepFieldName] Writing Array field into a object`,
+														safeFieldName(fieldName)
 													);
 												}
 												if (index in pPrev[prevIndex]) {
 													if (_debug) {
 														server.logger.warn(
-															`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
-																container,
-																fieldName,
-																fieldData
-															}
+															`[Warn] [Request._parseDeepFieldName] Overwriting field value`,
+															safeFieldName(fieldName)
 														);
 													}
 												}
@@ -313,12 +316,9 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 								}
 							} else {
 								if (_debug) {
-									console.warn(
-										`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`, {
-											container,
-											fieldName,
-											fieldData
-										}
+									server.logger.warn(
+										`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`,
+										safeFieldName(fieldName)
 									);
 								}
 								p = null;
@@ -326,12 +326,9 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 						} else {
 							if (k in p) {
 								if (_debug) {
-									console.warn(
-										`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
-											container,
-											fieldName,
-											fieldData
-										}
+									server.logger.warn(
+										`[Warn] [Request._parseDeepFieldName] Overwriting field value`,
+										safeFieldName(fieldName)
 									);
 								}
 							} else {
@@ -342,11 +339,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 										} else {
 											if (_debug) {
 												server.logger.warn(
-													`[Warn] [Request._parseDeepFieldName] Overwriting field "${fieldName}" value`, {
-														container,
-														fieldName,
-														fieldData
-													}
+													`[Warn] [Request._parseDeepFieldName] Overwriting field value`,
+													safeFieldName(fieldName)
 												);
 											}
 											p[k] = fieldData;
@@ -354,11 +348,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 									} else {
 										if (_debug) {
 											server.logger.warn(
-												`[Warn] [Request._parseDeepFieldName] Converting array to object due incorrect field "${fieldName}" name`, {
-													container,
-													fieldName,
-													fieldData
-												}
+												`[Warn] [Request._parseDeepFieldName] Converting array to object due incorrect field name`,
+												safeFieldName(fieldName)
 											);
 										}
 	
@@ -375,11 +366,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 						if (k === '') {
 							if (_debug) {
 								server.logger.warn(
-									`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`, {
-										container,
-										fieldName,
-										fieldData
-									}
+									`[Warn] [Request._parseDeepFieldName] Unable to parse intermediary array index "[]"`,
+									safeFieldName(fieldName)
 								);
 							}
 							p = null;
@@ -394,11 +382,8 @@ module.exports = function RequestUrlDecorator(request, response, server, callbac
 						p = null;
 						if (_debug) {
 							server.logger.warn(
-								`[Warn] [Request._parseDeepFieldName] Unable to parse Request params. Setting field "${fieldName}" in structure`, {
-									container,
-									fieldName,
-									fieldData
-								}
+								`[Warn] [Request._parseDeepFieldName] Unable to parse Request params. Setting field in structure`,
+								safeFieldName(fieldName)
 							);
 						}
 					}
